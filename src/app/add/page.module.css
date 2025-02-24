@@ -1,0 +1,62 @@
+  .container {
+    position: relative;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+  
+  .searchContainer {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 10;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    color: var(--foreground);
+  }
+  
+  .input:focus {
+    outline: none;
+    ring: 2px solid #3b82f6;
+  }
+  
+  .mapContainer {
+    width: 100%;
+    height: calc(100vh - 8rem);
+    margin-top: 8rem;
+    background-color: #f3f4f6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  /* Dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    .searchContainer {
+      background-color: #1f2937;
+    }
+  
+    .input {
+      border-color: #4b5563;
+      background-color: #374151;
+    }
+  
+    .mapContainer {
+      background-color: #374151;
+    }
+  }

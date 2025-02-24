@@ -1,0 +1,97 @@
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.locations {
+  flex-grow: 1;
+}
+
+.location {
+  margin-bottom: 0.5rem;
+}
+
+.location:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  color: #6b7280;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.locationText {
+  font-weight: 500;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.timeInfo {
+  display: flex;
+  gap: 1rem;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+}
+
+.seats {
+  display: flex;
+  align-items: center;
+}
+
+.seatsNumber {
+  font-weight: 600;
+  color: #059669;
+  margin-left: 0.25rem;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: #1f2937;
+  }
+
+  .label {
+    color: #9ca3af;
+  }
+
+  .locationText {
+    color: #e5e7eb;
+  }
+
+  .details {
+    border-color: #374151;
+  }
+
+  .seatsNumber {
+    color: #34d399;
+  }
+}

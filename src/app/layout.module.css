@@ -1,0 +1,11 @@
+.mainContent {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .mainContent {
+    padding-top: 4rem;
+    padding-bottom: 0;
+  }
+}

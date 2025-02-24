@@ -1,0 +1,52 @@
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  color: #24292e;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.googleButton:hover {
+  background-color: #f8f9fa;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.googleButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.googleIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.buttonText {
+  margin-left: 0.5rem;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .googleButton {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    border-color: #374151;
+  }
+
+  .googleButton:hover {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+}
