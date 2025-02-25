@@ -11,6 +11,7 @@ const Rides = () => {
     date: "2024-01-20",
     time: "14:00",
     numberOfSeats: 3,
+    driverName: "John Doe",
   };
 
   return (

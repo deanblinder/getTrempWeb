@@ -1,15 +1,14 @@
-'use client';
-import { useState } from 'react';
-import styles from './page.module.css';
+"use client";
+import { useState } from "react";
+import styles from "./page.module.css";
 import { useSession } from "next-auth/react";
+import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
+  const [date, setDate] = useState("");
   const session = useSession();
-
-  console.log('SESS',session);
+  console.log("SESS", session);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,21 +22,25 @@ const Search = () => {
       <h1 className={styles.title}>Find Available Rides</h1>
       <form onSubmit={handleSearch} className={styles.searchForm}>
         <div className={styles.inputContainer}>
-          <input
-            type="text"
+          <AutocompleteInput
             placeholder="Origin"
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
             className={styles.input}
+            onPlaceSelected={(place) => console.log(place)}
+            required
+          />
+          <AutocompleteInput
+            placeholder="Destination"
+            className={styles.input}
+            onPlaceSelected={(place) => console.log(place)}
             required
           />
           <input
-            type="text"
-            placeholder="Destination"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className={styles.input}
             required
+            min={new Date().toISOString().split("T")[0]}
           />
         </div>
         <button type="submit" className={styles.searchButton}>
@@ -54,12 +57,12 @@ const Search = () => {
           ))
         ) : (
           <div className={styles.emptyState}>
-           {"No rides found. Try searching for available rides!"}
+            {"No rides found. Try searching for available rides!"}
           </div>
         )}
       </div>
     </main>
   );
-}
+};
 
 export default Search;

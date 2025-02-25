@@ -14,11 +14,13 @@
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.5",
     "@mui/material-nextjs": "^6.4.3",
+    "@react-google-maps/api": "^2.20.6",
     "mongoose": "^8.10.1",
     "next": "15.1.7",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-google-autocomplete": "^2.7.4",
     "react-router-dom": "^6.29.0"
   },
   "devDependencies": {
