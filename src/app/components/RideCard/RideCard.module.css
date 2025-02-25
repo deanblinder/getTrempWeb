@@ -4,6 +4,13 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.15);
 }
 
 .header {
@@ -15,6 +22,14 @@
 
 .avatarContainer {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.driverName {
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .avatar {

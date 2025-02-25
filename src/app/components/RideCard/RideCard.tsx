@@ -1,10 +1,12 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import styles from './RideCard.module.css';
+import Image from "next/image";
+import styles from "./RideCard.module.css";
+import { useRouter } from "next/navigation";
 
 interface RideCardProps {
   avatarImage: string;
+  driverName: string;
   origin: string;
   destination: string;
   date: string;
@@ -14,14 +16,20 @@ interface RideCardProps {
 
 const RideCard = ({
   avatarImage,
+  driverName,
   origin,
   destination,
   date,
   time,
   numberOfSeats,
 }: RideCardProps) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router?.push("/rideScreen/id");
+  };
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick}>
       <div className={styles.header}>
         <div className={styles.avatarContainer}>
           <Image
@@ -31,6 +39,7 @@ const RideCard = ({
             height={40}
             className={styles.avatar}
           />
+          <span className={styles.driverName}>{driverName}</span>
         </div>
         <div className={styles.locations}>
           <div className={styles.location}>

@@ -5,12 +5,6 @@ import Navigation from "@/app/components/Navigation/Navigation";
 import styles from "./layout.module.css";
 import MobileNavigation from "./components/Navigation/MobileNavigation";
 import RegisterModal from "./components/RegisterModal";
-
-// export const metadata: Metadata = {
-//   title: "GetRide - Your Ride Sharing Platform",
-//   description: "Find and share rides easily with GetRide",
-// };
-
 import { SessionProvider } from "next-auth/react";
 
 const navItems = [
