@@ -11,7 +11,23 @@
   z-index: 1000;
   animation: fadeIn 0.2s ease-in-out;
 }
+.instagramButton {
+  border-radius: 5px;
+  background: linear-gradient(
+    45deg,
+    #f09433,
+    #e6683c,
+    #dc2743,
+    #cc2366,
+    #bc1888
+  );
+  color: white;
+}
 
+.instagramButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 .modal {
   background-color: #1a2233;
   border-radius: 12px;
@@ -91,9 +107,40 @@
   font-weight: 600;
 }
 
+.socialButton {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  color: #ffffff;
+}
+
+.instagramButton {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagramButton:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.instagramButton:disabled {
+  background: #2a3447;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
@@ -105,4 +152,53 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.socialButton {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.socialButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.phoneButton {
+  background-color: #6B7280;
+}
+
+.phoneButton:hover:not(:disabled) {
+  background-color: #4B5563;
+}
+
+.whatsappButton {
+  background-color: #25D366;
+}
+
+.whatsappButton:hover:not(:disabled) {
+  background-color: #20bd5a;
+}
+
+.instagramButton {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagramButton:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.facebookButton {
+  background-color: #1877F2;
+}
+
+.facebookButton:hover:not(:disabled) {
+  background-color: #166fe5;
 }

@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./DriverModal.module.css";
+import SocialButton from "../SocialButton/SocialButton";
 
 interface DriverModalProps {
   isOpen: boolean;
@@ -43,56 +44,42 @@ const DriverModal: React.FC<DriverModalProps> = ({
           </div>
 
           <div className={styles.info}>
-            {driver.phone && (
-              <div className={styles.infoItem}>
-                <span className={styles.label}>📞 Phone</span>
-                <a href={`tel:${driver.phone}`} className={styles.value}>
-                  {driver.phone}
-                </a>
-              </div>
-            )}
+            <SocialButton
+              type="phone"
+              onClick={() =>
+                driver.phone && window.open(`tel:${driver.phone}`, "_blank")
+              }
+              disabled={!driver.phone}
+            >
+              Phone
+            </SocialButton>
 
-            {driver.whatsapp && (
-              <div className={styles.infoItem}>
-                <span className={styles.label}>💬 WhatsApp</span>
-                <a
-                  href={`https://wa.me/${driver.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.value}
-                >
-                  Message
-                </a>
-              </div>
-            )}
+            <SocialButton
+              type="whatsapp"
+              onClick={() =>
+                driver.whatsapp &&
+                window.open(`https://wa.me/${driver.whatsapp}`, "_blank")
+              }
+              disabled={!driver.whatsapp}
+            >
+              WhatsApp
+            </SocialButton>
 
-            {driver.instagram && (
-              <div className={styles.infoItem}>
-                <span className={styles.label}>📸 Instagram</span>
-                <a
-                  href={driver.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.value}
-                >
-                  Profile
-                </a>
-              </div>
-            )}
+            <SocialButton
+              type="instagram"
+              onClick={() => window.open(driver.instagram, "_blank")}
+              disabled={!driver.instagram}
+            >
+              Instagram
+            </SocialButton>
 
-            {driver.facebook && (
-              <div className={styles.infoItem}>
-                <span className={styles.label}>👤 Facebook</span>
-                <a
-                  href={driver.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.value}
-                >
-                  Profile
-                </a>
-              </div>
-            )}
+            <SocialButton
+              type="facebook"
+              onClick={() => window.open(driver.facebook, "_blank")}
+              disabled={!driver.facebook}
+            >
+              Facebook
+            </SocialButton>
           </div>
         </div>
       </div>

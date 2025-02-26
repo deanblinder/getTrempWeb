@@ -52,6 +52,14 @@ const EditProfileModal = ({
             required
           />
           <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            defaultValue={userProfile.phone}
+            pattern="[0-9]{10}"
+            title="Please enter a valid 10-digit phone number"
+          />
+          <input
             type="url"
             name="instagram"
             placeholder="Instagram URL"
@@ -64,14 +72,6 @@ const EditProfileModal = ({
             defaultValue={userProfile.facebook}
           />
 
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            defaultValue={userProfile.phone}
-            pattern="[0-9]{10}"
-            title="Please enter a valid 10-digit phone number"
-          />
           <div className={styles.modalButtons}>
             <Button type="submit" fullWidth>
               Save
