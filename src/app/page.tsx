@@ -3,6 +3,8 @@ import { useState } from "react";
 import styles from "./page.module.css";
 // import { useSession } from "next-auth/react";
 import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
+import DatePicker from "./components/DatePicker/DatePicker";
+import Button from "./components/Button/Button";
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -34,22 +36,17 @@ const Search = () => {
             onPlaceSelected={(place) => console.log(place)}
             required
           />
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className={styles.input}
-            required
-            min={new Date().toISOString().split("T")[0]}
-          />
+          <DatePicker value={date} onChange={setDate} required />
+          <Button
+            fullWidth
+            type="submit"
+            variant="blue"
+            size="large"
+            onClick={handleSearch}
+          >
+            Search Rides
+          </Button>
         </div>
-        <button
-          type="submit"
-          className={styles.searchButton}
-          onClick={handleSearch}
-        >
-          Search Rides
-        </button>
       </div>
 
       <div className={styles.ridesList}>

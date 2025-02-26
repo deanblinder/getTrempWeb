@@ -2,9 +2,10 @@
 
 import { signOut, useSession } from "next-auth/react";
 import styles from "./page.module.css";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import EditProfileModal from "../components/EditProfileModal";
+import Avatar from "../components/Avatar";
+import Button from "../components/Button/Button";
 
 export interface UserProfile {
   firstName: string;
@@ -12,6 +13,7 @@ export interface UserProfile {
   instagram: string;
   facebook: string;
   image: string;
+  phone: string;
 }
 
 const Profile = () => {
@@ -24,6 +26,7 @@ const Profile = () => {
     instagram: "",
     facebook: "",
     image: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const Profile = () => {
         instagram: "",
         facebook: "",
         image: session.user.image || "",
+        phone: "",
       });
     }
   }, [session]);
@@ -41,13 +45,6 @@ const Profile = () => {
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/" });
   };
-
-  // const handleSocialMediaClick = (platform: string) => {
-  //   const url = userProfile[platform as keyof UserProfile];
-  //   if (url) {
-  //     window.open(url, "_blank");
-  //   }
-  // };
 
   const handleEditProfile = () => {
     setIsEditModalOpen(true);
@@ -62,11 +59,10 @@ const Profile = () => {
     <div className={styles.container}>
       <div className={styles.profileSection}>
         <div className={styles.avatarContainer}>
-          <Image
+          <Avatar
             src={userProfile.image}
             alt="Profile Avatar"
-            width={120}
-            height={120}
+            size={120}
             className={styles.avatar}
           />
         </div>
@@ -89,12 +85,28 @@ const Profile = () => {
             Facebook
           </button>
         </div> */}
-        <button onClick={handleEditProfile} className={styles.editButton}>
+        {/* <button onClick={handleEditProfile} className={styles.editButton}>
           Edit Profile
-        </button>
-        <button onClick={handleLogout} className={styles.logoutButton}>
-          Logout
-        </button>
+        </button> */}
+        {/* <Button fullWidth size="large" onClick={handleEditProfile}>
+          Edit Profile
+        </Button> */}
+
+        <div className={styles.buttonContainer}>
+          <Button fullWidth size="large" onClick={handleEditProfile}>
+            Edit Profile
+          </Button>
+
+          <Button
+            fullWidth
+            size="large"
+            variant="red"
+            outline
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </div>
       </div>
       <EditProfileModal
         isOpen={isEditModalOpen}

@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./rideScreen.module.css";
-import Image from "next/image";
 import GoogleMapWrapper from "@/app/components/GoogleMap/GoogleMapWrapper";
 import DriverModal from "@/app/components/DriverModal/DriverModal";
+import Avatar from "@/app/components/Avatar";
+import Button from "@/app/components/Button/Button";
 
 const RideScreen = () => {
   const [showDriverModal, setShowDriverModal] = useState(false);
@@ -27,12 +28,10 @@ const RideScreen = () => {
         <div onClick={() => setShowDriverModal(true)}>
           <div className={styles.header}>
             <div className={styles.driverInfo}>
-              <Image
+              <Avatar
                 src={rideData.avatarImage}
                 alt="Driver's avatar"
-                width={60}
-                height={60}
-                className={styles.avatar}
+                size={60}
               />
               <span className={styles.driverName}>{rideData.driverName}</span>
             </div>
@@ -66,7 +65,9 @@ const RideScreen = () => {
             </div>
           </div>
         </div>
-        <button className={styles.joinButton}>Request To Join</button>
+        <Button fullWidth size="large">
+          Request To Join
+        </Button>
       </div>
 
       <div className={styles.mapContainer}>

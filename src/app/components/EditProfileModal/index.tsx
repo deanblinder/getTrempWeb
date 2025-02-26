@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "../Button/Button";
 import styles from "./styles.module.css";
 import { UserProfile } from "@/app/profile/page";
 
@@ -32,6 +33,7 @@ const EditProfileModal = ({
               instagram: formData.get("instagram") as string,
               facebook: formData.get("facebook") as string,
               image: userProfile.image,
+              phone: formData.get("phone") as string,
             });
           }}
         >
@@ -61,17 +63,28 @@ const EditProfileModal = ({
             placeholder="Facebook URL"
             defaultValue={userProfile.facebook}
           />
+
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            defaultValue={userProfile.phone}
+            pattern="[0-9]{10}"
+            title="Please enter a valid 10-digit phone number"
+          />
           <div className={styles.modalButtons}>
-            <button type="submit" className={styles.saveButton}>
+            <Button type="submit" fullWidth>
               Save
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              size="large"
+              variant="red"
+              fullWidth
               onClick={onClose}
-              className={styles.cancelButton}
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>

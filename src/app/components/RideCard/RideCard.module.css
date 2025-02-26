@@ -32,11 +32,6 @@
   color: #ffffff;
 }
 
-.avatar {
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .locations {
   flex-grow: 1;
 }

@@ -45,7 +45,7 @@
 .mapContainer {
   width: 100%;
   height: calc(100vh - 8rem);
-  margin-top: 27rem;
+  margin-top: 29rem;
   background-color: #f3f4f6;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -90,43 +90,61 @@
   align-items: center;
   gap: 1rem;
   width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: var(--foreground);
 }
 
 .seatsInput {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #1f2937;
   border-radius: 8px;
-  padding: 0.5rem;
-  border: 1px solid #e2e8f0;
+  overflow: hidden;
 }
 
 .seatButton {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  border: none;
-  background-color: #1a365d;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
   color: white;
-  font-size: 1.2rem;
+  border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: background-color 0.2s;
 }
 
 .seatButton:hover {
-  background-color: #2c5282;
+  background-color: #2563eb;
 }
 
 .seatsNumber {
-  width: 40px;
+  width: 3rem;
   text-align: center;
-  border: none;
-  font-size: 1rem;
-  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .seatsContainer {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+
+  .seatsNumber {
+    background-color: #1f2937;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .seatButton {
+    background-color: #3b82f6;
+  }
+
+  .seatButton:hover {
+    background-color: #2563eb;
+  }
 }
 
 .seatsNumber::-webkit-inner-spin-button,
