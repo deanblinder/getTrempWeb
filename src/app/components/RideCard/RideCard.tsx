@@ -1,8 +1,7 @@
 "use client";
-
-import Image from "next/image";
 import styles from "./RideCard.module.css";
 import { useRouter } from "next/navigation";
+import Avatar from "../Avatar";
 
 interface RideCardProps {
   avatarImage: string;
@@ -32,13 +31,7 @@ const RideCard = ({
     <div className={styles.card} onClick={handleCardClick}>
       <div className={styles.header}>
         <div className={styles.avatarContainer}>
-          <Image
-            src={avatarImage}
-            alt="Driver's avatar"
-            width={40}
-            height={40}
-            className={styles.avatar}
-          />
+          <Avatar src={avatarImage} alt="Driver's avatar" size={40} />
           <span className={styles.driverName}>{driverName}</span>
         </div>
         <div className={styles.locations}>

@@ -26,6 +26,9 @@
 //     profileImage:{
 //         type: String,
 //     },
+//     rides: {
+//          type: Array,
+//     },
 // });
 
 // export default mongoose.model("User", userSchema);
