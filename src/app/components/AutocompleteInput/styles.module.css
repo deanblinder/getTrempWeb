@@ -8,6 +8,47 @@
   transition: border-color 0.2s ease;
 }
 
+/* Custom styles for the Google Places Autocomplete dropdown */
+:global(.pac-container) {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  font-family: inherit;
+  padding: 8px 0;
+}
+
+:global(.pac-item) {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  border-top: none;
+}
+
+:global(.pac-item:hover) {
+  background-color: #f5f5f5;
+}
+
+:global(.pac-item-selected) {
+  background-color: #eef2ff;
+}
+
+:global(.pac-icon) {
+  margin-right: 12px;
+}
+
+:global(.pac-item-query) {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+:global(.pac-matched) {
+  font-weight: 600;
+  color: #4a90e2;
+}
+
 .input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);

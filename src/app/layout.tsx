@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
+        <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
           <Navigation
             navItems={navItems}
             onShowRegisterModal={() => setShowRegisterModal(true)}

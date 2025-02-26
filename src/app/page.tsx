@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.css";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [date, setDate] = useState("");
-  const session = useSession();
-  console.log("SESS", session);
+  // const session = useSession();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +19,8 @@ const Search = () => {
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>Find Available Rides</h1>
-      <form onSubmit={handleSearch} className={styles.searchForm}>
+
+      <div className={styles.searchContainer}>
         <div className={styles.inputContainer}>
           <AutocompleteInput
             placeholder="Origin"
@@ -43,10 +43,14 @@ const Search = () => {
             min={new Date().toISOString().split("T")[0]}
           />
         </div>
-        <button type="submit" className={styles.searchButton}>
+        <button
+          type="submit"
+          className={styles.searchButton}
+          onClick={handleSearch}
+        >
           Search Rides
         </button>
-      </form>
+      </div>
 
       <div className={styles.ridesList}>
         {searchResults.length > 0 ? (

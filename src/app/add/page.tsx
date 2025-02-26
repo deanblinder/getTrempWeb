@@ -69,6 +69,7 @@ const Add = () => {
             </div>
           </div>
         </div>
+        <button className={styles.addButton}>Add Ride</button>
       </div>
 
       {/* Map Container */}
