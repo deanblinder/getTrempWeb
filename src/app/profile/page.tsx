@@ -3,7 +3,7 @@
 import { signOut, useSession } from "next-auth/react";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditProfileModal from "../components/EditProfileModal";
 
 export interface UserProfile {
@@ -17,25 +17,37 @@ export interface UserProfile {
 const Profile = () => {
   const { data: session } = useSession();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  console.log(typeof session?.user?.image);
+
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    firstName: session?.user?.name?.split(" ")[0] || "",
-    lastName: session?.user?.name?.split(" ")[1] || "",
+    firstName: "",
+    lastName: "",
     instagram: "",
     facebook: "",
-    image: session?.user?.image || "",
+    image: "",
   });
+
+  useEffect(() => {
+    if (session?.user) {
+      setUserProfile({
+        firstName: session.user.name?.split(" ")[0] || "",
+        lastName: session.user.name?.split(" ")[1] || "",
+        instagram: "",
+        facebook: "",
+        image: session.user.image || "",
+      });
+    }
+  }, [session]);
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/" });
   };
 
-  const handleSocialMediaClick = (platform: string) => {
-    const url = userProfile[platform as keyof UserProfile];
-    if (url) {
-      window.open(url, "_blank");
-    }
-  };
+  // const handleSocialMediaClick = (platform: string) => {
+  //   const url = userProfile[platform as keyof UserProfile];
+  //   if (url) {
+  //     window.open(url, "_blank");
+  //   }
+  // };
 
   const handleEditProfile = () => {
     setIsEditModalOpen(true);
@@ -61,7 +73,7 @@ const Profile = () => {
         <h2 className={styles.userName}>
           {userProfile.firstName} {userProfile.lastName}
         </h2>
-        <div className={styles.socialButtons}>
+        {/* <div className={styles.socialButtons}>
           <button
             onClick={() => handleSocialMediaClick("instagram")}
             className={`${styles.socialButton} ${styles.instagramButton}`}
@@ -76,7 +88,7 @@ const Profile = () => {
           >
             Facebook
           </button>
-        </div>
+        </div> */}
         <button onClick={handleEditProfile} className={styles.editButton}>
           Edit Profile
         </button>

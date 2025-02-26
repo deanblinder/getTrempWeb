@@ -45,7 +45,7 @@
 .mapContainer {
   width: 100%;
   height: calc(100vh - 8rem);
-  margin-top: 23rem;
+  margin-top: 27rem;
   background-color: #f3f4f6;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -137,4 +137,20 @@
 
 .seatsNumber:focus {
   outline: none;
+}
+.addButton {
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.addButton:hover {
+  background-color: #2563eb;
 }
