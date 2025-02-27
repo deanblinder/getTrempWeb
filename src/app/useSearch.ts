@@ -27,8 +27,6 @@ export const useSearch = () => {
 
   const [searchResults] = useState([]);
 
-  console.log({ formState });
-
   const setOrigin = (place: PlaceResult) => {
     console.log({ place });
     setFormState((prev) => {

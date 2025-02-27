@@ -21,7 +21,7 @@ const AutocompleteInput = ({
     <Autocomplete
       options={{
         componentRestrictions: { country: "IL" },
-        types: ["address"],
+        types: ["geocode"],
       }}
       debounce={300}
       type="text"
