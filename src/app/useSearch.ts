@@ -5,8 +5,8 @@ type PlaceResult = google.maps.places.PlaceResult;
 export interface Place {
   geometry: {
     location: {
-      lat: () => number;
-      lng: () => number;
+      lat: number;
+      lng: number;
     };
   };
   formatted_address: string;
@@ -39,8 +39,8 @@ export const useSearch = () => {
         origin: {
           geometry: {
             location: {
-              lat: () => place.geometry!.location!.lat(),
-              lng: () => place.geometry!.location!.lng(),
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
             },
           },
           formatted_address: place.formatted_address,
@@ -60,8 +60,8 @@ export const useSearch = () => {
         destination: {
           geometry: {
             location: {
-              lat: () => place.geometry!.location!.lat(),
-              lng: () => place.geometry!.location!.lng(),
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
             },
           },
           formatted_address: place.formatted_address,

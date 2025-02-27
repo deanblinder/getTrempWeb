@@ -17,6 +17,7 @@ const Add = () => {
     setTime,
     setSeats,
     setSelectedRouteIndex,
+    handleAddRide,
   } = useAddRide();
 
   return (
@@ -38,7 +39,7 @@ const Add = () => {
           <DatePicker value={formState.date} onChange={setDate} required />
           <TimePicker value={formState.time} onChange={setTime} required />
           <SeatsInput value={formState.seats} onChange={setSeats} required />
-          <Button fullWidth size="large">
+          <Button fullWidth size="large" onClick={handleAddRide}>
             Add Ride
           </Button>
         </div>

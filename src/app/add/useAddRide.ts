@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { Place } from "../useSearch";
+import rideActions from "../actions/rideActions";
 type PlaceResult = google.maps.places.PlaceResult;
 
-interface FormData {
+export interface AddRideFormData {
   origin: Place | undefined;
   destination: Place | undefined;
   date: string;
@@ -13,7 +14,7 @@ interface FormData {
 }
 
 export const useAddRide = () => {
-  const [formState, setFormState] = useState<FormData>({
+  const [formState, setFormState] = useState<AddRideFormData>({
     origin: undefined,
     destination: undefined,
     date: "",
@@ -22,9 +23,7 @@ export const useAddRide = () => {
     selectedRouteIndex: 0,
   });
 
-  console.log("###", formState);
   const setOrigin = (place: PlaceResult) => {
-    console.log({ place });
     setFormState((prev) => {
       if (!place.geometry?.location || !place.formatted_address) {
         return prev;
@@ -35,8 +34,8 @@ export const useAddRide = () => {
         origin: {
           geometry: {
             location: {
-              lat: () => place.geometry!.location!.lat(),
-              lng: () => place.geometry!.location!.lng(),
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
             },
           },
           formatted_address: place.formatted_address,
@@ -56,8 +55,8 @@ export const useAddRide = () => {
         destination: {
           geometry: {
             location: {
-              lat: () => place.geometry!.location!.lat(),
-              lng: () => place.geometry!.location!.lng(),
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
             },
           },
           formatted_address: place.formatted_address,
@@ -93,6 +92,10 @@ export const useAddRide = () => {
       selectedRouteIndex,
     }));
   };
+  console.log("formState", formState);
+  const handleAddRide = async () => {
+    rideActions.addRide(formState);
+  };
 
   return {
     formState,
@@ -102,5 +105,6 @@ export const useAddRide = () => {
     setTime,
     setSeats,
     setSelectedRouteIndex,
+    handleAddRide,
   };
 };

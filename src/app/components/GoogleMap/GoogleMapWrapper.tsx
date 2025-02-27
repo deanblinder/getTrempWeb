@@ -40,12 +40,12 @@ const GoogleMapWrapper = ({
       directionsService.route(
         {
           origin: {
-            lat: origin.geometry.location.lat(),
-            lng: origin.geometry.location.lng(),
+            lat: origin.geometry.location.lat,
+            lng: origin.geometry.location.lng,
           },
           destination: {
-            lat: destination.geometry.location.lat(),
-            lng: destination.geometry.location.lng(),
+            lat: destination.geometry.location.lat,
+            lng: destination.geometry.location.lng,
           },
           travelMode: google.maps.TravelMode.DRIVING,
           provideRouteAlternatives: true, // Request alternative routes
