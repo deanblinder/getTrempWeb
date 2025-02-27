@@ -11,7 +11,7 @@ const userActions = {
   // TODO : add UserType
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createUser: async (userData: any) => {
-    const response = await fetch("/api/user", {
+    const response = await fetch("/api/user/createUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +39,19 @@ const userActions = {
       throw new Error("Failed to update user");
     }
 
+    return await response.json();
+  },
+
+  getUser: async (userId: string) => {
+    const response = await fetch(`/api/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch user");
+    }
     return await response.json();
   },
 };
