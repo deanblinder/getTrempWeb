@@ -2,19 +2,22 @@
 import GoogleMapWrapper from "../components/GoogleMap/GoogleMapWrapper";
 import styles from "./page.module.css";
 import AutocompleteInput from "../components/AutocompleteInput/AutocompleteInput";
-import { useState } from "react";
 import DatePicker from "../components/DatePicker/DatePicker";
 import TimePicker from "../components/TimePicker/TimePicker";
 import SeatsInput from "../components/SeatsInput/SeatsInput";
 import Button from "../components/Button/Button";
+import { useAddRide } from "./useAddRide";
 
 const Add = () => {
-  const [seats, setSeats] = useState(1);
-  const [origin] = useState({ lat: 32.0853, lng: 34.7818 }); // Tel Aviv
-  const [destination] = useState({ lat: 32.794, lng: 34.9896 }); // Haifa
-  const [selectedRouteIndex, setSelectedRouteIndex] = useState(0);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const {
+    formState,
+    setOrigin,
+    setDestination,
+    setDate,
+    setTime,
+    setSeats,
+    setSelectedRouteIndex,
+  } = useAddRide();
 
   return (
     <main className={styles.container}>
@@ -23,22 +26,18 @@ const Add = () => {
           <AutocompleteInput
             placeholder="Origin"
             className={styles.input}
-            onPlaceSelected={(place) => console.log(place)}
+            onPlaceSelected={setOrigin}
             required
           />
           <AutocompleteInput
             placeholder="Destination"
             className={styles.input}
-            onPlaceSelected={(place) => console.log(place)}
+            onPlaceSelected={setDestination}
             required
           />
-          <DatePicker value={date} onChange={setDate} required />
-          <TimePicker value={time} onChange={setTime} required />
-          <SeatsInput
-            value={seats}
-            onChange={(val) => setSeats(val)}
-            required
-          />
+          <DatePicker value={formState.date} onChange={setDate} required />
+          <TimePicker value={formState.time} onChange={setTime} required />
+          <SeatsInput value={formState.seats} onChange={setSeats} required />
           <Button fullWidth size="large">
             Add Ride
           </Button>
@@ -46,13 +45,11 @@ const Add = () => {
       </div>
       <div className={styles.mapContainer}>
         <GoogleMapWrapper
-          origin={origin}
-          destination={destination}
+          origin={formState.origin}
+          destination={formState.destination}
           showRoute={true}
-          selectedRouteIndex={selectedRouteIndex}
-          onRouteChange={(index) => {
-            setSelectedRouteIndex(index);
-          }}
+          selectedRouteIndex={formState.selectedRouteIndex}
+          onRouteChange={setSelectedRouteIndex}
         />
       </div>
     </main>

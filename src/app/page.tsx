@@ -1,22 +1,20 @@
 "use client";
-import { useState } from "react";
 import styles from "./page.module.css";
-// import { useSession } from "next-auth/react";
 import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
 import DatePicker from "./components/DatePicker/DatePicker";
 import Button from "./components/Button/Button";
+import { useSearch } from "./useSearch";
 
 const Search = () => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [date, setDate] = useState("");
-  // const session = useSession();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement actual search logic here
-    // For now, we'll just simulate some results
-    setSearchResults([]);
-  };
+  const {
+    setOrigin,
+    setDestination,
+    searchResults,
+    date,
+    setDate,
+    handleSearch,
+    shouldShowSearchResults,
+  } = useSearch();
 
   return (
     <main className={styles.container}>
@@ -27,13 +25,13 @@ const Search = () => {
           <AutocompleteInput
             placeholder="Origin"
             className={styles.input}
-            onPlaceSelected={(place) => console.log(place)}
+            onPlaceSelected={setOrigin}
             required
           />
           <AutocompleteInput
             placeholder="Destination"
             className={styles.input}
-            onPlaceSelected={(place) => console.log(place)}
+            onPlaceSelected={setDestination}
             required
           />
           <DatePicker value={date} onChange={setDate} required />
@@ -50,7 +48,7 @@ const Search = () => {
       </div>
 
       <div className={styles.ridesList}>
-        {searchResults.length > 0 ? (
+        {shouldShowSearchResults ? (
           searchResults.map((ride, index) => (
             <div key={index} className={styles.rideItem}>
               {/* Ride details will go here */}

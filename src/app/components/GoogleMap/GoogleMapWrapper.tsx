@@ -6,10 +6,11 @@ import {
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import styles from "./GoogleMapWrapper.module.css";
+import { Place } from "@/app/useSearch";
 
 interface GoogleMapWrapperProps {
-  origin?: { lat: number; lng: number };
-  destination?: { lat: number; lng: number };
+  origin?: Place;
+  destination?: Place;
   showRoute?: boolean;
   selectedRouteIndex?: number;
   onRouteChange?: (index: number) => void;
@@ -38,8 +39,14 @@ const GoogleMapWrapper = ({
 
       directionsService.route(
         {
-          origin: origin,
-          destination: destination,
+          origin: {
+            lat: origin.geometry.location.lat(),
+            lng: origin.geometry.location.lng(),
+          },
+          destination: {
+            lat: destination.geometry.location.lat(),
+            lng: destination.geometry.location.lng(),
+          },
           travelMode: google.maps.TravelMode.DRIVING,
           provideRouteAlternatives: true, // Request alternative routes
         },
@@ -52,7 +59,10 @@ const GoogleMapWrapper = ({
     }
   }, [isLoaded, origin, destination, showRoute]);
 
-  const center = origin || { lat: 32.0853, lng: 34.7818 }; // Default to Tel Aviv
+  const center = {
+    lat: 32.0853,
+    lng: 34.7818,
+  }; // Default to Tel Aviv
 
   if (!isLoaded) {
     return <div className={styles.loadingContainer}>Loading map...</div>;
