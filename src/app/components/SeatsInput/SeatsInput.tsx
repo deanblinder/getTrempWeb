@@ -7,6 +7,7 @@ interface SeatsInputProps {
   onChange: (value: number) => void;
   required?: boolean;
   className?: string;
+  showTitle?: boolean;
 }
 
 const SeatsInput = ({
@@ -14,6 +15,7 @@ const SeatsInput = ({
   onChange,
   required,
   className,
+  showTitle = true,
 }: SeatsInputProps) => {
   const handleIncrement = () => {
     onChange(Math.min(8, value + 1));
@@ -25,9 +27,11 @@ const SeatsInput = ({
 
   return (
     <div className={`${styles.container} ${className || ""}`}>
-      <label htmlFor="seats" className={styles.label}>
-        Available Seats:
-      </label>
+      {showTitle && (
+        <label htmlFor="seats" className={styles.label}>
+          Available Seats:
+        </label>
+      )}
       <div className={styles.inputContainer}>
         <button
           onClick={handleDecrement}

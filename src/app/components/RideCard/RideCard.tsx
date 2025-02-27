@@ -25,7 +25,11 @@ const RideCard = ({
   const router = useRouter();
 
   const handleCardClick = () => {
-    router?.push("/rideScreen/id");
+    if (false) {
+      return router?.push("/rideScreen/id");
+    } else {
+      return router?.push("/editRide/id");
+    }
   };
   return (
     <div className={styles.card} onClick={handleCardClick}>

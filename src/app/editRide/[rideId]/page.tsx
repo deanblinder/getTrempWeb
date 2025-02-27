@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./editRide.module.css";
-import Image from "next/image";
 import GoogleMapWrapper from "@/app/components/GoogleMap/GoogleMapWrapper";
 import AutocompleteInput from "@/app/components/AutocompleteInput/AutocompleteInput";
 import { useRouter } from "next/navigation";
+import TimePicker from "@/app/components/TimePicker/TimePicker";
+import DatePicker from "@/app/components/DatePicker/DatePicker";
+import Avatar from "@/app/components/Avatar";
+import SeatsInput from "@/app/components/SeatsInput/SeatsInput";
 
 const EditRide = () => {
   const router = useRouter();
@@ -33,11 +36,10 @@ const EditRide = () => {
       <div className={styles.rideDetails}>
         <div className={styles.header}>
           <div className={styles.driverInfo}>
-            <Image
+            <Avatar
               src={rideData.avatarImage}
               alt="Driver's avatar"
-              width={60}
-              height={60}
+              size={60}
               className={styles.avatar}
             />
             <span className={styles.driverName}>{rideData.driverName}</span>
@@ -50,7 +52,6 @@ const EditRide = () => {
             <AutocompleteInput
               placeholder="Origin"
               className={styles.locationInput}
-              //   initialValue={rideData.origin}
               onPlaceSelected={(place) =>
                 setRideData({
                   ...rideData,
@@ -84,43 +85,28 @@ const EditRide = () => {
         <div className={styles.details}>
           <div className={styles.detailItem}>
             <span className={styles.label}>Date:</span>
-            <input
-              type="date"
+            <DatePicker
               value={rideData.date}
-              onChange={(e) =>
-                setRideData({ ...rideData, date: e.target.value })
-              }
-              className={styles.input}
+              onChange={(date) => setRideData({ ...rideData, date })}
+              required
             />
           </div>
           <div className={styles.detailItem}>
             <span className={styles.label}>Time:</span>
-            <input
-              type="time"
+            <TimePicker
               value={rideData.time}
-              onChange={(e) =>
-                setRideData({ ...rideData, time: e.target.value })
-              }
-              className={styles.input}
+              onChange={(time) => setRideData({ ...rideData, time })}
             />
           </div>
           <div className={styles.detailItem}>
             <span className={styles.label}>Available Seats:</span>
-            <input
-              type="number"
+            <SeatsInput
               value={rideData.numberOfSeats}
-              onChange={(e) =>
-                setRideData({
-                  ...rideData,
-                  numberOfSeats: Math.max(
-                    1,
-                    Math.min(8, parseInt(e.target.value) || 1)
-                  ),
-                })
+              onChange={(numberOfSeats) =>
+                setRideData({ ...rideData, numberOfSeats })
               }
-              min="1"
-              max="8"
-              className={styles.input}
+              showTitle={false}
+              required
             />
           </div>
         </div>
