@@ -1,6 +1,6 @@
 import { Place } from "@/app/useSearch";
 
-export const isWithinRadius = (
+export const isLocationWithinDistance = (
   place1: Place,
   place2: Place,
   radius: number
