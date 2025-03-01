@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 interface AvatarProps {
-  src: string;
+  src?: string;
   alt: string;
   size?: number;
   className?: string;
@@ -14,7 +14,7 @@ const Avatar = ({ src, alt, size = 120, className }: AvatarProps) => {
   return (
     <div className={`${styles.avatarContainer} ${className || ""}`}>
       <Image
-        src={src}
+        src={src || "/vercel.svg"}
         alt={alt}
         width={size}
         height={size}

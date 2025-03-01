@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 export interface Ride {
   _id: string;
-  driverId: string;
+  driver: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
   origin: Place | undefined;
   destination: Place | undefined;
   rideTime: {
@@ -22,9 +26,13 @@ export interface Ride {
 }
 
 const rideSchema = new Schema<Ride>({
-  driverId: { type: String, required: true },
+  driver: {
+    id: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+  },
   origin: {
-    description: { type: String, required: true },
+    formatted_address: { type: String, required: true },
     place_id: { type: String, required: true },
     geometry: {
       location: {
@@ -34,7 +42,7 @@ const rideSchema = new Schema<Ride>({
     },
   },
   destination: {
-    description: { type: String, required: true },
+    formatted_address: { type: String, required: true },
     place_id: { type: String, required: true },
     geometry: {
       location: {

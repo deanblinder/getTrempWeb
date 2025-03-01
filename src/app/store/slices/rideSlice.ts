@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface RideState {
   rides: Ride[];
@@ -24,11 +24,11 @@ const initialState: RideState = {
   rides: [],
   selectedRide: null,
   loading: false,
-  error: null
+  error: null,
 };
 
 export const rideSlice = createSlice({
-  name: 'rides',
+  name: "rides",
   initialState,
   reducers: {
     setRides: (state, action: PayloadAction<Ride[]>) => {
@@ -43,7 +43,9 @@ export const rideSlice = createSlice({
       state.rides.push(action.payload);
     },
     updateRide: (state, action: PayloadAction<Ride>) => {
-      const index = state.rides.findIndex(ride => ride.id === action.payload.id);
+      const index = state.rides.findIndex(
+        (ride) => ride.id === action.payload.id
+      );
       if (index !== -1) {
         state.rides[index] = action.payload;
         if (state.selectedRide?.id === action.payload.id) {
@@ -52,7 +54,7 @@ export const rideSlice = createSlice({
       }
     },
     deleteRide: (state, action: PayloadAction<string>) => {
-      state.rides = state.rides.filter(ride => ride.id !== action.payload);
+      state.rides = state.rides.filter((ride) => ride.id !== action.payload);
       if (state.selectedRide?.id === action.payload) {
         state.selectedRide = null;
       }
@@ -66,8 +68,8 @@ export const rideSlice = createSlice({
     },
     clearError: (state: RideState) => {
       state.error = null;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -78,11 +80,12 @@ export const {
   deleteRide,
   setLoading,
   setError,
-  clearError
+  clearError,
 } = rideSlice.actions;
 
 export const selectRides = (state: RootState) => state.rides.rides;
-export const selectSelectedRide = (state: RootState) => state.rides.selectedRide;
+export const selectSelectedRide = (state: RootState) =>
+  state.rides.selectedRide;
 export const selectRidesLoading = (state: RootState) => state.rides.loading;
 export const selectRidesError = (state: RootState) => state.rides.error;
 

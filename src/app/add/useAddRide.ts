@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Place } from "../useSearch";
 import rideActions from "../actions/rideActions";
+import { useSession } from "next-auth/react";
+import { User } from "@/models/user";
 type PlaceResult = google.maps.places.PlaceResult;
 
 export interface AddRideFormData {
@@ -14,6 +16,7 @@ export interface AddRideFormData {
 }
 
 export const useAddRide = () => {
+  const session = useSession();
   const [formState, setFormState] = useState<AddRideFormData>({
     origin: undefined,
     destination: undefined,
@@ -24,8 +27,12 @@ export const useAddRide = () => {
   });
 
   const setOrigin = (place: PlaceResult) => {
-    setFormState((prev) => {
-      if (!place.geometry?.location || !place.formatted_address) {
+    setFormState((prev: AddRideFormData): AddRideFormData => {
+      if (
+        !place.geometry?.location ||
+        !place.formatted_address ||
+        !place.place_id
+      ) {
         return prev;
       }
 
@@ -38,6 +45,7 @@ export const useAddRide = () => {
               lng: place.geometry.location.lng(),
             },
           },
+          place_id: place.place_id,
           formatted_address: place.formatted_address,
         },
       };
@@ -46,7 +54,11 @@ export const useAddRide = () => {
 
   const setDestination = (place: PlaceResult) => {
     setFormState((prev) => {
-      if (!place.geometry?.location || !place.formatted_address) {
+      if (
+        !place.geometry?.location ||
+        !place.formatted_address ||
+        !place.place_id
+      ) {
         return prev;
       }
 
@@ -59,6 +71,7 @@ export const useAddRide = () => {
               lng: place.geometry.location.lng(),
             },
           },
+          place_id: place.place_id,
           formatted_address: place.formatted_address,
         },
       };
@@ -92,9 +105,12 @@ export const useAddRide = () => {
       selectedRouteIndex,
     }));
   };
-  console.log("formState", formState);
+
   const handleAddRide = async () => {
-    rideActions.addRide(formState);
+    rideActions.addRide({
+      formState,
+      user: session.data?.user as Partial<User>,
+    });
   };
 
   return {

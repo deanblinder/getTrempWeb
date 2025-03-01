@@ -1,28 +1,24 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import styles from "./DriverModal.module.css";
 import SocialButton from "../SocialButton/SocialButton";
+import { useUser } from "@/app/hooks/useUser";
+import Avatar from "../Avatar";
 
 interface DriverModalProps {
   isOpen: boolean;
   onClose: () => void;
-  driver: {
-    avatarImage: string;
-    name: string;
-    phone?: string;
-    instagram?: string;
-    facebook?: string;
-    whatsapp?: string;
-  };
+  driverId: string;
 }
 
 const DriverModal: React.FC<DriverModalProps> = ({
   isOpen,
   onClose,
-  driver,
+  driverId,
 }) => {
+  const { user: driver } = useUser(driverId);
+
   if (!isOpen) return null;
 
   return (
@@ -33,23 +29,25 @@ const DriverModal: React.FC<DriverModalProps> = ({
         </button>
         <div className={styles.content}>
           <div className={styles.header}>
-            <Image
-              src={driver.avatarImage}
+            <Avatar
+              src={driver?.profilePicture}
               alt="Driver's avatar"
-              width={100}
-              height={100}
+              size={100}
               className={styles.avatar}
             />
-            <h2 className={styles.name}>{driver.name}</h2>
+            <h2 className={styles.name}>
+              {driver?.firstName + " " + driver?.lastName}
+            </h2>
           </div>
 
           <div className={styles.info}>
             <SocialButton
               type="phone"
               onClick={() =>
-                driver.phone && window.open(`tel:${driver.phone}`, "_blank")
+                driver?.phoneNumber &&
+                window.open(`tel:${driver.phoneNumber}`, "_blank")
               }
-              disabled={!driver.phone}
+              disabled={!driver?.phoneNumber}
             >
               Phone
             </SocialButton>
@@ -57,26 +55,26 @@ const DriverModal: React.FC<DriverModalProps> = ({
             <SocialButton
               type="whatsapp"
               onClick={() =>
-                driver.whatsapp &&
-                window.open(`https://wa.me/${driver.whatsapp}`, "_blank")
+                driver?.phoneNumber &&
+                window.open(`https://wa.me/${driver.phoneNumber}`, "_blank")
               }
-              disabled={!driver.whatsapp}
+              disabled={!driver?.phoneNumber}
             >
               WhatsApp
             </SocialButton>
 
             <SocialButton
               type="instagram"
-              onClick={() => window.open(driver.instagram, "_blank")}
-              disabled={!driver.instagram}
+              onClick={() => window.open(driver?.instagramUrl, "_blank")}
+              disabled={!driver?.instagramUrl}
             >
               Instagram
             </SocialButton>
 
             <SocialButton
               type="facebook"
-              onClick={() => window.open(driver.facebook, "_blank")}
-              disabled={!driver.facebook}
+              onClick={() => window.open(driver?.facebookUrl, "_blank")}
+              disabled={!driver?.facebookUrl}
             >
               Facebook
             </SocialButton>

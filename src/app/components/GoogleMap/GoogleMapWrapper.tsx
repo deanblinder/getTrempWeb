@@ -14,6 +14,7 @@ interface GoogleMapWrapperProps {
   showRoute?: boolean;
   selectedRouteIndex?: number;
   onRouteChange?: (index: number) => void;
+  showRouteButton?: boolean;
 }
 
 const GoogleMapWrapper = ({
@@ -22,6 +23,7 @@ const GoogleMapWrapper = ({
   showRoute = false,
   selectedRouteIndex = 0,
   onRouteChange,
+  showRouteButton = false,
 }: GoogleMapWrapperProps) => {
   const [directions, setDirections] =
     useState<google.maps.DirectionsResult | null>(null);
@@ -70,7 +72,7 @@ const GoogleMapWrapper = ({
 
   return (
     <div className={styles.mapContainer}>
-      {directions && directions.routes.length > 1 && (
+      {showRouteButton && directions && directions.routes.length > 1 && (
         <button
           onClick={() => {
             const nextIndex =

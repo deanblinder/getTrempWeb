@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import rideActions from "./actions/rideActions";
+import { Ride } from "@/models/rides";
 type PlaceResult = google.maps.places.PlaceResult;
 
 export interface Place {
@@ -9,6 +11,7 @@ export interface Place {
       lng: number;
     };
   };
+  place_id: string;
   formatted_address: string;
 }
 
@@ -16,6 +19,7 @@ interface SearchFormState {
   origin: Place | undefined;
   destination: Place | undefined;
   date: string;
+  radius: number;
 }
 
 export const useSearch = () => {
@@ -23,14 +27,25 @@ export const useSearch = () => {
     origin: undefined,
     destination: undefined,
     date: "",
+    radius: 5,
   });
 
-  const [searchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<Ride[]>([]);
+
+  const setRadius = (radius: number) => {
+    setFormState((prev) => ({
+      ...prev,
+      radius,
+    }));
+  };
 
   const setOrigin = (place: PlaceResult) => {
-    console.log({ place });
-    setFormState((prev) => {
-      if (!place.geometry?.location || !place.formatted_address) {
+    setFormState((prev: SearchFormState) => {
+      if (
+        !place.geometry?.location ||
+        !place.formatted_address ||
+        !place.place_id
+      ) {
         return prev;
       }
 
@@ -43,6 +58,7 @@ export const useSearch = () => {
               lng: place.geometry.location.lng(),
             },
           },
+          place_id: place.place_id,
           formatted_address: place.formatted_address,
         },
       };
@@ -50,8 +66,12 @@ export const useSearch = () => {
   };
 
   const setDestination = (place: PlaceResult) => {
-    setFormState((prev) => {
-      if (!place.geometry?.location || !place.formatted_address) {
+    setFormState((prev: SearchFormState): SearchFormState => {
+      if (
+        !place.geometry?.location ||
+        !place.formatted_address ||
+        !place.place_id
+      ) {
         return prev;
       }
 
@@ -64,6 +84,7 @@ export const useSearch = () => {
               lng: place.geometry.location.lng(),
             },
           },
+          place_id: place.place_id,
           formatted_address: place.formatted_address,
         },
       };
@@ -77,9 +98,12 @@ export const useSearch = () => {
     }));
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulating search results for now
+    const rides = await rideActions.searchRides(formState);
+    console.log("Rides: ", rides);
+
+    setSearchResults(rides);
   };
 
   return {
@@ -87,6 +111,8 @@ export const useSearch = () => {
     setOrigin,
     destination: formState.destination,
     setDestination,
+    radius: formState.radius,
+    setRadius,
     searchResults,
     date: formState.date,
     setDate,

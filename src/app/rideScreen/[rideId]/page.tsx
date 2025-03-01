@@ -1,26 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./rideScreen.module.css";
 import GoogleMapWrapper from "@/app/components/GoogleMap/GoogleMapWrapper";
 import DriverModal from "@/app/components/DriverModal/DriverModal";
 import Avatar from "@/app/components/Avatar";
 import Button from "@/app/components/Button/Button";
+import { useRideScreen } from "./useRideScreen";
 
 const RideScreen = () => {
-  const [showDriverModal, setShowDriverModal] = useState(false);
-  // const params = useParams();
-  // const rideId = params.rideId;
-
-  // Example ride data - this would typically come from an API
-  const rideData = {
-    avatarImage: "/vercel.svg",
-    driverName: "John Doe",
-    origin: "Tel Aviv",
-    destination: "Jerusalem",
-    date: "2024-01-20",
-    time: "14:00",
-    numberOfSeats: 3,
-  };
+  const { showDriverModal, setShowDriverModal, rideData, handleRequestToJoin } =
+    useRideScreen();
 
   return (
     <div className={styles.container}>
@@ -28,24 +17,24 @@ const RideScreen = () => {
         <div onClick={() => setShowDriverModal(true)}>
           <div className={styles.header}>
             <div className={styles.driverInfo}>
-              <Avatar
-                src={rideData.avatarImage}
-                alt="Driver's avatar"
-                size={60}
-              />
-              <span className={styles.driverName}>{rideData.driverName}</span>
+              <Avatar src={""} alt="Driver's avatar" size={60} />
+              <span className={styles.driverName}>
+                {rideData?.driver?.firstName + " " + rideData?.driver?.lastName}
+              </span>
             </div>
           </div>
 
           <div className={styles.locations}>
             <div className={styles.locationItem}>
               <span className={styles.label}>From:</span>
-              <span className={styles.locationText}>{rideData.origin}</span>
+              <span className={styles.locationText}>
+                {rideData?.origin?.formatted_address}
+              </span>
             </div>
             <div className={styles.locationItem}>
               <span className={styles.label}>To:</span>
               <span className={styles.locationText}>
-                {rideData.destination}
+                {rideData?.destination?.formatted_address}
               </span>
             </div>
           </div>
@@ -53,42 +42,41 @@ const RideScreen = () => {
           <div className={styles.details}>
             <div className={styles.detailItem}>
               <span className={styles.label}>Date:</span>
-              <span>{rideData.date}</span>
+              <span>{rideData?.rideTime.formattedData.date}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Time:</span>
-              <span>{rideData.time}</span>
+              <span>{rideData?.rideTime.formattedData.time}</span>
             </div>
             <div className={styles.detailItem}>
               <span className={styles.label}>Available Seats:</span>
-              <span>{rideData.numberOfSeats}</span>
+              <span>{rideData?.seats}</span>
             </div>
           </div>
         </div>
-        <Button fullWidth size="large">
+        <Button fullWidth size="large" onClick={handleRequestToJoin}>
           Request To Join
         </Button>
       </div>
-
       <div className={styles.mapContainer}>
         {/* Map component will be added here */}
         <div className={styles.mapPlaceholder}>
-          <GoogleMapWrapper></GoogleMapWrapper>
+          <GoogleMapWrapper
+            origin={rideData?.origin}
+            destination={rideData?.destination}
+            showRoute
+            selectedRouteIndex={0}
+            showRouteButton={false}
+          />
         </div>
       </div>
-      <DriverModal
-        isOpen={showDriverModal}
-        onClose={() => setShowDriverModal(false)}
-        // need to removedriverProp
-        driver={{
-          avatarImage: rideData.avatarImage,
-          name: rideData.driverName,
-          phone: "0501234567",
-          instagram: "asd",
-          facebook: "asd",
-          whatsapp: "asd",
-        }}
-      />
+      {rideData && (
+        <DriverModal
+          isOpen={showDriverModal}
+          onClose={() => setShowDriverModal(false)}
+          driverId={rideData?.driver?.id}
+        />
+      )}
     </div>
   );
 };

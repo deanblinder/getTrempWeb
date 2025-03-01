@@ -3,7 +3,9 @@ import styles from "./page.module.css";
 import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
 import DatePicker from "./components/DatePicker/DatePicker";
 import Button from "./components/Button/Button";
+import Slider from "./components/Slider/Slider";
 import { useSearch } from "./useSearch";
+import RideCard from "./components/RideCard/RideCard";
 
 const Search = () => {
   const {
@@ -12,6 +14,8 @@ const Search = () => {
     searchResults,
     date,
     setDate,
+    radius,
+    setRadius,
     handleSearch,
     shouldShowSearchResults,
   } = useSearch();
@@ -35,6 +39,7 @@ const Search = () => {
             required
           />
           <DatePicker value={date} onChange={setDate} required />
+          <Slider value={radius} max={10} onChange={setRadius} />
           <Button
             fullWidth
             type="submit"
@@ -51,7 +56,15 @@ const Search = () => {
         {shouldShowSearchResults ? (
           searchResults.map((ride, index) => (
             <div key={index} className={styles.rideItem}>
-              {/* Ride details will go here */}
+              <RideCard
+                key={index}
+                rideId={ride._id}
+                date={ride.rideTime.formattedData.date}
+                time={ride.rideTime.formattedData.time}
+                numberOfSeats={ride.seats}
+                origin={ride.origin?.formatted_address || ""}
+                destination={ride.destination?.formatted_address || ""}
+              />
             </div>
           ))
         ) : (

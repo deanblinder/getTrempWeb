@@ -4,16 +4,19 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 
 export const POST = async (request: Request) => {
-  const body = await request.json();
-  const newRide = new Ride(body);
-
   try {
-    await connectDB();
+    const body = await request.json();
 
+    await connectDB();
+    const newRide = new Ride(body);
     await newRide.save();
 
-    return new NextResponse("Post has been created", { status: 201 });
+    return NextResponse.json(
+      { message: "Ride has been created", ride: newRide },
+      { status: 201 }
+    );
   } catch (err) {
+    console.error("Error creating ride:", err);
     return new NextResponse(`Database Error: ${err}`, { status: 500 });
   }
 };

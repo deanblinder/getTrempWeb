@@ -33,22 +33,22 @@ export const isLocationWithinDistance = (
   return distance <= radius;
 };
 
-export const GET = async (request: Request) => {
-  const { origin, destination, rideTime, radius = 5 } = await request.json();
+export const POST = async (request: Request) => {
+  const { origin, destination, date, radius = 5 } = await request.json();
 
-  if (!origin || !destination || !rideTime || !radius) {
+  if (!origin || !destination || !date || !radius) {
     return new NextResponse("Missing required parameters", { status: 400 });
   }
+
+  console.log("Connecting to database...");
 
   try {
     await connectDB();
 
     const rides = await Ride.find({
       "rideTime.timeStemp": {
-        $gte: rideTime.timeStemp,
-        $lte: new Date(rideTime.timeStemp).setDate(
-          new Date(rideTime.timeStemp).getDate() + 3
-        ),
+        $gte: new Date(date),
+        $lt: new Date(new Date(date).getTime() + 3 * 24 * 60 * 60 * 1000),
       },
     });
 

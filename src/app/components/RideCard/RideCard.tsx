@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 import Avatar from "../Avatar";
 
 interface RideCardProps {
-  avatarImage: string;
-  driverName: string;
+  avatarImage?: string;
+  driverName?: string;
   origin: string;
   destination: string;
   date: string;
   time: string;
   numberOfSeats: number;
+  rideId: string;
 }
 
 const RideCard = ({
@@ -21,14 +22,15 @@ const RideCard = ({
   date,
   time,
   numberOfSeats,
+  rideId,
 }: RideCardProps) => {
   const router = useRouter();
 
   const handleCardClick = () => {
-    if (false) {
-      return router?.push("/rideScreen/id");
+    if (true) {
+      return router?.push(`/rideScreen/${rideId}`);
     } else {
-      return router?.push("/editRide/id");
+      return router?.push(`/editRide/${rideId}`);
     }
   };
   return (

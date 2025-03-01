@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Autocomplete from "react-google-autocomplete";
 import styles from "./styles.module.css";
 type PlaceResult = google.maps.places.PlaceResult;
@@ -17,6 +18,24 @@ const AutocompleteInput = ({
   className,
   required,
 }: AutocompleteInputProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <input
+        type="text"
+        placeholder={placeholder}
+        className={className || styles.input}
+        required={required}
+        disabled
+      />
+    );
+  }
+
   return (
     <Autocomplete
       options={{
