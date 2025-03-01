@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 import User from "@/models/user";
+import mongoose from "mongoose";
 
 export async function GET(
   request: NextRequest,
@@ -9,6 +10,13 @@ export async function GET(
   try {
     await connectDB();
     const { userId } = params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return NextResponse.json(
+        { error: "Invalid user ID format" },
+        { status: 400 }
+      );
+    }
 
     const user = await User.findById(userId);
     if (!user) {
@@ -25,21 +33,29 @@ export async function GET(
   }
 }
 
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: { userId: string } }
 ) {
   try {
     await connectDB();
     const { userId } = params;
+    console.log("userId", userId);
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return NextResponse.json(
+        { error: "Invalid user ID format" },
+        { status: 400 }
+      );
+    }
+
     const updateData = await request.json();
 
     const user = await User.findByIdAndUpdate(
       userId,
       { $set: updateData },
-      { new: true, runValidators: true }
+      { new: true }
     );
-
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

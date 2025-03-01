@@ -28,7 +28,7 @@ const userActions = {
 
   updateUser: async (userId: string, updateData: UpdateUserData) => {
     const response = await fetch(`/api/user/${userId}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

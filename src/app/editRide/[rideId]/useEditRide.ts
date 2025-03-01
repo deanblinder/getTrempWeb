@@ -4,7 +4,7 @@ import { Ride } from "@/models/rides";
 import { useFetchRide } from "@/app/hooks/useFetchRide";
 import { Place } from "@/app/useSearch";
 import rideActions from "@/app/actions/rideActions";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 type PlaceResult = google.maps.places.PlaceResult;
 
 const updatePlace = (place: PlaceResult): Place | undefined => {
