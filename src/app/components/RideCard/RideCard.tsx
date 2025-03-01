@@ -2,10 +2,15 @@
 import styles from "./RideCard.module.css";
 import { useRouter } from "next/navigation";
 import Avatar from "../Avatar";
+import { useSession } from "next-auth/react";
 
 interface RideCardProps {
   avatarImage?: string;
-  driverName?: string;
+  driver?: {
+    firstName: string;
+    lastName: string;
+    id: string;
+  };
   origin: string;
   destination: string;
   date: string;
@@ -16,7 +21,7 @@ interface RideCardProps {
 
 const RideCard = ({
   avatarImage,
-  driverName,
+  driver,
   origin,
   destination,
   date,
@@ -25,12 +30,15 @@ const RideCard = ({
   rideId,
 }: RideCardProps) => {
   const router = useRouter();
+  const session = useSession();
 
   const handleCardClick = () => {
-    if (true) {
-      return router?.push(`/rideScreen/${rideId}`);
-    } else {
+    const isUserDriver = session?.data?.user?.id === driver?.id;
+
+    if (isUserDriver) {
       return router?.push(`/editRide/${rideId}`);
+    } else {
+      return router?.push(`/rideScreen/${rideId}`);
     }
   };
   return (
@@ -38,7 +46,9 @@ const RideCard = ({
       <div className={styles.header}>
         <div className={styles.avatarContainer}>
           <Avatar src={avatarImage} alt="Driver's avatar" size={40} />
-          <span className={styles.driverName}>{driverName}</span>
+          <span className={styles.driverName}>
+            {driver?.firstName + " " + driver?.lastName}
+          </span>
         </div>
         <div className={styles.locations}>
           <div className={styles.location}>

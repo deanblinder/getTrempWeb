@@ -1,24 +1,52 @@
 "use client";
 import styles from "./rides.module.css";
 import RideCard from "../components/RideCard/RideCard";
+import { useUserRides } from "../hooks/useUserRides";
 
 const Rides = () => {
-  // Example ride data - this would typically come from an API or database
-  const exampleRide = {
-    avatarImage: "/vercel.svg", // Placeholder image
-    origin: "Tel Aviv",
-    destination: "Jerusalem",
-    date: "2024-01-20",
-    time: "14:00",
-    numberOfSeats: 3,
-    driverName: "John Doe",
-  };
+  const { rides, loading, error } = useUserRides();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (rides.length === 0) {
+    return (
+      <main className={styles.container}>
+        <h1 className={styles.title}>My Upcoming Rides</h1>
+        <div className={styles.emptyState}>
+          <h2>{"No Rides Found"}</h2>
+          <p>
+            {
+              "You don't have any upcoming rides. Create a new ride or join an existing one!"
+            }
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>My Upcoming Rides</h1>
       <div className={styles.ridesList}>
-        <RideCard {...exampleRide} />
+        {rides.map((ride) => (
+          <RideCard
+            key={ride._id}
+            rideId={ride._id}
+            avatarImage="/vercel.svg"
+            driver={ride.driver}
+            origin={ride.origin?.formatted_address || ""}
+            destination={ride.destination?.formatted_address || ""}
+            date={ride.rideTime.formattedData.date}
+            time={ride.rideTime.formattedData.time}
+            numberOfSeats={ride.seats}
+          />
+        ))}
       </div>
     </main>
   );

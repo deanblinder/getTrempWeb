@@ -79,6 +79,20 @@ const rideActions = {
     }
     return await response.json();
   },
+
+  getUserRides: async (userId: string) => {
+    console.log("userId", userId);
+    const response = await fetch(`/api/rides/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch rides");
+    }
+    return await response.json();
+  },
 };
 
 export default rideActions;
