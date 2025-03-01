@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Autocomplete from "react-google-autocomplete";
 import styles from "./styles.module.css";
+import { Place } from "@/app/useSearch";
+import { useLoadScript } from "@react-google-maps/api";
 type PlaceResult = google.maps.places.PlaceResult;
 
 interface AutocompleteInputProps {
@@ -10,6 +12,7 @@ interface AutocompleteInputProps {
   onPlaceSelected: (place: PlaceResult) => void;
   className?: string;
   required?: boolean;
+  initialValue?: Place;
 }
 
 const AutocompleteInput = ({
@@ -17,14 +20,24 @@ const AutocompleteInput = ({
   onPlaceSelected,
   className,
   required,
+  initialValue,
 }: AutocompleteInputProps) => {
   const [isMounted, setIsMounted] = useState(false);
+  const [defaultValue, setDefaultValue] = useState("");
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+    libraries: ["places"],
+  });
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+    if (initialValue?.formatted_address) {
+      setDefaultValue(initialValue.formatted_address);
+    }
+  }, [initialValue]);
 
-  if (!isMounted) {
+  if (!isMounted || !isLoaded) {
     return (
       <input
         type="text"
@@ -42,6 +55,7 @@ const AutocompleteInput = ({
         componentRestrictions: { country: "IL" },
         types: ["geocode"],
       }}
+      defaultValue={defaultValue}
       debounce={300}
       type="text"
       placeholder={placeholder}

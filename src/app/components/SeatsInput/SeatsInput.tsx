@@ -3,7 +3,7 @@
 import styles from "./styles.module.css";
 
 interface SeatsInputProps {
-  value: number;
+  value?: number;
   onChange: (value: number) => void;
   required?: boolean;
   className?: string;
@@ -11,7 +11,7 @@ interface SeatsInputProps {
 }
 
 const SeatsInput = ({
-  value,
+  value = 0,
   onChange,
   required,
   className,

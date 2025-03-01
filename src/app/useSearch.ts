@@ -22,6 +22,23 @@ interface SearchFormState {
   radius: number;
 }
 
+const updatePlace = (place: PlaceResult): Place | undefined => {
+  if (!place?.geometry?.location || !place?.formatted_address || !place?.place_id) {
+    return undefined;
+  }
+
+  return {
+    geometry: {
+      location: {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      },
+    },
+    place_id: place.place_id,
+    formatted_address: place.formatted_address,
+  };
+};
+
 export const useSearch = () => {
   const [formState, setFormState] = useState<SearchFormState>({
     origin: undefined,
@@ -41,52 +58,24 @@ export const useSearch = () => {
 
   const setOrigin = (place: PlaceResult) => {
     setFormState((prev: SearchFormState) => {
-      if (
-        !place.geometry?.location ||
-        !place.formatted_address ||
-        !place.place_id
-      ) {
-        return prev;
-      }
+      const updatedPlace = updatePlace(place);
+      if (!updatedPlace) return prev;
 
       return {
         ...prev,
-        origin: {
-          geometry: {
-            location: {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng(),
-            },
-          },
-          place_id: place.place_id,
-          formatted_address: place.formatted_address,
-        },
+        origin: updatedPlace,
       };
     });
   };
 
   const setDestination = (place: PlaceResult) => {
     setFormState((prev: SearchFormState): SearchFormState => {
-      if (
-        !place.geometry?.location ||
-        !place.formatted_address ||
-        !place.place_id
-      ) {
-        return prev;
-      }
+      const updatedPlace = updatePlace(place);
+      if (!updatedPlace) return prev;
 
       return {
         ...prev,
-        destination: {
-          geometry: {
-            location: {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng(),
-            },
-          },
-          place_id: place.place_id,
-          formatted_address: place.formatted_address,
-        },
+        destination: updatedPlace,
       };
     });
   };

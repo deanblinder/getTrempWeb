@@ -4,14 +4,10 @@ import RideCard from "../components/RideCard/RideCard";
 import { useUserRides } from "../hooks/useUserRides";
 
 const Rides = () => {
-  const { rides, loading, error } = useUserRides();
+  const { rides, loading } = useUserRides();
 
   if (loading) {
     return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
   }
 
   if (rides.length === 0) {

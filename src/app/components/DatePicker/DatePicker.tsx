@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import styles from "./DatePicker.module.css";
 
 interface DatePickerProps {
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
   className?: string;
   required?: boolean;
