@@ -2,6 +2,7 @@ import { User } from "@/models/user";
 import { AddRideFormData } from "../add/useAddRide";
 import { Place } from "../useSearch";
 import {} from "next-auth/react";
+import { Ride } from "@/models/rides";
 
 const rideActions = {
   addRide: async ({
@@ -90,6 +91,21 @@ const rideActions = {
     });
     if (!response.ok) {
       throw new Error("Failed to fetch rides");
+    }
+    return await response.json();
+  },
+  editRide: async (rideId: string, updatedRide: Ride) => {
+    console.log("updatedRide", updatedRide);
+    console.log("rideId", rideId);
+    const response = await fetch(`/api/rides/${rideId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedRide),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to update ride");
     }
     return await response.json();
   },

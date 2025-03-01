@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Ride } from "@/models/rides";
 import { useFetchRide } from "@/app/hooks/useFetchRide";
 import { Place } from "@/app/useSearch";
+import rideActions from "@/app/actions/rideActions";
+import { useRouter } from "next/router";
 type PlaceResult = google.maps.places.PlaceResult;
 
 const updatePlace = (place: PlaceResult): Place | undefined => {
@@ -29,12 +31,22 @@ const updatePlace = (place: PlaceResult): Place | undefined => {
 export const useEditRide = (rideId: string) => {
   const { rideData: initialRideData, loading, error } = useFetchRide(rideId);
   const [ride, setRide] = useState<Ride | undefined>(initialRideData);
+  const router = useRouter();
 
   useEffect(() => {
     if (initialRideData) {
       setRide(initialRideData);
     }
   }, [initialRideData]);
+
+  const handleCancel = () => {
+    router.back();
+  };
+
+  const handleSave = async () => {
+    if (!ride) return;
+    rideActions.editRide(rideId, ride);
+  };
 
   const setOrigin = (place: PlaceResult) => {
     setRide((prev: Ride | undefined): Ride | undefined => {
@@ -125,5 +137,7 @@ export const useEditRide = (rideId: string) => {
     updateTime,
     updateSeats,
     updateSelectedRouteIndex,
+    handleSave,
+    handleCancel,
   };
 };

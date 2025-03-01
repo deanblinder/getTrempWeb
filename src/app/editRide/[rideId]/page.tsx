@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./editRide.module.css";
 import GoogleMapWrapper from "@/app/components/GoogleMap/GoogleMapWrapper";
 import AutocompleteInput from "@/app/components/AutocompleteInput/AutocompleteInput";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import TimePicker from "@/app/components/TimePicker/TimePicker";
 import DatePicker from "@/app/components/DatePicker/DatePicker";
 import Avatar from "@/app/components/Avatar";
@@ -11,8 +11,6 @@ import SeatsInput from "@/app/components/SeatsInput/SeatsInput";
 import { useEditRide } from "./useEditRide";
 
 const EditRide = () => {
-  const router = useRouter();
-
   const params = useParams();
   const rideId = params.rideId as string;
 
@@ -24,15 +22,9 @@ const EditRide = () => {
     updateTime,
     updateSeats,
     updateSelectedRouteIndex,
+    handleSave,
+    handleCancel,
   } = useEditRide(rideId);
-
-  const handleSave = () => {
-    console.log("Saving changes:", ride);
-  };
-
-  const handleCancel = () => {
-    router.back();
-  };
 
   return (
     <div className={styles.container}>
