@@ -2,6 +2,7 @@
 import { useState } from "react";
 import rideActions from "./actions/rideActions";
 import { Ride } from "@/models/rides";
+import { useSession } from "next-auth/react";
 type PlaceResult = google.maps.places.PlaceResult;
 
 export interface Place {
@@ -23,7 +24,11 @@ interface SearchFormState {
 }
 
 const updatePlace = (place: PlaceResult): Place | undefined => {
-  if (!place?.geometry?.location || !place?.formatted_address || !place?.place_id) {
+  if (
+    !place?.geometry?.location ||
+    !place?.formatted_address ||
+    !place?.place_id
+  ) {
     return undefined;
   }
 
@@ -40,6 +45,8 @@ const updatePlace = (place: PlaceResult): Place | undefined => {
 };
 
 export const useSearch = () => {
+  const { data: session } = useSession();
+
   const [formState, setFormState] = useState<SearchFormState>({
     origin: undefined,
     destination: undefined,
@@ -90,9 +97,11 @@ export const useSearch = () => {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const rides = await rideActions.searchRides(formState);
-    console.log("Rides: ", rides);
+    const filterdRides = rides.filter((ride: Ride) => {
+      return ride._id === session?.user.id;
+    });
 
-    setSearchResults(rides);
+    setSearchResults(filterdRides);
   };
 
   return {
