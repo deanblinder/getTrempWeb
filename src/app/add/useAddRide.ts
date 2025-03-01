@@ -29,9 +29,9 @@ export const useAddRide = () => {
   const setOrigin = (place: PlaceResult) => {
     setFormState((prev: AddRideFormData): AddRideFormData => {
       if (
-        !place.geometry?.location ||
-        !place.formatted_address ||
-        !place.place_id
+        !place?.geometry?.location ||
+        !place?.formatted_address ||
+        !place?.place_id
       ) {
         return prev;
       }
@@ -55,9 +55,9 @@ export const useAddRide = () => {
   const setDestination = (place: PlaceResult) => {
     setFormState((prev) => {
       if (
-        !place.geometry?.location ||
-        !place.formatted_address ||
-        !place.place_id
+        !place?.geometry?.location ||
+        !place?.formatted_address ||
+        !place?.place_id
       ) {
         return prev;
       }

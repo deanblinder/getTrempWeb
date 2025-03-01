@@ -57,6 +57,7 @@ const Search = () => {
           searchResults.map((ride, index) => (
             <div key={index} className={styles.rideItem}>
               <RideCard
+                driver={ride.driver}
                 key={index}
                 rideId={ride._id}
                 date={ride.rideTime.formattedData.date}

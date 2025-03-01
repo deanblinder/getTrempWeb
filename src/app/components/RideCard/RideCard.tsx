@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 interface RideCardProps {
   avatarImage?: string;
-  driver?: {
+  driver: {
     firstName: string;
     lastName: string;
     id: string;
