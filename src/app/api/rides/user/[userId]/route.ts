@@ -4,10 +4,10 @@ import { connectDB } from "../../../../../utils/db";
 
 export async function GET(
   request: Request,
-  context: { params: { userId: string } }
+  { params }: { params: { userId: string } }
 ) {
   try {
-    const { userId } = context.params;
+    const { userId } = params;
     console.log("Connected to MongoDB");
     await connectDB();
     // Find rides where the user is either a driver or a passenger

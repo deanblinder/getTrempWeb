@@ -1,15 +1,13 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 import Ride from "@/models/rides";
-
 import mongoose from "mongoose";
 
 export async function GET(
   request: Request,
-  context: { params: { rideId: string } }
+  { params }: { params: { rideId: string } }
 ) {
   try {
-    const { params } = context;
     await connectDB();
     const { rideId } = params;
     console.log("Attempting to fetch ride with ID:", rideId);
@@ -39,10 +37,9 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  context: { params: { rideId: string } }
+  { params }: { params: { rideId: string } }
 ) {
   try {
-    const { params } = context;
     const { rideId } = params;
     const updatedRide = await request.json();
 
