@@ -97,7 +97,6 @@ export const useSearch = () => {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const rides = await rideActions.searchRides(formState);
-    console.log("rides:", rides);
     const filterdRides = rides.filter((ride: Ride) => {
       return ride.driver.id !== session?.user?.id;
     });
