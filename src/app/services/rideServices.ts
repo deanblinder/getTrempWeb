@@ -91,6 +91,19 @@ export const rideServices = {
     }
     return await response.json();
   },
+
+  getUserRideRequestsService: async (userId: string) => {
+    const response = await fetch(`/api/rides/rideRequests/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch ride requests");
+    }
+    return await response.json();
+  },
   editRideService: async (rideId: string, updatedRide: Ride) => {
     const response = await fetch(`/api/rides/${rideId}`, {
       method: "PUT",
@@ -101,6 +114,19 @@ export const rideServices = {
     });
     if (!response.ok) {
       throw new Error("Failed to update ride");
+    }
+    return await response.json();
+  },
+  requestRideService: async (rideId: string, userId: string) => {
+    const response = await fetch(`/api/rides/rideRequests/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rideId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to request ride");
     }
     return await response.json();
   },

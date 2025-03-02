@@ -32,6 +32,12 @@ const rideActions = {
   editRide: async (rideId: string, updatedRide: Ride) => {
     return await rideServices.editRideService(rideId, updatedRide);
   },
+  getUserRideRequests: async (userId: string) => {
+    return await rideServices.getUserRideRequestsService(userId);
+  },
+  requestRide: async (rideId: string, userId: string) => {
+    return await rideServices.requestRideService(rideId, userId);
+  },
 };
 
 export default rideActions;
