@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 import Ride from "@/models/rides";
 import mongoose from "mongoose";
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { rideId: string } }
 ) {
   try {
@@ -36,7 +36,7 @@ export async function GET(
 }
 
 export async function PUT(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { rideId: string } }
 ) {
   try {
