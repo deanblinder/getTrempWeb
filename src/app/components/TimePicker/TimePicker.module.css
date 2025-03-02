@@ -13,7 +13,7 @@
 
 @media (min-width: 640px) {
   .input {
-    /* max-width: none; */
+    height: 3rem;
     width: 100%;
     font-size: 0.875rem;
   }
