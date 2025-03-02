@@ -1,6 +1,6 @@
 .input {
   width: 100%;
-  max-width: 300px;
+  /* max-width: 300px; */
   padding: 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
@@ -12,7 +12,8 @@
 
 @media (min-width: 640px) {
   .input {
-    max-width: none;
+    /* max-width: none; */
+    width: 100%;
     font-size: 0.875rem;
   }
 }

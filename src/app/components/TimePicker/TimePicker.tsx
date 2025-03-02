@@ -27,6 +27,7 @@ const TimePicker = ({
   return (
     <input
       type="time"
+      placeholder="Select Time"
       value={value}
       onChange={handleChange}
       className={`${styles.input} ${className || ""}`}

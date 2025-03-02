@@ -27,7 +27,7 @@
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
   .ridesList {
-    background-color: #1f2937;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .emptyState {

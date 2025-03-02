@@ -27,6 +27,7 @@ const DatePicker = ({
   return (
     <input
       type="date"
+      placeholder="Select date"
       value={value}
       onChange={handleChange}
       className={`${styles.input} ${className || ""}`}
