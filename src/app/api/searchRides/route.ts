@@ -3,7 +3,7 @@ import Ride from "@/models/rides";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 
-export const isLocationWithinDistance = (
+const isLocationWithinDistance = (
   place1: Place,
   place2: Place,
   radius: number

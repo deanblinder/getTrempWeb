@@ -3,13 +3,10 @@ import { connectDB } from "@/utils/db";
 import User from "@/models/user";
 import mongoose from "mongoose";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    const { userId } = params;
+    const userId = request.nextUrl.pathname.split("/").pop() as string;
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return NextResponse.json(
@@ -33,13 +30,10 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function PUT(request: NextRequest) {
   try {
     await connectDB();
-    const { userId } = params;
+    const userId = request.nextUrl.pathname.split("/").pop() as string;
     console.log("userId", userId);
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {

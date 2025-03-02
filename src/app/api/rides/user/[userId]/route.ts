@@ -1,13 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Ride from "../../../../../models/rides";
 import { connectDB } from "../../../../../utils/db";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
-    const { userId } = params;
+    const userId = request.nextUrl.pathname.split("/").pop() as string;
     console.log("Connected to MongoDB");
     await connectDB();
     // Find rides where the user is either a driver or a passenger
