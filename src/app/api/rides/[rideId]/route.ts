@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/utils/db";
 import Ride from "@/models/rides";
 import mongoose from "mongoose";
-import type { NextApiRequest } from "next";
 
-export async function GET(request: NextApiRequest) {
+export async function GET(
+  request: NextRequest,
+  context: { params: { rideId: string } }
+) {
   try {
     await connectDB();
-    const rideId = request.query.rideId as string;
+    const { rideId } = context.params;
     console.log("Attempting to fetch ride with ID:", rideId);
 
     if (!mongoose.Types.ObjectId.isValid(rideId)) {
@@ -35,10 +37,10 @@ export async function GET(request: NextApiRequest) {
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { rideId: string } }
+  context: { params: { rideId: string } }
 ) {
   try {
-    const { rideId } = params;
+    const { rideId } = context.params;
     const updatedRide = await request.json();
 
     await connectDB();
