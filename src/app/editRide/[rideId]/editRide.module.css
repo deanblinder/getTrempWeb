@@ -154,18 +154,50 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    flex-direction: column;
+    height: auto;
+    padding: 12px;
+    gap: 12px;
   }
 
   .rideDetails {
-    padding: 1.5rem;
-  }
-
-  .details {
-    grid-template-columns: 1fr;
+    max-width: 100%;
+    order: 1;
+    padding: 16px;
   }
 
   .mapContainer {
+    order: 2;
     height: 300px;
+    margin-bottom: 16px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .driverName {
+    font-size: 1rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .locationItem,
+  .detailItem {
+    gap: 6px;
+  }
+
+  .locations,
+  .details {
+    gap: 12px;
+  }
+
+  .cancelButton,
+  .saveButton {
+    padding: 10px;
+    font-size: 0.9rem;
   }
 }
