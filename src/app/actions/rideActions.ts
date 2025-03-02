@@ -3,6 +3,7 @@ import { AddRideFormData } from "../add/useAddRide";
 import { Place } from "../useSearch";
 import {} from "next-auth/react";
 import { Ride } from "@/models/rides";
+import { rideServices } from "../services/rideServices";
 
 const rideActions = {
   addRide: async ({
@@ -12,43 +13,7 @@ const rideActions = {
     formState: AddRideFormData;
     user: Partial<User>;
   }) => {
-    const response = await fetch("/api/addRide", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        driver: {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-expect-error
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        },
-        origin: formState.origin,
-        destination: formState.destination,
-        rideTime: {
-          timeStemp: new Date(formState.date + " " + formState.time).getTime(),
-          formattedData: {
-            date: formState.date,
-            time: formState.time,
-          },
-        },
-        seats: formState.seats,
-        selectedRouteIndex: formState.selectedRouteIndex,
-        passengers: {
-          requests: [],
-          accepted: [],
-        },
-      }),
-    });
-
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(error);
-    }
-
-    return await response.json();
+    return await rideServices.addRideService({ formState, user });
   },
   searchRides: async (searchParams: {
     origin?: Place;
@@ -56,58 +21,16 @@ const rideActions = {
     date?: string;
     radius?: number;
   }) => {
-    const response = await fetch("/api/searchRides", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(searchParams),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch rides");
-    }
-    return await response.json();
+    return await rideServices.searchRidesService(searchParams);
   },
   fetchRide: async (rideId: string) => {
-    const response = await fetch(`/api/rides/${rideId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch ride");
-    }
-    return await response.json();
+    return await rideServices.fetchRideService(rideId);
   },
-
   getUserRides: async (userId: string) => {
-    console.log("userId", userId);
-    const response = await fetch(`/api/rides/user/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch rides");
-    }
-    return await response.json();
+    return await rideServices.getUserRidesService(userId);
   },
   editRide: async (rideId: string, updatedRide: Ride) => {
-    console.log("updatedRide", updatedRide);
-    console.log("rideId", rideId);
-    const response = await fetch(`/api/rides/${rideId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedRide),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to update ride");
-    }
-    return await response.json();
+    return await rideServices.editRideService(rideId, updatedRide);
   },
 };
 

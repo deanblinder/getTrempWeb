@@ -1,11 +1,20 @@
 .input {
   width: 100%;
+  max-width: 300px;
   padding: 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
   background-color: white;
   color: var(--foreground);
   transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .input {
+    max-width: none;
+    font-size: 0.875rem;
+  }
 }
 
 .input:focus {
