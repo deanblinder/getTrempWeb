@@ -56,7 +56,7 @@ const DriverModal: React.FC<DriverModalProps> = ({
               type="whatsapp"
               onClick={() =>
                 driver?.phoneNumber &&
-                window.open(`https://wa.me/${driver.phoneNumber}`, "_blank")
+                window.open(`https://wa.me/+972${driver.phoneNumber}`, "_blank")
               }
               disabled={!driver?.phoneNumber}
             >

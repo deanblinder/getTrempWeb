@@ -21,7 +21,6 @@ export const useUser = (userId: string) => {
 
   const fetchUser = async () => {
     setIsLoading(true);
-
     const data = await userActions.getUser(userId);
     setUser(data);
     setIsLoading(false);

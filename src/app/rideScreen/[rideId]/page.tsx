@@ -10,7 +10,6 @@ import { useRideScreen } from "./useRideScreen";
 const RideScreen = () => {
   const { showDriverModal, setShowDriverModal, rideData, handleRequestToJoin } =
     useRideScreen();
-
   return (
     <div className={styles.container}>
       <div className={styles.rideDetails}>

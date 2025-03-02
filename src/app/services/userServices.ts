@@ -34,7 +34,7 @@ export const userServices = {
   },
 
   fetchUserService: async (userId: string) => {
-    const response = await fetch(`/api/users/${userId}`, {
+    const response = await fetch(`/api/user/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
