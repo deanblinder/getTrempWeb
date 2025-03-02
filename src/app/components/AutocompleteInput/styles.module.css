@@ -18,7 +18,7 @@
   padding: 8px 0;
 }
 
-[class*="pac-item"] {
+.pac-item {
   padding: 8px 16px;
   cursor: pointer;
   font-size: 14px;
@@ -26,25 +26,25 @@
   border-top: none;
 }
 
-[class*="pac-item"]:hover {
+.pac-item:hover {
   background-color: #f5f5f5;
 }
 
-[class*="pac-item-selected"] {
+.pac-item-selected {
   background-color: #eef2ff;
 }
 
-[class*="pac-icon"] {
+.pac-icon {
   margin-right: 12px;
 }
 
-[class*="pac-item-query"] {
+.pac-item-query {
   font-size: 14px;
   color: #1a1a1a;
   font-weight: 500;
 }
 
-[class*="pac-matched"] {
+.pac-matched {
   font-weight: 600;
   color: #4a90e2;
 }
