@@ -8,11 +8,12 @@
 }
 
 .searchContainer {
+  position: absolute;
   top: 1rem;
   left: 1rem;
   right: 1rem;
   z-index: 1000;
-  background-color: white;
+  background-color: #1f2937;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -30,8 +31,8 @@
   width: 100%;
   padding: 0.75rem;
   border-radius: 0.5rem;
-  border: 1px solid #e5e7eb;
-  background-color: white;
+  border: 1px solid #4b5563;
+  background-color: #374151;
   color: var(--foreground);
 }
 
@@ -44,44 +45,10 @@
 .mapContainer {
   width: 100%;
   height: calc(100vh - 8rem);
-  margin-top: 1rem;
-  background-color: #f3f4f6;
+  margin-top: 29rem;
+  background-color: #374151;
   border-radius: 0.5rem;
   overflow: hidden;
-}
-
-/* Dark mode styles */
-@media (prefers-color-scheme: dark) {
-  .searchContainer {
-    background-color: #1f2937;
-  }
-
-  .input {
-    border-color: #4b5563;
-    background-color: #374151;
-  }
-
-  .mapContainer {
-    background-color: #374151;
-  }
-
-  .inputContainer :global(.pac-container) {
-    background-color: #1f2937;
-    border-color: #4b5563;
-  }
-
-  .inputContainer :global(.pac-item) {
-    border-color: #4b5563;
-    color: #9ca3af;
-  }
-
-  .inputContainer :global(.pac-item:hover) {
-    background-color: #374151;
-  }
-
-  .inputContainer :global(.pac-item-query) {
-    color: #e5e7eb;
-  }
 }
 
 .seatsContainer {
@@ -91,8 +58,8 @@
   width: 100%;
   padding: 0.75rem;
   border-radius: 0.5rem;
-  border: 1px solid #e5e7eb;
-  background-color: white;
+  border: 1px solid #4b5563;
+  background-color: #1f2937;
   color: var(--foreground);
 }
 
@@ -117,7 +84,7 @@
   font-size: 1.875rem;
   font-weight: 600;
   color: var(--foreground);
-  margin-bottom: 1rem;
+  margin-bottom: 15rem;
 }
 
 .seatButton:hover {
@@ -127,30 +94,11 @@
 .seatsNumber {
   width: 3rem;
   text-align: center;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #4b5563;
   border-radius: 4px;
   padding: 0.25rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  .seatsContainer {
-    background-color: #374151;
-    border-color: #4b5563;
-  }
-
-  .seatsNumber {
-    background-color: #1f2937;
-    border-color: #4b5563;
-    color: #e5e7eb;
-  }
-
-  .seatButton {
-    background-color: #3b82f6;
-  }
-
-  .seatButton:hover {
-    background-color: #2563eb;
-  }
+  background-color: #1f2937;
+  color: #e5e7eb;
 }
 
 .seatsNumber::-webkit-inner-spin-button,
@@ -162,6 +110,7 @@
 .seatsNumber:focus {
   outline: none;
 }
+
 .addButton {
   padding: 0.75rem;
   background-color: #3b82f6;
@@ -172,9 +121,22 @@
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 1rem;
-  width: 100%;
 }
 
-.addButton:hover {
-  background-color: #2563eb;
+.inputContainer :global(.pac-container) {
+  background-color: #1f2937;
+  border-color: #4b5563;
+}
+
+.inputContainer :global(.pac-item) {
+  border-color: #4b5563;
+  color: #9ca3af;
+}
+
+.inputContainer :global(.pac-item:hover) {
+  background-color: #374151;
+}
+
+.inputContainer :global(.pac-item-query) {
+  color: #e5e7eb;
 }

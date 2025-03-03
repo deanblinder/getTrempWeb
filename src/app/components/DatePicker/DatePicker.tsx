@@ -32,24 +32,21 @@ const DatePicker = ({
         slotProps={{
           textField: {
             color: "primary" as const,
-            required,
+            required: required,
+            defaultValue: dayjs(),
             sx: {
               "& .MuiInputBase-root": {
                 height: "3rem",
                 borderRadius: "0.5rem",
-                border: "1px solid #e5e7eb",
-                backgroundColor: "#ffffff",
+                border: "1px solid #4b5563",
+                backgroundColor: "#374151",
+                color: "#e5e7eb",
                 fontSize: "1rem",
-                "@media (prefers-color-scheme: dark)": {
-                  backgroundColor: "#374151",
-                  border: "1px solid #4b5563",
+                "& .MuiInputAdornment-root": {
                   color: "#e5e7eb",
-                  "& .MuiInputAdornment-root": {
-                    color: "#e5e7eb",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "#e5e7eb",
-                  },
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "#e5e7eb",
                 },
                 "&:hover": {
                   border: "1px solid #3b82f6",
@@ -64,6 +61,32 @@ const DatePicker = ({
         sx={{
           width: "100%",
           ...style,
+          "& .MuiPaper-root": {
+            backgroundColor: "#1f2937",
+            color: "#e5e7eb",
+          },
+          "& .MuiPickersDay-root": {
+            color: "#e5e7eb",
+            "&:hover": {
+              backgroundColor: "#374151",
+            },
+            "&.Mui-selected": {
+              backgroundColor: "#3b82f6",
+              color: "#ffffff",
+              "&:hover": {
+                backgroundColor: "#2563eb",
+              },
+            },
+          },
+          "& .MuiDayCalendar-weekDayLabel": {
+            color: "#9ca3af",
+          },
+          "& .MuiPickersCalendarHeader-root": {
+            color: "#e5e7eb",
+          },
+          "& .MuiPickersArrowSwitcher-button": {
+            color: "#e5e7eb",
+          },
         }}
         minDate={dayjs()}
       />

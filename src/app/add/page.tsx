@@ -26,9 +26,14 @@ const Add = () => {
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>Add Rides</h1>
-
       <div className={styles.searchContainer}>
-        <div className={styles.inputContainer}>
+        <form
+          className={styles.inputContainer}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddRide();
+          }}
+        >
           <AutocompleteInput
             placeholder="Origin"
             className={styles.input}
@@ -44,10 +49,10 @@ const Add = () => {
           <DatePicker value={formState.date} onChange={setDate} required />
           <TimePicker value={formState.time} onChange={setTime} required />
           <SeatsInput value={formState.seats} onChange={setSeats} required />
-          <Button fullWidth size="large" onClick={handleAddRide}>
+          <Button fullWidth size="large" type="submit">
             Add Ride
           </Button>
-        </div>
+        </form>
       </div>
       <div className={styles.mapContainer}>
         <GoogleMapWrapper
@@ -56,6 +61,7 @@ const Add = () => {
           showRoute={true}
           selectedRouteIndex={formState.selectedRouteIndex}
           onRouteChange={setSelectedRouteIndex}
+          showRouteButton={true}
         />
       </div>
       <EditProfileModal

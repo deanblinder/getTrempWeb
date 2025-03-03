@@ -114,6 +114,7 @@ const EditRide = () => {
           showRoute={true}
           selectedRouteIndex={ride?.selectedRouteIndex}
           onRouteChange={updateSelectedRouteIndex}
+          showRouteButton={false}
         />
       </div>
     </div>

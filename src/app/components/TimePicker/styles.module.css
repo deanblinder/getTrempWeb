@@ -1,0 +1,69 @@
+.container {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #4b5563;
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.container:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.timeList {
+  margin-top: 0.5rem;
+  background-color: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.timeOption {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: #e5e7eb;
+  transition: background-color 0.2s;
+}
+
+.timeOption:hover {
+  background-color: #374151;
+}
+
+.selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.timeList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeList::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 4px;
+}
+
+.timeList::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+.timeList::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}

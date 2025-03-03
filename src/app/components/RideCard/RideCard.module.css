@@ -1,16 +1,25 @@
 .card {
-  background-color: white;
+  background-color: #1f2937;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, opacity 0.3s ease;
   width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
 .card:hover {
   transform: translateY(-2px);
+}
+
+@media (hover: none) {
+  .card:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
 }
 
 .header {
@@ -29,6 +38,7 @@
 .driverName {
   font-weight: 500;
   font-size: 1rem;
+  color: #e5e7eb;
 }
 
 .locations {
@@ -45,13 +55,13 @@
 }
 
 .label {
-  color: #666;
+  color: #9ca3af;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .locationText {
-  color: #333;
+  color: #e5e7eb;
   font-size: 0.9375rem;
   word-break: break-word;
 }
@@ -84,7 +94,7 @@
 
 .seatsNumber {
   font-weight: 500;
-  color: #333;
+  color: #34d399;
 }
 
 @media (min-width: 640px) {
@@ -111,24 +121,6 @@
 }
 
 /* Dark mode styles */
-@media (prefers-color-scheme: dark) {
-  .card {
-    background-color: #1f2937;
-  }
-
-  .label {
-    color: #9ca3af;
-  }
-
-  .locationText {
-    color: #e5e7eb;
-  }
-
-  .details {
-    border-color: #374151;
-  }
-
-  .seatsNumber {
-    color: #34d399;
-  }
+.detail span:not(.label) {
+  color: #e5e7eb;
 }

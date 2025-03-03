@@ -8,8 +8,7 @@ import Button from "@/app/components/Button/Button";
 import { useRideScreen } from "./useRideScreen";
 
 const RideScreen = () => {
-  const { showDriverModal, setShowDriverModal, rideData, handleRequestToJoin } =
-    useRideScreen();
+  const { showDriverModal, setShowDriverModal, rideData } = useRideScreen();
   return (
     <div className={styles.container}>
       <div className={styles.rideDetails}>
@@ -52,8 +51,8 @@ const RideScreen = () => {
             <span>{rideData?.seats}</span>
           </div>
         </div>
-        <Button fullWidth size="large" onClick={handleRequestToJoin}>
-          Request To Join
+        <Button fullWidth size="large" onClick={() => setShowDriverModal(true)}>
+          Connect Driver
         </Button>
       </div>
       <div className={styles.mapContainer}>

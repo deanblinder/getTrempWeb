@@ -26,7 +26,7 @@ const Search = () => {
     <main className={styles.container}>
       <h1 className={styles.title}>Find Available Rides</h1>
       <div className={styles.searchContainer}>
-        <div className={styles.inputContainer}>
+        <form className={styles.inputContainer} onSubmit={handleSearch}>
           <AutocompleteInput
             placeholder="Origin"
             className={styles.input}
@@ -40,17 +40,11 @@ const Search = () => {
             required
           />
           <DatePicker value={date} onChange={setDate} required />
-          <Slider value={radius} max={10} onChange={setRadius} />
-          <Button
-            fullWidth
-            type="submit"
-            variant="blue"
-            size="large"
-            onClick={handleSearch}
-          >
+          <Slider value={radius} max={10} onChange={setRadius} required />
+          <Button fullWidth type="submit" variant="blue" size="large">
             {isLoading ? <Loader /> : "Search Rides"}
           </Button>
-        </div>
+        </form>
       </div>
 
       <div className={styles.ridesList}>

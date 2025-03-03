@@ -11,6 +11,7 @@ interface SliderProps {
   step?: number;
   label?: string;
   className?: string;
+  required?: boolean;
 }
 
 const Slider: React.FC<SliderProps> = ({
@@ -21,8 +22,8 @@ const Slider: React.FC<SliderProps> = ({
   step = 1,
   label = "Distance",
   className,
+  required = false,
 }) => {
-  console.log("Slider rendered", value);
   return (
     <div className={`${styles.container} ${className || ""}`}>
       <div className={styles.labelContainer}>
@@ -37,6 +38,7 @@ const Slider: React.FC<SliderProps> = ({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className={styles.slider}
+        required={required}
       />
     </div>
   );

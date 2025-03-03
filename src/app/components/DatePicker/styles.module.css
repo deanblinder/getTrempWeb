@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #4b5563;
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.container:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.calendar {
+  margin-top: 0.5rem;
+  background-color: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #4b5563;
+}
+
+.navigationButton {
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.navigationButton:hover {
+  background-color: #374151;
+}
+
+.monthYear {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #4b5563;
+}
+
+.weekday {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  padding: 0.5rem;
+}
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: #e5e7eb;
+}
+
+.day:hover:not(.selected):not(.disabled) {
+  background-color: #374151;
+}
+
+.selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.disabled {
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.today {
+  font-weight: 600;
+  border: 1px solid #3b82f6;
+}
