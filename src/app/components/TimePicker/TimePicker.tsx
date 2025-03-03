@@ -1,8 +1,9 @@
 "use client";
 
-import { ChangeEvent } from "react";
-import styles from "./TimePicker.module.css";
-import useDevice from "@/app/hooks/useDevice";
+import { TimePicker as MTimePicker } from "@mui/x-date-pickers/TimePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
 
 interface TimePickerProps {
   value?: string;
@@ -16,32 +17,55 @@ interface TimePickerProps {
 const TimePicker = ({
   value,
   onChange,
-  className,
   required = false,
   style,
-  inputProps,
 }: TimePickerProps) => {
-  const { isMobile } = useDevice();
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
-
   return (
-    <div>
-      {isMobile && <label htmlFor="time">Time:</label>}
-      <input
-        type="time"
-        placeholder="Select Time"
-        value={value}
-        onChange={handleChange}
-        className={`${styles.input} ${className || ""}`}
-        required={required}
-        min={new Date().toISOString().slice(11, 16)}
-        style={style}
-        {...inputProps}
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <MTimePicker
+        value={value ? dayjs(value, "HH:mm") : null}
+        onChange={(newValue) => {
+          if (newValue) {
+            onChange(newValue.format("HH:mm"));
+          }
+        }}
+        slotProps={{
+          textField: {
+            required,
+            sx: {
+              "& .MuiInputBase-root": {
+                height: "3rem",
+                borderRadius: "0.5rem",
+                border: "1px solid #e5e7eb",
+                backgroundColor: "#ffffff",
+                fontSize: "1rem",
+                "@media (prefers-color-scheme: dark)": {
+                  backgroundColor: "#374151",
+                  border: "1px solid #4b5563",
+                  color: "#e5e7eb",
+                  "& .MuiInputAdornment-root": {
+                    color: "#e5e7eb",
+                  },
+                  "& .MuiSvgIcon-root": {
+                    color: "#e5e7eb",
+                  },
+                },
+                "&:hover": {
+                  border: "1px solid #3b82f6",
+                },
+                "& fieldset": {
+                  border: "none",
+                },
+              },
+            },
+          },
+        }}
+        sx={{
+          width: "100%",
+          ...style,
+        }}
       />
-    </div>
+    </LocalizationProvider>
   );
 };
 

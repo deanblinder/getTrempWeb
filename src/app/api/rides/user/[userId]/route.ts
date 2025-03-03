@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
         { "passengers.accepted": { $elemMatch: { id: userId } } },
         { "passengers.requests": { $elemMatch: { id: userId } } },
       ],
-    });
+    }).sort({ "rideTime.timeStemp": 1 });
 
     if (!rides) {
       return NextResponse.json({ error: "No rides found" }, { status: 404 });
