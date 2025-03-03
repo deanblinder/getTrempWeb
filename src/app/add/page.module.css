@@ -8,7 +8,7 @@
 }
 
 .searchContainer {
-  position: absolute;
+  /* position: absolute; */
   top: 1rem;
   left: 1rem;
   right: 1rem;
@@ -45,7 +45,7 @@
 .mapContainer {
   width: 100%;
   height: calc(100vh - 8rem);
-  margin-top: 29rem;
+  margin-top: 1rem;
   background-color: #374151;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -84,7 +84,7 @@
   font-size: 1.875rem;
   font-weight: 600;
   color: var(--foreground);
-  margin-bottom: 15rem;
+  margin-bottom: 1rem;
 }
 
 .seatButton:hover {
