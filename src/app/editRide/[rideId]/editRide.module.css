@@ -16,16 +16,26 @@
 }
 
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
+}
+
+.closeButton:hover {
+  color: #333;
 }
 
 .driverInfo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 12px;
+}
+
+.driverName {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
 }
 
 .avatar {

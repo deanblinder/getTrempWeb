@@ -16,6 +16,19 @@
   cursor: pointer;
 }
 
+.closeButton {
+  position: absolute;
+  /* top: 0; */
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

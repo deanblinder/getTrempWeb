@@ -14,7 +14,6 @@ interface EditProfileModalProps {
 
 const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
   const { data: session } = useSession();
-
   const [userDetails, setUserDetails] = useState<Partial<User>>({
     firstName: session?.user.firstName ?? "",
     lastName: session?.user.lastName ?? "",
@@ -37,8 +36,8 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
     }
   }, [session]);
 
-  const handleSave = () => {
-    if (session) userActions.updateUser(session?.user.id, userDetails);
+  const handleSave = async () => {
+    if (session) await userActions.updateUser(session?.user.id, userDetails);
 
     onClose();
   };

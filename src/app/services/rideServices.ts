@@ -130,4 +130,16 @@ export const rideServices = {
     }
     return await response.json();
   },
+  deleteRideService: async (rideId: string) => {
+    const response = await fetch(`/api/rides/${rideId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to delete ride");
+    }
+    return await response.json();
+  },
 };

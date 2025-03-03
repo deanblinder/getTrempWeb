@@ -51,3 +51,28 @@ export async function PUT(request: NextRequest) {
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await connectDB();
+    const rideId = request.nextUrl.pathname.split("/").pop() as string;
+
+    if (!mongoose.Types.ObjectId.isValid(rideId)) {
+      return Response.json(
+        { error: "Invalid ride ID format" },
+        { status: 400 }
+      );
+    }
+
+    const deletedRide = await Ride.findByIdAndDelete(rideId);
+
+    if (!deletedRide) {
+      return Response.json({ error: "Ride not found" }, { status: 404 });
+    }
+
+    return Response.json({ message: "Ride deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting ride:", error);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
+  }
+}

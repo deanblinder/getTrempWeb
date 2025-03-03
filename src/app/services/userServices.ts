@@ -18,7 +18,7 @@ export const userServices = {
   },
 
   updateUserService: async (userId: string, updatedUser: Partial<User>) => {
-    const response = await fetch(`/api/users/${userId}`, {
+    const response = await fetch(`/api/user/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

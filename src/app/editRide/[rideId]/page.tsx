@@ -24,22 +24,28 @@ const EditRide = () => {
     updateSelectedRouteIndex,
     handleSave,
     handleCancel,
+    handleDelete,
   } = useEditRide(rideId);
 
   return (
     <div className={styles.container}>
       <div className={styles.rideDetails}>
         <div className={styles.header}>
-          <div className={styles.driverInfo}>
-            <Avatar
-              src={""}
-              alt="Driver's avatar"
-              size={60}
-              className={styles.avatar}
-            />
-            <span className={styles.driverName}>
-              {ride?.driver.firstName} {ride?.driver.lastName}
-            </span>
+          <div>
+            <button className={styles.closeButton} onClick={handleCancel}>
+              ✕
+            </button>
+            <div className={styles.driverInfo}>
+              <Avatar
+                src={""}
+                alt="Driver's avatar"
+                size={60}
+                className={styles.avatar}
+              />
+              <span className={styles.driverName}>
+                {ride?.driver.firstName} {ride?.driver.lastName}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -92,8 +98,8 @@ const EditRide = () => {
         </div>
 
         <div className={styles.buttonContainer}>
-          <button className={styles.cancelButton} onClick={handleCancel}>
-            Cancel
+          <button className={styles.cancelButton} onClick={handleDelete}>
+            Delete Ride
           </button>
           <button className={styles.saveButton} onClick={handleSave}>
             Save Changes

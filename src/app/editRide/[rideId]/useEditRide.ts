@@ -39,13 +39,19 @@ export const useEditRide = (rideId: string) => {
     }
   }, [initialRideData]);
 
-  const handleCancel = () => {
+  const handleDelete = () => {
+    rideActions.deleteRide(rideId);
     router.back();
   };
 
   const handleSave = async () => {
     if (!ride) return;
-    rideActions.editRide(rideId, ride);
+    await rideActions.editRide(rideId, ride);
+    router.back();
+  };
+
+  const handleCancel = () => {
+    router.back();
   };
 
   const setOrigin = (place: PlaceResult) => {
@@ -138,6 +144,7 @@ export const useEditRide = (rideId: string) => {
     updateSeats,
     updateSelectedRouteIndex,
     handleSave,
+    handleDelete,
     handleCancel,
   };
 };

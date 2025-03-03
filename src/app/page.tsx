@@ -6,6 +6,7 @@ import Button from "./components/Button/Button";
 import Slider from "./components/Slider/Slider";
 import { useSearch } from "./useSearch";
 import RideCard from "./components/RideCard/RideCard";
+import Loader from "./components/Loader/Loader";
 
 const Search = () => {
   const {
@@ -18,6 +19,7 @@ const Search = () => {
     setRadius,
     handleSearch,
     shouldShowSearchResults,
+    isLoading,
   } = useSearch();
 
   return (
@@ -47,7 +49,7 @@ const Search = () => {
             size="large"
             onClick={handleSearch}
           >
-            Search Rides
+            {isLoading ? <Loader /> : "Search Rides"}
           </Button>
         </div>
       </div>

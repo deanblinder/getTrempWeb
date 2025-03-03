@@ -38,6 +38,9 @@ const rideActions = {
   requestRide: async (rideId: string, userId: string) => {
     return await rideServices.requestRideService(rideId, userId);
   },
+  deleteRide(rideId: string) {
+    return rideServices.deleteRideService(rideId);
+  },
 };
 
 export default rideActions;

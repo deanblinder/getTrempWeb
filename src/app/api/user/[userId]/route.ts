@@ -54,7 +54,10 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json(user);
+    // Update the session with the new user data
+    const response = NextResponse.json(user);
+
+    return response;
   } catch (error) {
     console.error("Error updating user:", error);
     return NextResponse.json(

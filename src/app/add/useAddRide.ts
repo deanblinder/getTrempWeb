@@ -4,6 +4,7 @@ import { Place } from "../useSearch";
 import rideActions from "../actions/rideActions";
 import { useSession } from "next-auth/react";
 import { User } from "@/models/user";
+import { useRouter } from "next/navigation";
 type PlaceResult = google.maps.places.PlaceResult;
 
 export interface AddRideFormData {
@@ -38,6 +39,7 @@ const updatePlace = (place: PlaceResult): Place | undefined => {
 
 export const useAddRide = () => {
   const session = useSession();
+  const router = useRouter();
   const [formState, setFormState] = useState<AddRideFormData>({
     origin: undefined,
     destination: undefined,
@@ -100,10 +102,11 @@ export const useAddRide = () => {
   };
 
   const handleAddRide = async () => {
-    rideActions.addRide({
+    await rideActions.addRide({
       formState,
       user: session.data?.user as Partial<User>,
     });
+    router.push("/rides");
   };
 
   return {

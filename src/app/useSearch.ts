@@ -53,6 +53,7 @@ export const useSearch = () => {
     date: "",
     radius: 5,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchResults, setSearchResults] = useState<Ride[]>([]);
 
@@ -96,12 +97,14 @@ export const useSearch = () => {
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     const rides = await rideActions.searchRides(formState);
     const filterdRides = rides.filter((ride: Ride) => {
       return ride.driver.id !== session?.user?.id;
     });
 
     setSearchResults(filterdRides);
+    setIsLoading(false);
   };
 
   return {
@@ -116,5 +119,6 @@ export const useSearch = () => {
     setDate,
     handleSearch,
     shouldShowSearchResults: searchResults.length > 0,
+    isLoading,
   };
 };

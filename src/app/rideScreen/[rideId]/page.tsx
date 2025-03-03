@@ -22,35 +22,34 @@ const RideScreen = () => {
               </span>
             </div>
           </div>
-
-          <div className={styles.locations}>
-            <div className={styles.locationItem}>
-              <span className={styles.label}>From:</span>
-              <span className={styles.locationText}>
-                {rideData?.origin?.formatted_address}
-              </span>
-            </div>
-            <div className={styles.locationItem}>
-              <span className={styles.label}>To:</span>
-              <span className={styles.locationText}>
-                {rideData?.destination?.formatted_address}
-              </span>
-            </div>
+        </div>
+        <div className={styles.locations}>
+          <div className={styles.locationItem}>
+            <span className={styles.label}>From:</span>
+            <span className={styles.locationText}>
+              {rideData?.origin?.formatted_address}
+            </span>
           </div>
+          <div className={styles.locationItem}>
+            <span className={styles.label}>To:</span>
+            <span className={styles.locationText}>
+              {rideData?.destination?.formatted_address}
+            </span>
+          </div>
+        </div>
 
-          <div className={styles.details}>
-            <div className={styles.detailItem}>
-              <span className={styles.label}>Date:</span>
-              <span>{rideData?.rideTime.formattedData.date}</span>
-            </div>
-            <div className={styles.detailItem}>
-              <span className={styles.label}>Time:</span>
-              <span>{rideData?.rideTime.formattedData.time}</span>
-            </div>
-            <div className={styles.detailItem}>
-              <span className={styles.label}>Available Seats:</span>
-              <span>{rideData?.seats}</span>
-            </div>
+        <div className={styles.details}>
+          <div className={styles.detailItem}>
+            <span className={styles.label}>Date:</span>
+            <span>{rideData?.rideTime.formattedData.date}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.label}>Time:</span>
+            <span>{rideData?.rideTime.formattedData.time}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.label}>Available Seats:</span>
+            <span>{rideData?.seats}</span>
           </div>
         </div>
         <Button fullWidth size="large" onClick={handleRequestToJoin}>
