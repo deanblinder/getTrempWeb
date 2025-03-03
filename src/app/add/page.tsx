@@ -7,6 +7,7 @@ import TimePicker from "../components/TimePicker/TimePicker";
 import SeatsInput from "../components/SeatsInput/SeatsInput";
 import Button from "../components/Button/Button";
 import { useAddRide } from "./useAddRide";
+import EditProfileModal from "../components/EditProfileModal";
 
 const Add = () => {
   const {
@@ -18,10 +19,14 @@ const Add = () => {
     setSeats,
     setSelectedRouteIndex,
     handleAddRide,
+    isEditModalOpen,
+    setIsEditModalOpen,
   } = useAddRide();
 
   return (
     <main className={styles.container}>
+      <h1 className={styles.title}>Add Rides</h1>
+
       <div className={styles.searchContainer}>
         <div className={styles.inputContainer}>
           <AutocompleteInput
@@ -53,6 +58,11 @@ const Add = () => {
           onRouteChange={setSelectedRouteIndex}
         />
       </div>
+      <EditProfileModal
+        onClose={() => setIsEditModalOpen(false)}
+        isOpen={isEditModalOpen}
+        description="Please add your phone number to create a ride. This helps other riders contact you."
+      />
     </main>
   );
 };

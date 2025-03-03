@@ -11,6 +11,8 @@ const Profile = () => {
   const { data: session } = useSession();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  console.log({ session });
+
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/" });
   };

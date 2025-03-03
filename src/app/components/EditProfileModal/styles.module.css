@@ -23,8 +23,15 @@
 
 .modal h3 {
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.5rem;
+  text-align: center;
+}
+
+.modal h4 {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 

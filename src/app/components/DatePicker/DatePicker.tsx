@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from "react";
 import styles from "./DatePicker.module.css";
+import useDevice from "@/app/hooks/useDevice";
 
 interface DatePickerProps {
   value?: string;
@@ -20,22 +21,27 @@ const DatePicker = ({
   style,
   inputProps,
 }: DatePickerProps) => {
+  const { isMobile } = useDevice();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   return (
-    <input
-      type="date"
-      placeholder="Select date"
-      value={value}
-      onChange={handleChange}
-      className={`${styles.input} ${className || ""}`}
-      required={required}
-      min={new Date().toISOString().split("T")[0]}
-      style={style}
-      {...inputProps}
-    />
+    <div>
+      {isMobile && <label htmlFor="date">Date:</label>}
+      <input
+        type="date"
+        placeholder="Select date"
+        value={value}
+        onChange={handleChange}
+        className={`${styles.input} ${className || ""}`}
+        required={required}
+        min={new Date().toISOString().split("T")[0]}
+        style={style}
+        {...inputProps}
+      />
+    </div>
   );
 };
 

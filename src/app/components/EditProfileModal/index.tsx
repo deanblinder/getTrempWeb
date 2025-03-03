@@ -3,17 +3,26 @@
 import userActions from "@/app/actions/userActions";
 import Button from "../Button/Button";
 import styles from "./styles.module.css";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { User } from "@/models/user";
+import { useSessionUpdate } from "@/app/hooks/useSessionUpdate";
+import { useSession } from "next-auth/react";
+import { useUserRides } from "@/app/hooks/useUserRides";
 
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
+  description?: string;
 }
 
-const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
+const EditProfileModal = ({
+  isOpen,
+  onClose,
+  description,
+}: EditProfileModalProps) => {
+  const { updateSessionData } = useSessionUpdate();
   const { data: session } = useSession();
+  const { rides } = useUserRides();
   const [userDetails, setUserDetails] = useState<Partial<User>>({
     firstName: session?.user.firstName ?? "",
     lastName: session?.user.lastName ?? "",
@@ -37,7 +46,10 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
   }, [session]);
 
   const handleSave = async () => {
-    if (session) await userActions.updateUser(session?.user.id, userDetails);
+    if (session) {
+      await userActions.updateUser(session?.user.id, userDetails);
+      await updateSessionData(userDetails);
+    }
 
     onClose();
   };
@@ -48,6 +60,7 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <h3>Edit Profile</h3>
+        {description && <h4>{description}</h4>}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -81,6 +94,7 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
             defaultValue={userDetails.phoneNumber}
             pattern="[0-9]{10}"
             title="Please enter a valid 10-digit phone number"
+            required={rides.length > 0}
             onChange={(e) =>
               setUserDetails({ ...userDetails, phoneNumber: e.target.value })
             }
@@ -105,7 +119,7 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
           />
 
           <div className={styles.modalButtons}>
-            <Button type="submit" fullWidth onClick={handleSave}>
+            <Button type="submit" fullWidth>
               Save
             </Button>
             <Button

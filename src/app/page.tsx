@@ -25,7 +25,6 @@ const Search = () => {
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>Find Available Rides</h1>
-
       <div className={styles.searchContainer}>
         <div className={styles.inputContainer}>
           <AutocompleteInput

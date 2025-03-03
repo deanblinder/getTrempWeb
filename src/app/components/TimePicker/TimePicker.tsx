@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from "react";
 import styles from "./TimePicker.module.css";
+import useDevice from "@/app/hooks/useDevice";
 
 interface TimePickerProps {
   value?: string;
@@ -20,22 +21,27 @@ const TimePicker = ({
   style,
   inputProps,
 }: TimePickerProps) => {
+  const { isMobile } = useDevice();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   return (
-    <input
-      type="time"
-      placeholder="Select Time"
-      value={value}
-      onChange={handleChange}
-      className={`${styles.input} ${className || ""}`}
-      required={required}
-      min={new Date().toISOString().slice(11, 16)}
-      style={style}
-      {...inputProps}
-    />
+    <div>
+      {isMobile && <label htmlFor="time">Time:</label>}
+      <input
+        type="time"
+        placeholder="Select Time"
+        value={value}
+        onChange={handleChange}
+        className={`${styles.input} ${className || ""}`}
+        required={required}
+        min={new Date().toISOString().slice(11, 16)}
+        style={style}
+        {...inputProps}
+      />
+    </div>
   );
 };
 

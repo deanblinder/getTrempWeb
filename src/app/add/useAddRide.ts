@@ -48,6 +48,7 @@ export const useAddRide = () => {
     seats: 1,
     selectedRouteIndex: 0,
   });
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const setOrigin = (place: PlaceResult) => {
     setFormState((prev: AddRideFormData): AddRideFormData => {
@@ -102,6 +103,10 @@ export const useAddRide = () => {
   };
 
   const handleAddRide = async () => {
+    if (!session.data?.user?.phoneNumber) {
+      setIsEditModalOpen(true);
+      return;
+    }
     await rideActions.addRide({
       formState,
       user: session.data?.user as Partial<User>,
@@ -118,5 +123,7 @@ export const useAddRide = () => {
     setSeats,
     setSelectedRouteIndex,
     handleAddRide,
+    isEditModalOpen,
+    setIsEditModalOpen,
   };
 };

@@ -10,11 +10,19 @@
   font-size: 1rem;
 }
 
+.label {
+  display: block;
+}
+
 @media (min-width: 640px) {
   .input {
     height: 3rem;
     width: 100%;
     font-size: 0.875rem;
+  }
+
+  .label {
+    display: none;
   }
 }
 
