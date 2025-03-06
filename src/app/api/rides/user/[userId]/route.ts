@@ -8,11 +8,17 @@ export async function GET(request: NextRequest) {
     console.log("Connected to MongoDB");
     await connectDB();
     // Find rides where the user is either a driver or a passenger
+    const currentDate = new Date();
     const rides = await Ride.find({
-      $or: [
-        { "driver.id": userId },
-        { "passengers.accepted": { $elemMatch: { id: userId } } },
-        { "passengers.requests": { $elemMatch: { id: userId } } },
+      $and: [
+        {
+          $or: [
+            { "driver.id": userId },
+            { "passengers.accepted": { $elemMatch: { id: userId } } },
+            { "passengers.requests": { $elemMatch: { id: userId } } },
+          ],
+        },
+        { "rideTime.timeStemp": { $gt: currentDate } },
       ],
     }).sort({ "rideTime.timeStemp": 1 });
 
