@@ -5,9 +5,9 @@ import Avatar from "../Avatar";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import Loader from "../Loader/Loader";
+import { useUser } from "@/app/hooks/useUser";
 
 interface RideCardProps {
-  avatarImage?: string;
   driver: {
     firstName: string;
     lastName: string;
@@ -22,7 +22,6 @@ interface RideCardProps {
 }
 
 const RideCard = ({
-  avatarImage,
   driver,
   origin,
   destination,
@@ -35,6 +34,8 @@ const RideCard = ({
   const session = useSession();
 
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser(driver.id);
+
   const handleCardClick = () => {
     const isUserDriver = session?.data?.user?.id === driver?.id;
     setIsLoading(true);
@@ -65,9 +66,9 @@ const RideCard = ({
 
       <div className={styles.header}>
         <div className={styles.avatarContainer}>
-          <Avatar src={avatarImage} alt="Driver's avatar" size={40} />
+          <Avatar src={user?.profilePicture} alt="Driver's avatar" size={40} />
           <span className={styles.driverName}>
-            {driver?.firstName + " " + driver?.lastName}
+            {user?.firstName + " " + user?.lastName}
           </span>
         </div>
         <div className={styles.locations}>

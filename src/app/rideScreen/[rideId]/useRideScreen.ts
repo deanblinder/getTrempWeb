@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useFetchRide } from "@/app/hooks/useFetchRide";
 import rideActions from "@/app/actions/rideActions";
 import { useSession } from "next-auth/react";
+import { useUser } from "@/app/hooks/useUser";
 
 export const useRideScreen = () => {
   const [showDriverModal, setShowDriverModal] = useState(false);
@@ -12,14 +13,16 @@ export const useRideScreen = () => {
   const { rideData } = useFetchRide(rideId);
   const { data: session } = useSession();
   const handleRequestToJoin = async () => {
-    // Here you would typically make an API call to request joining the ride
     rideActions.requestRide(rideId, session!.user.id);
   };
+
+  const { user: driver } = useUser(rideData?.driver.id || "");
 
   return {
     showDriverModal,
     setShowDriverModal,
     rideData,
     handleRequestToJoin,
+    driver,
   };
 };

@@ -25,6 +25,7 @@ const EditRide = () => {
     handleSave,
     handleCancel,
     handleDelete,
+    session,
   } = useEditRide(rideId);
 
   return (
@@ -37,13 +38,13 @@ const EditRide = () => {
             </button>
             <div className={styles.driverInfo}>
               <Avatar
-                src={""}
+                src={session?.user.profilePicture}
                 alt="Driver's avatar"
                 size={60}
                 className={styles.avatar}
               />
               <span className={styles.driverName}>
-                {ride?.driver.firstName} {ride?.driver.lastName}
+                {session?.user.firstName} {session?.user?.lastName}
               </span>
             </div>
           </div>

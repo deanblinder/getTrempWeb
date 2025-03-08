@@ -30,7 +30,6 @@ const Rides = () => {
           <RideCard
             key={ride._id}
             rideId={ride._id}
-            avatarImage="/vercel.svg"
             driver={ride.driver}
             origin={ride.origin?.formatted_address || ""}
             destination={ride.destination?.formatted_address || ""}

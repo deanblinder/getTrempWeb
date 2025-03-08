@@ -43,7 +43,7 @@ export const useAddRide = () => {
   const [formState, setFormState] = useState<AddRideFormData>({
     origin: undefined,
     destination: undefined,
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     time: "00:00",
     seats: 1,
     selectedRouteIndex: 0,

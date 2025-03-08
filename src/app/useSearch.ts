@@ -50,7 +50,8 @@ export const useSearch = () => {
   const [formState, setFormState] = useState<SearchFormState>({
     origin: undefined,
     destination: undefined,
-    date: "",
+    date: new Date().toISOString().split("T")[0],
+
     radius: 5,
   });
   const [isLoading, setIsLoading] = useState(false);

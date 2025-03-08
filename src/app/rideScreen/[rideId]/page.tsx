@@ -8,16 +8,21 @@ import Button from "@/app/components/Button/Button";
 import { useRideScreen } from "./useRideScreen";
 
 const RideScreen = () => {
-  const { showDriverModal, setShowDriverModal, rideData } = useRideScreen();
+  const { showDriverModal, setShowDriverModal, rideData, driver } =
+    useRideScreen();
   return (
     <div className={styles.container}>
       <div className={styles.rideDetails}>
         <div onClick={() => setShowDriverModal(true)}>
           <div className={styles.header}>
             <div className={styles.driverInfo}>
-              <Avatar src={""} alt="Driver's avatar" size={60} />
+              <Avatar
+                src={driver?.profilePicture}
+                alt="Driver's avatar"
+                size={60}
+              />
               <span className={styles.driverName}>
-                {rideData?.driver?.firstName + " " + rideData?.driver?.lastName}
+                {driver?.firstName + " " + driver?.lastName}
               </span>
             </div>
           </div>

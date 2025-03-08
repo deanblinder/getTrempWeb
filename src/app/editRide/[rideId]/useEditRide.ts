@@ -5,6 +5,7 @@ import { useFetchRide } from "@/app/hooks/useFetchRide";
 import { Place } from "@/app/useSearch";
 import rideActions from "@/app/actions/rideActions";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 type PlaceResult = google.maps.places.PlaceResult;
 
 const updatePlace = (place: PlaceResult): Place | undefined => {
@@ -32,6 +33,7 @@ export const useEditRide = (rideId: string) => {
   const { rideData: initialRideData, loading, error } = useFetchRide(rideId);
   const [ride, setRide] = useState<Ride | undefined>(initialRideData);
   const router = useRouter();
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (initialRideData) {
@@ -146,5 +148,6 @@ export const useEditRide = (rideId: string) => {
     handleSave,
     handleDelete,
     handleCancel,
+    session,
   };
 };
