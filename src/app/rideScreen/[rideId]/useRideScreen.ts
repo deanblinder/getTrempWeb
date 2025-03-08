@@ -12,8 +12,12 @@ export const useRideScreen = () => {
   const rideId = params.rideId as string;
   const { rideData } = useFetchRide(rideId);
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleRequestToJoin = async () => {
-    rideActions.requestRide(rideId, session!.user.id);
+    setIsLoading(true);
+    await rideActions.requestRide(rideId, session!.user.id);
+    setIsLoading(false);
   };
 
   const { user: driver } = useUser(rideData?.driver.id || "");
@@ -24,5 +28,12 @@ export const useRideScreen = () => {
     rideData,
     handleRequestToJoin,
     driver,
+    isLoading,
+    rideRequested: rideData?.passengers.requests.includes(
+      session?.user.id || ""
+    ),
+    rideAccepted: rideData?.passengers.accepted.includes(
+      session?.user.id || ""
+    ),
   };
 };

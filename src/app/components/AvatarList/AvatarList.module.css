@@ -1,0 +1,28 @@
+.avatarList {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatarWrapper {
+  margin-right: -8px;
+  border-radius: 50%;
+  border: 2px solid #1f2937;
+  transition: transform 0.2s;
+}
+
+.avatarWrapper:hover {
+  transform: translateY(-2px);
+  z-index: 1;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #374151;
+  color: #9ca3af;
+  border-radius: 50%;
+  border: 2px solid #1f2937;
+  font-weight: 500;
+}

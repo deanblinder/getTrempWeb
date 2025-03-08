@@ -142,4 +142,17 @@ export const rideServices = {
     }
     return await response.json();
   },
+  approveRideRequestService: async (rideId: string, userId: string) => {
+    const response = await fetch(`/api/rides/approveRequest/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rideId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to approve ride request");
+    }
+    return await response.json();
+  },
 };

@@ -4,8 +4,8 @@ import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput"
 import DatePicker from "./components/DatePicker/DatePicker";
 import Button from "./components/Button/Button";
 import Slider from "./components/Slider/Slider";
-import { useSearch } from "./useSearch";
 import RideCard from "./components/RideCard/RideCard";
+import { useSearch } from "./useSearch";
 import Loader from "./components/Loader/Loader";
 
 const Search = () => {
@@ -49,18 +49,9 @@ const Search = () => {
 
       <div className={styles.ridesList}>
         {shouldShowSearchResults ? (
-          searchResults.map((ride, index) => (
-            <div key={index} className={styles.rideItem}>
-              <RideCard
-                driver={ride.driver}
-                key={index}
-                rideId={ride._id}
-                date={ride.rideTime.formattedData.date}
-                time={ride.rideTime.formattedData.time}
-                numberOfSeats={ride.seats}
-                origin={ride.origin?.formatted_address || ""}
-                destination={ride.destination?.formatted_address || ""}
-              />
+          searchResults.map((ride) => (
+            <div key={ride._id} className={styles.rideItem}>
+              <RideCard ride={ride} />
             </div>
           ))
         ) : (

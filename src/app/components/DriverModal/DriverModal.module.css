@@ -120,7 +120,14 @@
 }
 
 .instagramButton {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
 }
 
 .instagramButton:hover {
@@ -172,15 +179,15 @@
 }
 
 .phoneButton {
-  background-color: #6B7280;
+  background-color: #6b7280;
 }
 
 .phoneButton:hover:not(:disabled) {
-  background-color: #4B5563;
+  background-color: #4b5563;
 }
 
 .whatsappButton {
-  background-color: #25D366;
+  background-color: #25d366;
 }
 
 .whatsappButton:hover:not(:disabled) {
@@ -188,7 +195,14 @@
 }
 
 .instagramButton {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
 }
 
 .instagramButton:hover:not(:disabled) {
@@ -196,7 +210,7 @@
 }
 
 .facebookButton {
-  background-color: #1877F2;
+  background-color: #1877f2;
 }
 
 .facebookButton:hover:not(:disabled) {

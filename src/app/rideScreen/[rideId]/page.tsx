@@ -6,10 +6,19 @@ import DriverModal from "@/app/components/DriverModal/DriverModal";
 import Avatar from "@/app/components/Avatar";
 import Button from "@/app/components/Button/Button";
 import { useRideScreen } from "./useRideScreen";
+import Loader from "@/app/components/Loader/Loader";
 
 const RideScreen = () => {
-  const { showDriverModal, setShowDriverModal, rideData, driver } =
-    useRideScreen();
+  const {
+    showDriverModal,
+    setShowDriverModal,
+    rideData,
+    driver,
+    handleRequestToJoin,
+    rideAccepted,
+    rideRequested,
+    isLoading,
+  } = useRideScreen();
   return (
     <div className={styles.container}>
       <div className={styles.rideDetails}>
@@ -56,12 +65,26 @@ const RideScreen = () => {
             <span>{rideData?.seats}</span>
           </div>
         </div>
-        <Button fullWidth size="large" onClick={() => setShowDriverModal(true)}>
-          Connect Driver
-        </Button>
+        <div className={styles.buttons}>
+          <Button
+            fullWidth
+            size="large"
+            onClick={() => setShowDriverModal(true)}
+            variant="green"
+          >
+            {"Connect Driver"}
+          </Button>
+          <Button
+            disabled={rideAccepted || rideRequested}
+            fullWidth
+            size="large"
+            onClick={handleRequestToJoin}
+          >
+            {isLoading ? <Loader /> : "Request Ride"}
+          </Button>
+        </div>
       </div>
       <div className={styles.mapContainer}>
-        {/* Map component will be added here */}
         <div className={styles.mapPlaceholder}>
           <GoogleMapWrapper
             origin={rideData?.origin}

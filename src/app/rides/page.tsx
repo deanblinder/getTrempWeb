@@ -27,16 +27,7 @@ const Rides = () => {
       <h1 className={styles.title}>My Upcoming Rides</h1>
       <div className={styles.ridesList}>
         {rides.map((ride) => (
-          <RideCard
-            key={ride._id}
-            rideId={ride._id}
-            driver={ride.driver}
-            origin={ride.origin?.formatted_address || ""}
-            destination={ride.destination?.formatted_address || ""}
-            date={ride.rideTime.formattedData.date}
-            time={ride.rideTime.formattedData.time}
-            numberOfSeats={ride.seats}
-          />
+          <RideCard key={ride._id} ride={ride} />
         ))}
       </div>
     </main>

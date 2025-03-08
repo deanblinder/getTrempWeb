@@ -18,7 +18,6 @@ const DriverModal: React.FC<DriverModalProps> = ({
   driverId,
 }) => {
   const { user: driver } = useUser(driverId);
-
   if (!isOpen) return null;
 
   return (

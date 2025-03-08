@@ -26,13 +26,31 @@
 }
 
 .red {
-  background-color: #EF4444;
+  background-color: #ef4444;
   color: white;
   border: none;
 }
 
 .red:hover:not(:disabled) {
-  background-color: #DC2626;
+  background-color: #dc2626;
+}
+
+.green {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+}
+.yellow {
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+}
+.yellow:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.green:hover:not(:disabled) {
+  background-color: #16a34a;
 }
 
 /* Outline styles */
@@ -48,12 +66,22 @@
 
 .outline.red {
   background-color: transparent;
-  color: #EF4444;
-  border: 1px solid #EF4444;
+  color: #ef4444;
+  border: 1px solid #ef4444;
 }
 
 .outline.red:hover:not(:disabled) {
   background-color: rgba(239, 68, 68, 0.1);
+}
+
+.outline.green {
+  background-color: transparent;
+  color: #22c55e;
+  border: 1px solid #22c55e;
+}
+
+.outline.green:hover:not(:disabled) {
+  background-color: rgba(34, 197, 94, 0.1);
 }
 
 /* Sizes */

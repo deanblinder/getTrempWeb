@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "blue" | "red";
+  variant?: "blue" | "red" | "green" | "yellow";
   outline?: boolean;
   size?: "small" | "medium" | "large";
   fullWidth?: boolean;

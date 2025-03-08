@@ -41,6 +41,9 @@ const rideActions = {
   deleteRide(rideId: string) {
     return rideServices.deleteRideService(rideId);
   },
+  approveRideRequest: async (rideId: string, userId: string) => {
+    return await rideServices.approveRideRequestService(rideId, userId);
+  },
 };
 
 export default rideActions;

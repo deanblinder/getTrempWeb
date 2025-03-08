@@ -8,9 +8,10 @@ interface AvatarProps {
   alt: string;
   size?: number;
   className?: string;
+  onClick?: () => void;
 }
 
-const Avatar = ({ src, alt, size = 120, className }: AvatarProps) => {
+const Avatar = ({ src, alt, size = 120, className, onClick }: AvatarProps) => {
   return (
     <div className={`${styles.avatarContainer} ${className || ""}`}>
       <Image
@@ -19,6 +20,7 @@ const Avatar = ({ src, alt, size = 120, className }: AvatarProps) => {
         width={size}
         height={size}
         className={styles.avatar}
+        onClick={onClick}
       />
     </div>
   );
