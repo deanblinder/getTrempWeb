@@ -15,7 +15,7 @@ const Avatar = ({ src, alt, size = 120, className, onClick }: AvatarProps) => {
   return (
     <div className={`${styles.avatarContainer} ${className || ""}`}>
       <Image
-        src={src || "/vercel.svg"}
+        src={src || "/placeholderAvater.gif"}
         alt={alt}
         width={size}
         height={size}
