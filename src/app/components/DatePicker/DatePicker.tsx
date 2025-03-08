@@ -23,6 +23,8 @@ const DatePicker = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MDatePicker
+        format="DD/MM/YYYY"
+        disablePast
         value={value ? dayjs(value) : null}
         onChange={(newValue) => {
           if (newValue) {

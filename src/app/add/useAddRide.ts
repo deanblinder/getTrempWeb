@@ -44,7 +44,7 @@ export const useAddRide = () => {
     origin: undefined,
     destination: undefined,
     date: "",
-    time: "",
+    time: "00:00",
     seats: 1,
     selectedRouteIndex: 0,
   });

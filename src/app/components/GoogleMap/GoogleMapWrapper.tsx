@@ -36,6 +36,10 @@ const GoogleMapWrapper = ({
   });
 
   useEffect(() => {
+    setCurrentRouteIndex(selectedRouteIndex);
+  }, [selectedRouteIndex]);
+
+  useEffect(() => {
     if (isLoaded && origin && destination && showRoute) {
       const directionsService = new google.maps.DirectionsService();
 
