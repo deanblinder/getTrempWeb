@@ -11,9 +11,9 @@
   position: relative;
 }
 
-.card:hover {
+/* .card:hover {
   transform: translateY(-2px);
-}
+} */
 
 @media (hover: none) {
   .card:active {

@@ -14,7 +14,12 @@ interface AvatarListProps {
 
 const AvatarList = ({ userIds, title, size = 32 }: AvatarListProps) => {
   const [showDriverModal, setShowDriverModal] = useState(false);
-  const [userId, setUserId] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+
+  const handleModalClose = () => {
+    setShowDriverModal(false);
+    setSelectedUserId(null);
+  };
 
   return (
     <div className={styles.avatarList}>
@@ -30,18 +35,20 @@ const AvatarList = ({ userIds, title, size = 32 }: AvatarListProps) => {
               alt={`${user?.firstName || "User"}'s avatar`}
               size={size}
               onClick={() => {
-                setUserId(userId);
+                setSelectedUserId(userId);
                 setShowDriverModal(true);
               }}
             />
           </div>
         );
       })}
-      <DriverModal
-        isOpen={showDriverModal}
-        onClose={() => setShowDriverModal(false)}
-        driverId={userId}
-      />
+      {showDriverModal && selectedUserId && (
+        <DriverModal
+          isOpen={showDriverModal}
+          onClose={handleModalClose}
+          driverId={selectedUserId}
+        />
+      )}
     </div>
   );
 };
