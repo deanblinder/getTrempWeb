@@ -37,6 +37,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
       await rideActions.approveRideRequest(rideId, driver!._id);
     }
     setIsLoading(false);
+    window.location.reload();
   };
   return (
     <div className={styles.content}>
