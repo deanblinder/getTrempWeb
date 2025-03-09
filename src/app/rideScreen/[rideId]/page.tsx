@@ -18,6 +18,7 @@ const RideScreen = () => {
     rideAccepted,
     rideRequested,
     isLoading,
+    buttonContent,
   } = useRideScreen();
   return (
     <div className={styles.container}>
@@ -80,7 +81,7 @@ const RideScreen = () => {
             size="large"
             onClick={handleRequestToJoin}
           >
-            {isLoading ? <Loader /> : "Request Ride"}
+            {isLoading ? <Loader /> : buttonContent}
           </Button>
         </div>
       </div>

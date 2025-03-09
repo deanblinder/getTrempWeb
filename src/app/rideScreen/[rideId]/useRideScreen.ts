@@ -22,6 +22,23 @@ export const useRideScreen = () => {
 
   const { user: driver } = useUser(rideData?.driver.id || "");
 
+  const rideRequested = rideData?.passengers.requests.includes(
+    session?.user.id || ""
+  );
+  const rideAccepted = rideData?.passengers.accepted.includes(
+    session?.user.id || ""
+  );
+
+  const getButtonContent = () => {
+    if (rideRequested) {
+      return "Requested";
+    }
+    if (rideAccepted) {
+      return "Accepted";
+    }
+    return "Request to Join";
+  };
+
   return {
     showDriverModal,
     setShowDriverModal,
@@ -29,11 +46,8 @@ export const useRideScreen = () => {
     handleRequestToJoin,
     driver,
     isLoading,
-    rideRequested: rideData?.passengers.requests.includes(
-      session?.user.id || ""
-    ),
-    rideAccepted: rideData?.passengers.accepted.includes(
-      session?.user.id || ""
-    ),
+    rideRequested,
+    rideAccepted,
+    buttonContent: getButtonContent(),
   };
 };

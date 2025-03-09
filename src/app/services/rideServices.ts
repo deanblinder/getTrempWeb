@@ -143,15 +143,41 @@ export const rideServices = {
     return await response.json();
   },
   approveRideRequestService: async (rideId: string, userId: string) => {
-    const response = await fetch(`/api/rides/approveRequest/${userId}`, {
+    const response = await fetch(`/api/rides/approveRequest/${rideId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ rideId }),
+      body: JSON.stringify({ userId }),
     });
     if (!response.ok) {
       throw new Error("Failed to approve ride request");
+    }
+    return await response.json();
+  },
+  unapproveRideRequestService: async (rideId: string, userId: string) => {
+    const response = await fetch(`/api/rides/unApproveRequest/${rideId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to approve ride request");
+    }
+    return await response.json();
+  },
+  removePassengerService: async (rideId: string, userId: string) => {
+    const response = await fetch(`/api/rides/removePassenger/${rideId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to remove passenger from ride");
     }
     return await response.json();
   },

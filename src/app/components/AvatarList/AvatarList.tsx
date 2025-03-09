@@ -2,22 +2,24 @@
 import { useUser } from "@/app/hooks/useUser";
 import Avatar from "../Avatar";
 import styles from "./AvatarList.module.css";
-import DriverModal from "../DriverModal/DriverModal";
 import { useState } from "react";
+import Modal from "../Modal/Modal";
+import DriverModalContent from "../DriverModalContent";
 
 interface AvatarListProps {
   userIds: string[];
   title: string;
   size?: number;
   maxDisplay?: number;
+  rideId: string;
 }
 
-const AvatarList = ({ userIds, title, size = 32 }: AvatarListProps) => {
-  const [showDriverModal, setShowDriverModal] = useState(false);
+const AvatarList = ({ userIds, title, size = 32, rideId }: AvatarListProps) => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalClose = () => {
-    setShowDriverModal(false);
+    setIsModalOpen(false);
     setSelectedUserId(null);
   };
 
@@ -36,17 +38,25 @@ const AvatarList = ({ userIds, title, size = 32 }: AvatarListProps) => {
               size={size}
               onClick={() => {
                 setSelectedUserId(userId);
-                setShowDriverModal(true);
+                setIsModalOpen(true);
               }}
             />
           </div>
         );
       })}
-      {showDriverModal && selectedUserId && (
-        <DriverModal
-          isOpen={showDriverModal}
+      {selectedUserId && (
+        <Modal
+          isOpen={isModalOpen}
           onClose={handleModalClose}
-          driverId={selectedUserId}
+          title={"User Profile"}
+          subtitle="Contact Information"
+          content={
+            <DriverModalContent
+              userId={selectedUserId}
+              rideId={rideId}
+              isOwner
+            />
+          }
         />
       )}
     </div>

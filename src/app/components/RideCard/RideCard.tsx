@@ -84,10 +84,18 @@ const RideCard = ({ ride }: RideCardProps) => {
           </div>
         </div>
         {shouldShowRequests && (
-          <AvatarList title={"Requests"} userIds={ride.passengers.requests} />
+          <AvatarList
+            title={"Requests"}
+            userIds={ride.passengers.requests}
+            rideId={ride._id}
+          />
         )}
         {shouldShowAccepted && (
-          <AvatarList title={"Accepted"} userIds={ride.passengers.accepted} />
+          <AvatarList
+            title={"Accepted"}
+            userIds={ride.passengers.accepted}
+            rideId={ride._id}
+          />
         )}
         <div className={styles.seats}>
           <span className={styles.label}>Available Seats:</span>

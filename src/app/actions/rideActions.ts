@@ -44,6 +44,9 @@ const rideActions = {
   approveRideRequest: async (rideId: string, userId: string) => {
     return await rideServices.approveRideRequestService(rideId, userId);
   },
+  removePassenger: async (rideId: string, userId: string) => {
+    return await rideServices.removePassengerService(rideId, userId);
+  },
 };
 
 export default rideActions;

@@ -30,53 +30,32 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Ride not found" }, { status: 404 });
     }
 
-    // Check if user is in requests array
-    const requestIndex = ride.passengers.requests.findIndex(
-      (request) => request === userId
+    // Check if user is in accepted passengers
+    const isAcceptedPassenger = ride.passengers.accepted.includes(userId);
+
+    if (!isAcceptedPassenger) {
+      return NextResponse.json(
+        { error: "User is not a passenger in this ride" },
+        { status: 400 }
+      );
+    }
+
+    // Remove user from accepted array and increment seats
+    ride.passengers.accepted = ride.passengers.accepted.filter(
+      (id) => id !== userId
     );
-
-    if (requestIndex === -1) {
-      return NextResponse.json(
-        { error: "User has not requested to join this ride" },
-        { status: 400 }
-      );
-    }
-
-    // Check if there are available seats
-    if (ride.seats <= 0) {
-      return NextResponse.json(
-        { error: "No available seats in this ride" },
-        { status: 400 }
-      );
-    }
-
-    // Check if user is already accepted
-    if (ride.passengers.accepted.includes(userId)) {
-      return NextResponse.json(
-        { error: "User is already accepted in this ride" },
-        { status: 400 }
-      );
-    }
-
-    // Remove user from requests array
-    ride.passengers.requests.splice(requestIndex, 1);
-
-    // Add user to accepted array
-    ride.passengers.accepted.push(userId);
-
-    // Decrement available seats
-    ride.seats -= 1;
+    ride.seats += 1;
 
     await ride.save();
 
     return NextResponse.json({
-      message: "Request approved successfully",
+      message: "Passenger removed successfully",
       ride,
     });
   } catch (error) {
-    console.error("Error approving ride request:", error);
+    console.error("Error removing passenger:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Failed to remove passenger" },
       { status: 500 }
     );
   }

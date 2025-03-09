@@ -15,13 +15,13 @@ export interface User {
   name?: string;
 }
 
-export const useUser = (userId: string) => {
+export const useUser = (userId: string | undefined) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchUser = async () => {
     setIsLoading(true);
-    const data = await userActions.getUser(userId);
+    const data = await userActions.getUser(userId!);
     setUser(data);
     setIsLoading(false);
   };
