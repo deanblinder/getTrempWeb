@@ -2,9 +2,6 @@
 import { useUser } from "@/app/hooks/useUser";
 import Avatar from "../Avatar";
 import styles from "./AvatarList.module.css";
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import DriverModalContent from "../DriverModalContent";
 
 interface AvatarListProps {
   userIds: string[];
@@ -12,17 +9,15 @@ interface AvatarListProps {
   size?: number;
   maxDisplay?: number;
   rideId: string;
+  onAvatarClick?: (userId: string) => void;
 }
 
-const AvatarList = ({ userIds, title, size = 32, rideId }: AvatarListProps) => {
-  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedUserId(null);
-  };
-
+const AvatarList = ({
+  userIds,
+  title,
+  size = 32,
+  onAvatarClick,
+}: AvatarListProps) => {
   return (
     <div className={styles.avatarList}>
       {title}
@@ -37,28 +32,12 @@ const AvatarList = ({ userIds, title, size = 32, rideId }: AvatarListProps) => {
               alt={`${user?.firstName || "User"}'s avatar`}
               size={size}
               onClick={() => {
-                setSelectedUserId(userId);
-                setIsModalOpen(true);
+                onAvatarClick?.(userId);
               }}
             />
           </div>
         );
       })}
-      {selectedUserId && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          title={"User Profile"}
-          subtitle="Contact Information"
-          content={
-            <DriverModalContent
-              userId={selectedUserId}
-              rideId={rideId}
-              isOwner
-            />
-          }
-        />
-      )}
     </div>
   );
 };

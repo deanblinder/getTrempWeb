@@ -11,14 +11,14 @@ import AvatarList from "../AvatarList/AvatarList";
 
 interface RideCardProps {
   ride: Ride;
+  onAvatarClick?: (userId: string) => void;
 }
 
-const RideCard = ({ ride }: RideCardProps) => {
+const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
   const router = useRouter();
   const session = useSession();
   const [shouldShowAccepted] = useState(ride.passengers.accepted.length > 0);
   const [shouldShowRequests] = useState(ride.passengers.requests.length > 0);
-
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser(ride.driver.id);
 
@@ -88,6 +88,7 @@ const RideCard = ({ ride }: RideCardProps) => {
             title={"Requests"}
             userIds={ride.passengers.requests}
             rideId={ride._id}
+            onAvatarClick={onAvatarClick}
           />
         )}
         {shouldShowAccepted && (
@@ -95,6 +96,7 @@ const RideCard = ({ ride }: RideCardProps) => {
             title={"Accepted"}
             userIds={ride.passengers.accepted}
             rideId={ride._id}
+            onAvatarClick={onAvatarClick}
           />
         )}
         <div className={styles.seats}>
