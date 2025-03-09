@@ -83,7 +83,7 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
             <span>{ride.rideTime.formattedData.time}</span>
           </div>
         </div>
-        {shouldShowRequests && (
+        {onAvatarClick && shouldShowRequests && (
           <AvatarList
             title={"Requests"}
             userIds={ride.passengers.requests}
@@ -91,7 +91,7 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
             onAvatarClick={onAvatarClick}
           />
         )}
-        {shouldShowAccepted && (
+        {onAvatarClick && shouldShowAccepted && (
           <AvatarList
             title={"Accepted"}
             userIds={ride.passengers.accepted}

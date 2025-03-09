@@ -17,8 +17,8 @@ export const useFetchRide = (rideId: string) => {
       setRideData(data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch ride');
-      console.error('Error fetching ride:', err);
+      setError("Failed to fetch ride");
+      console.error("Error fetching ride:", err);
     } finally {
       setLoading(false);
     }
@@ -32,6 +32,6 @@ export const useFetchRide = (rideId: string) => {
     rideData,
     loading,
     error,
-    refetch: fetchRideData
+    refetch: fetchRideData,
   };
 };

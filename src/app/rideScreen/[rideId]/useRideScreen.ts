@@ -10,13 +10,14 @@ export const useRideScreen = () => {
   const [showDriverModal, setShowDriverModal] = useState(false);
   const params = useParams();
   const rideId = params.rideId as string;
-  const { rideData } = useFetchRide(rideId);
+  const { rideData, refetch } = useFetchRide(rideId);
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRequestToJoin = async () => {
     setIsLoading(true);
     await rideActions.requestRide(rideId, session!.user.id);
+    refetch();
     setIsLoading(false);
   };
 
