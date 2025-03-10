@@ -14,9 +14,7 @@ const RideScreen = () => {
     setShowDriverModal,
     rideData,
     driver,
-    handleRequestToJoin,
-    rideAccepted,
-    rideRequested,
+    handleClick,
     isLoading,
     buttonContent,
   } = useRideScreen();
@@ -75,12 +73,7 @@ const RideScreen = () => {
           >
             {"Connect Driver"}
           </Button>
-          <Button
-            disabled={rideAccepted || rideRequested}
-            fullWidth
-            size="large"
-            onClick={handleRequestToJoin}
-          >
+          <Button fullWidth size="large" onClick={handleClick}>
             {isLoading ? <Loader /> : buttonContent}
           </Button>
         </div>

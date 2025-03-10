@@ -181,4 +181,17 @@ export const rideServices = {
     }
     return await response.json();
   },
+  removeRequestRideService: async (rideId: string, userId: string) => {
+    const response = await fetch(`/api/rides/removeRequest/${rideId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to remove ride request");
+    }
+    return await response.json();
+  },
 };

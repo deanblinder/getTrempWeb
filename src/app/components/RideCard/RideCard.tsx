@@ -33,6 +33,8 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
     }
   };
 
+  const isDriver = session?.data?.user?.id === ride.driver.id;
+
   return (
     <div className={styles.card}>
       {isLoading && (
@@ -83,7 +85,7 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
             <span>{ride.rideTime.formattedData.time}</span>
           </div>
         </div>
-        {onAvatarClick && shouldShowRequests && (
+        {isDriver && shouldShowRequests && (
           <AvatarList
             title={"Requests"}
             userIds={ride.passengers.requests}
@@ -91,7 +93,7 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
             onAvatarClick={onAvatarClick}
           />
         )}
-        {onAvatarClick && shouldShowAccepted && (
+        {isDriver && shouldShowAccepted && (
           <AvatarList
             title={"Accepted"}
             userIds={ride.passengers.accepted}

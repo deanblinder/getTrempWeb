@@ -14,9 +14,16 @@ export const useRideScreen = () => {
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleRequestToJoin = async () => {
+  const handleClick = async () => {
     setIsLoading(true);
-    await rideActions.requestRide(rideId, session!.user.id);
+
+    if (rideRequested) {
+      await rideActions.removeRequestRide(rideId, session!.user.id);
+    } else if (rideAccepted) {
+      await rideActions.removePassenger(rideId, session!.user.id);
+    } else {
+      await rideActions.requestRide(rideId, session!.user.id);
+    }
     refetch();
     setIsLoading(false);
   };
@@ -32,10 +39,10 @@ export const useRideScreen = () => {
 
   const getButtonContent = () => {
     if (rideRequested) {
-      return "Requested";
+      return "Cancel Request";
     }
     if (rideAccepted) {
-      return "Accepted";
+      return "Cancel Ride";
     }
     return "Request to Join";
   };
@@ -44,11 +51,9 @@ export const useRideScreen = () => {
     showDriverModal,
     setShowDriverModal,
     rideData,
-    handleRequestToJoin,
+    handleClick,
     driver,
     isLoading,
-    rideRequested,
-    rideAccepted,
     buttonContent: getButtonContent(),
   };
 };
