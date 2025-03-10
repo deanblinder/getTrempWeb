@@ -21,13 +21,13 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   max-height: 90vh;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #666 #1a2233;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   height: 70vh;
 }
 
 .modal::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
 
 .modal::-webkit-scrollbar-track {

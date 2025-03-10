@@ -2,11 +2,12 @@
 import React from "react";
 import styles from "./rideScreen.module.css";
 import GoogleMapWrapper from "@/app/components/GoogleMap/GoogleMapWrapper";
-import DriverModal from "@/app/components/DriverModal/DriverModal";
 import Avatar from "@/app/components/Avatar";
 import Button from "@/app/components/Button/Button";
 import { useRideScreen } from "./useRideScreen";
 import Loader from "@/app/components/Loader/Loader";
+import DriverModalContent from "@/app/components/DriverModalContent";
+import Modal from "@/app/components/Modal/Modal";
 
 const RideScreen = () => {
   const {
@@ -17,6 +18,7 @@ const RideScreen = () => {
     handleClick,
     isLoading,
     buttonContent,
+    session,
   } = useRideScreen();
   return (
     <div className={styles.container}>
@@ -90,10 +92,18 @@ const RideScreen = () => {
         </div>
       </div>
       {rideData && (
-        <DriverModal
+        <Modal
           isOpen={showDriverModal}
           onClose={() => setShowDriverModal(false)}
-          driverId={rideData?.driver?.id}
+          title={"User Profile"}
+          subtitle="Contact Information"
+          content={
+            <DriverModalContent
+              userId={session?.user.id}
+              rideId={rideData?._id}
+              isOwner={session?.user.id === rideData.driver.id}
+            />
+          }
         />
       )}
     </div>

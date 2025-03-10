@@ -55,5 +55,6 @@ export const useRideScreen = () => {
     driver,
     isLoading,
     buttonContent: getButtonContent(),
+    session,
   };
 };

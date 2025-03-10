@@ -5,22 +5,28 @@ import { useUserRides } from "../hooks/useUserRides";
 import { useState } from "react";
 import Modal from "../components/Modal/Modal";
 import DriverModalContent from "../components/DriverModalContent";
+import { useSession } from "next-auth/react";
+import { Ride } from "@/models/rides";
 
 const Rides = () => {
   const { rides } = useUserRides();
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRideId, setSelectedRideId] = useState<string | null>(null);
+  const [driverId, setDriverId] = useState<string | null>(null);
+  const { data: session } = useSession();
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     setSelectedUserId(null);
     setSelectedRideId(null);
+    setDriverId(null);
   };
 
-  const handleAvatarClick = (userId: string, rideId: string) => {
+  const handleAvatarClick = (userId: string, ride: Ride) => {
     setSelectedUserId(userId);
-    setSelectedRideId(rideId);
+    setSelectedRideId(ride._id);
+    setDriverId(ride.driver.id);
     setIsModalOpen(true);
   };
 
@@ -48,7 +54,7 @@ const Rides = () => {
           <RideCard
             key={ride._id}
             ride={ride}
-            onAvatarClick={(userId) => handleAvatarClick(userId, ride._id)}
+            onAvatarClick={(userId) => handleAvatarClick(userId, ride)}
           />
         ))}
       </div>
@@ -62,7 +68,7 @@ const Rides = () => {
             <DriverModalContent
               userId={selectedUserId}
               rideId={selectedRideId}
-              isOwner
+              isOwner={session?.user.id === driverId}
             />
           }
         />
