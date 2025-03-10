@@ -4,6 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import styles from "./MobileNavigation.module.css";
 import { useSession } from "next-auth/react";
+import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 export interface NavigationItem {
   name: string;
@@ -41,9 +44,9 @@ const MobileNavigation = ({
   };
 
   const mobileTabItems = [
-    { name: "Search", path: "/", icon: "🔍" },
-    { name: "Add", path: "/add", icon: "➕" },
-    { name: "Rides", path: "/rides", icon: "🚗" },
+    { name: "Search", path: "/", icon: <SearchIcon /> },
+    { name: "Add", path: "/add", icon: <AddIcon /> },
+    { name: "Rides", path: "/rides", icon: <DirectionsCarIcon /> },
   ];
 
   return (
