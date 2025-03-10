@@ -6,6 +6,10 @@ interface UpdateUserData {
   facebookUrl?: string;
   instagramUrl?: string;
 }
+export interface RideRequestsResponse {
+  requests: string[];
+  requestsString: string;
+}
 
 import { userServices } from "../services/userServices";
 
@@ -22,6 +26,9 @@ const userActions = {
 
   getUser: async (userId: string) => {
     return await userServices.fetchUserService(userId);
+  },
+  getUserRequests: async (userId: string): Promise<RideRequestsResponse> => {
+    return await userServices.getUserRequestsService(userId);
   },
 };
 

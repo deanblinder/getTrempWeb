@@ -62,4 +62,16 @@ export const userServices = {
 
     return await response.json();
   },
+  getUserRequestsService: async (userId: string) => {
+    const response = await fetch(`/api/rides/requests/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch user requests");
+    }
+    return await response.json();
+  },
 };
