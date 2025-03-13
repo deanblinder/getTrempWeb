@@ -3,6 +3,7 @@
 import { useCallback } from "react";
 import styles from "./styles.module.css";
 import GoogleLoginButton from "../googleLoginButton/GoogleLoginButton";
+import i18next from "i18next";
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -28,9 +29,9 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
           ×
         </button>
         <div className={styles.content}>
-          <h2 className={styles.title}>Register</h2>
+          <h2 className={styles.title}>{i18next.t("common:register.title")}</h2>
           <p className={styles.description}>
-            Join GetRide to start sharing and finding rides!
+            {i18next.t("common:register.subtitle")}
           </p>
           <GoogleLoginButton />
         </div>

@@ -68,5 +68,7 @@
   "settings.title": "Settings",
   "settings.language.title": "Select Language",
   "settings.language.english": "English",
-  "settings.language.hebrew": "Hebrew"
+  "settings.language.hebrew": "Hebrew",
+  "register.title": "Register",
+  "register.subtitle": "Join GetRide to start sharing and finding rides!"
 }

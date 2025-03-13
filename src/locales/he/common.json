@@ -68,5 +68,7 @@
   "settings.title": "הגדרות",
   "settings.language.title": "בחר שפה",
   "settings.language.english": "אנגלית",
-  "settings.language.hebrew": "עברית"
+  "settings.language.hebrew": "עברית",
+  "register.title": "התחבר",
+  "register.subtitle": "הירשמו והתחילו לשתף ולחפש נסיעות!"
 }
