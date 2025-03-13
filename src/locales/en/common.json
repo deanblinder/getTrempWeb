@@ -64,5 +64,9 @@
   "driver-modal.facebook": "Facebook",
   "driver-modal.whatsapp": "WhatsApp",
   "driver-modal.approve": "Approve passenger",
-  "driver-modal.remove-passenger": "Remove passenger"
+  "driver-modal.remove-passenger": "Remove passenger",
+  "settings.title": "Settings",
+  "settings.language.title": "Select Language",
+  "settings.language.english": "English",
+  "settings.language.hebrew": "Hebrew"
 }

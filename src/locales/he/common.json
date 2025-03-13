@@ -64,5 +64,9 @@
   "driver-modal.facebook": "פייסבוק",
   "driver-modal.whatsapp": "וואטסאפ",
   "driver-modal.approve": "אשר נוסע",
-  "driver-modal.remove-passenger": "בטל נוסע"
+  "driver-modal.remove-passenger": "בטל נוסע",
+  "settings.title": "הגדרות",
+  "settings.language.title": "בחר שפה",
+  "settings.language.english": "אנגלית",
+  "settings.language.hebrew": "עברית"
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./globals.css";
 import Navigation from "@/app/components/Navigation/Navigation";
 import styles from "./layout.module.css";
@@ -22,14 +22,6 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
 });
 
-const navItems = [
-  { name: i18n.t("common:navigation.search"), path: "/" },
-  { name: i18n.t("common:navigation.add"), path: "/add" },
-  { name: i18n.t("common:navigation.rides"), path: "/rides" },
-  { name: i18n.t("common:navigation.profile"), path: "/profile" },
-  { name: i18n.t("common:navigation.settings"), path: "/settings" },
-];
-
 export default function RootLayout({
   children,
 }: {
@@ -37,6 +29,23 @@ export default function RootLayout({
 }) {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [currentLang] = useState("he");
+  const [navItems, setNavItems] = useState([
+    { name: i18n.t("common:navigation.search"), path: "/" },
+    { name: i18n.t("common:navigation.add"), path: "/add" },
+    { name: i18n.t("common:navigation.rides"), path: "/rides" },
+    { name: i18n.t("common:navigation.profile"), path: "/profile" },
+    { name: i18n.t("common:navigation.settings"), path: "/settings" },
+  ]);
+
+  useEffect(() => {
+    setNavItems([
+      { name: i18n.t("common:navigation.search"), path: "/" },
+      { name: i18n.t("common:navigation.add"), path: "/add" },
+      { name: i18n.t("common:navigation.rides"), path: "/rides" },
+      { name: i18n.t("common:navigation.profile"), path: "/profile" },
+      { name: i18n.t("common:navigation.settings"), path: "/settings" },
+    ]);
+  }, [i18n.language]);
 
   return (
     <html lang={currentLang} dir={currentLang === "he" ? "rtl" : "ltr"}>
