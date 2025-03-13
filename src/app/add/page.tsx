@@ -8,6 +8,7 @@ import SeatsInput from "../components/SeatsInput/SeatsInput";
 import Button from "../components/Button/Button";
 import { useAddRide } from "./useAddRide";
 import EditProfileModal from "../components/EditProfileModal";
+import i18next from "i18next";
 
 const Add = () => {
   const {
@@ -25,7 +26,7 @@ const Add = () => {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Add Rides</h1>
+      <h1 className={styles.title}>{i18next.t("common:add.title")}</h1>
       <div className={styles.searchContainer}>
         <form
           className={styles.inputContainer}
@@ -35,13 +36,13 @@ const Add = () => {
           }}
         >
           <AutocompleteInput
-            placeholder="Origin"
+            placeholder={i18next.t("common:add.destination")}
             className={styles.input}
             onPlaceSelected={setOrigin}
             required
           />
           <AutocompleteInput
-            placeholder="Destination"
+            placeholder={i18next.t("common:add.origin")}
             className={styles.input}
             onPlaceSelected={setDestination}
             required
@@ -50,7 +51,7 @@ const Add = () => {
           <TimePicker value={formState.time} onChange={setTime} required />
           <SeatsInput value={formState.seats} onChange={setSeats} required />
           <Button fullWidth size="large" type="submit">
-            Add Ride
+            {i18next.t("common:add.add-button")}
           </Button>
         </form>
       </div>
@@ -67,7 +68,7 @@ const Add = () => {
       <EditProfileModal
         onClose={() => setIsEditModalOpen(false)}
         isOpen={isEditModalOpen}
-        description="Please add your phone number to create a ride. This helps other riders contact you."
+        description={i18next.t("common:profile.edit.modal.descriptions")}
       />
     </main>
   );

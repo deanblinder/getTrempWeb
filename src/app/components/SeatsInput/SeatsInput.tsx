@@ -1,5 +1,6 @@
 "use client";
 
+import i18next from "i18next";
 import styles from "./styles.module.css";
 
 interface SeatsInputProps {
@@ -29,7 +30,7 @@ const SeatsInput = ({
     <div className={`${styles.container} ${className || ""}`}>
       {showTitle && (
         <label htmlFor="seats" className={styles.label}>
-          Available Seats:
+          {i18next.t("common:add.available-seats")}
         </label>
       )}
       <div className={styles.inputContainer}>

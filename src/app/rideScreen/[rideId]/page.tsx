@@ -8,6 +8,7 @@ import { useRideScreen } from "./useRideScreen";
 import Loader from "@/app/components/Loader/Loader";
 import DriverModalContent from "@/app/components/DriverModalContent";
 import Modal from "@/app/components/Modal/Modal";
+import i18next from "i18next";
 
 const RideScreen = () => {
   const {
@@ -39,13 +40,18 @@ const RideScreen = () => {
         </div>
         <div className={styles.locations}>
           <div className={styles.locationItem}>
-            <span className={styles.label}>From:</span>
+            <span className={styles.label}>
+              {" "}
+              {i18next.t("common:ride-screen.from")}
+            </span>
             <span className={styles.locationText}>
               {rideData?.origin?.formatted_address}
             </span>
           </div>
           <div className={styles.locationItem}>
-            <span className={styles.label}>To:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-screen.to")}
+            </span>
             <span className={styles.locationText}>
               {rideData?.destination?.formatted_address}
             </span>
@@ -54,15 +60,21 @@ const RideScreen = () => {
 
         <div className={styles.details}>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Date:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-screen.date")}
+            </span>
             <span>{rideData?.rideTime.formattedData.date}</span>
           </div>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Time:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-screen.time")}
+            </span>
             <span>{rideData?.rideTime.formattedData.time}</span>
           </div>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Available Seats:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-screen.seats")}
+            </span>
             <span>{rideData?.seats}</span>
           </div>
         </div>
@@ -73,7 +85,7 @@ const RideScreen = () => {
             onClick={() => setShowDriverModal(true)}
             variant="green"
           >
-            {"Connect Driver"}
+            {i18next.t("common:ride-screen.connect-driver.button")}
           </Button>
           <Button fullWidth size="large" onClick={handleClick}>
             {isLoading ? <Loader /> : buttonContent}

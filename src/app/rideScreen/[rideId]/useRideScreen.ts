@@ -5,6 +5,7 @@ import { useFetchRide } from "@/app/hooks/useFetchRide";
 import rideActions from "@/app/actions/rideActions";
 import { useSession } from "next-auth/react";
 import { useUser } from "@/app/hooks/useUser";
+import i18next from "i18next";
 
 export const useRideScreen = () => {
   const [showDriverModal, setShowDriverModal] = useState(false);
@@ -39,12 +40,12 @@ export const useRideScreen = () => {
 
   const getButtonContent = () => {
     if (rideRequested) {
-      return "Cancel Request";
+      return i18next.t("common:ride-screen.cancel-request-join-ride.button");
     }
     if (rideAccepted) {
-      return "Cancel Ride";
+      return i18next.t("common:ride-screen.cancel-ride.button");
     }
-    return "Request to Join";
+    return i18next.t("common:ride-screen.request-join-ride.button");
   };
 
   return {

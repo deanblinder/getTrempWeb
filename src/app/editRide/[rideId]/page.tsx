@@ -9,6 +9,7 @@ import DatePicker from "@/app/components/DatePicker/DatePicker";
 import Avatar from "@/app/components/Avatar";
 import SeatsInput from "@/app/components/SeatsInput/SeatsInput";
 import { useEditRide } from "./useEditRide";
+import i18next from "i18next";
 
 const EditRide = () => {
   const params = useParams();
@@ -52,18 +53,26 @@ const EditRide = () => {
 
         <div className={styles.locations}>
           <div className={styles.locationItem}>
-            <span className={styles.label}>From:</span>
+            <span className={styles.label}>
+              {i18next.t("common:edit-ride-screen.from")}
+            </span>
             <AutocompleteInput
               initialValue={ride?.origin}
-              placeholder="Origin"
+              placeholder={i18next.t(
+                "common:edit-ride-screen.origin.placeholder"
+              )}
               className={styles.locationInput}
               onPlaceSelected={setOrigin}
             />
           </div>
           <div className={styles.locationItem}>
-            <span className={styles.label}>To:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-card.to")}
+            </span>
             <AutocompleteInput
-              placeholder="Destination"
+              placeholder={i18next.t(
+                "common:edit-ride-screen.destination.placeholder"
+              )}
               className={styles.locationInput}
               initialValue={ride?.destination}
               onPlaceSelected={setDestination}
@@ -73,7 +82,9 @@ const EditRide = () => {
 
         <div className={styles.details}>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Date:</span>
+            <span className={styles.label}>
+              {i18next.t("common:edit-ride-screen.date")}
+            </span>
             <DatePicker
               value={ride?.rideTime?.formattedData?.date}
               onChange={updateDate}
@@ -81,14 +92,18 @@ const EditRide = () => {
             />
           </div>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Time:</span>
+            <span className={styles.label}>
+              {i18next.t("common:edit-ride-screen.time")}
+            </span>
             <TimePicker
               value={ride?.rideTime?.formattedData?.time}
               onChange={updateTime}
             />
           </div>
           <div className={styles.detailItem}>
-            <span className={styles.label}>Available Seats:</span>
+            <span className={styles.label}>
+              {i18next.t("common:edit-ride-screen.seats")}
+            </span>
             <SeatsInput
               value={ride?.seats}
               onChange={updateSeats}
@@ -100,10 +115,10 @@ const EditRide = () => {
 
         <div className={styles.buttonContainer}>
           <button className={styles.cancelButton} onClick={handleDelete}>
-            Delete Ride
+            {i18next.t("common:edit-ride-screen.delete-ride.button")}
           </button>
           <button className={styles.saveButton} onClick={handleSave}>
-            Save Changes
+            {i18next.t("common:edit-ride-screen.save-ride.button")}
           </button>
         </div>
       </div>

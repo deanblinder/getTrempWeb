@@ -8,6 +8,7 @@ import Loader from "../Loader/Loader";
 import { useUser } from "@/app/hooks/useUser";
 import { Ride } from "@/models/rides";
 import AvatarList from "../AvatarList/AvatarList";
+import i18next from "i18next";
 
 interface RideCardProps {
   ride: Ride;
@@ -61,13 +62,17 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
         </div>
         <div className={styles.locations}>
           <div className={styles.location}>
-            <span className={styles.label}>From:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-card.from")}
+            </span>
             <span className={styles.locationText}>
               {ride.origin?.formatted_address || ""}
             </span>
           </div>
           <div className={styles.location}>
-            <span className={styles.label}>To:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-card.to")}
+            </span>
             <span className={styles.locationText}>
               {ride.destination?.formatted_address || ""}
             </span>
@@ -77,17 +82,21 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
       <div className={styles.details}>
         <div className={styles.timeInfo}>
           <div className={styles.detail}>
-            <span className={styles.label}>Date:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-card.date")}
+            </span>
             <span>{ride.rideTime.formattedData.date}</span>
           </div>
           <div className={styles.detail}>
-            <span className={styles.label}>Time:</span>
+            <span className={styles.label}>
+              {i18next.t("common:ride-card.time")}
+            </span>
             <span>{ride.rideTime.formattedData.time}</span>
           </div>
         </div>
         {isDriver && shouldShowRequests && (
           <AvatarList
-            title={"Requests"}
+            title={i18next.t("common:ride-card.requests")}
             userIds={ride.passengers.requests}
             rideId={ride._id}
             onAvatarClick={onAvatarClick}
@@ -95,14 +104,16 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
         )}
         {isDriver && shouldShowAccepted && (
           <AvatarList
-            title={"Accepted"}
+            title={i18next.t("common:ride-card.accepted")}
             userIds={ride.passengers.accepted}
             rideId={ride._id}
             onAvatarClick={onAvatarClick}
           />
         )}
         <div className={styles.seats}>
-          <span className={styles.label}>Available Seats:</span>
+          <span className={styles.label}>
+            {i18next.t("common:ride-card.seats")}
+          </span>
           <span className={styles.seatsNumber}>{ride.seats}</span>
         </div>
       </div>

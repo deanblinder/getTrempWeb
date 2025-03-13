@@ -2,6 +2,7 @@
 
 import React from "react";
 import styles from "./styles.module.css";
+import i18next from "i18next";
 
 interface SliderProps {
   value: number;
@@ -28,7 +29,9 @@ const Slider: React.FC<SliderProps> = ({
     <div className={`${styles.container} ${className || ""}`}>
       <div className={styles.labelContainer}>
         <label className={styles.label}>{label}</label>
-        <span className={styles.value}>{value} km</span>
+        <span className={styles.value}>
+          {value} {i18next.t("common:search.km")}
+        </span>
       </div>
       <input
         type="range"

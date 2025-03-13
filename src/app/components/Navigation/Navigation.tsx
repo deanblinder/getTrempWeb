@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./Navigation.module.css";
 import { NavigationItem } from "./MobileNavigation";
 import { useSession } from "next-auth/react";
+import i18next from "i18next";
 
 interface NavigationProps {
   navItems: NavigationItem[];
@@ -28,7 +29,7 @@ const Navigation = ({ navItems, onShowRegisterModal }: NavigationProps) => {
       <nav className={styles.desktopNav}>
         <div className={styles.container}>
           <Link href="/" className={styles.logo}>
-            GetRide
+            {i18next.t("common:app.name")}
           </Link>
           <div className={styles.navLinks}>
             {navItems.map((item) => (

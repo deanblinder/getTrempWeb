@@ -7,6 +7,7 @@ import Slider from "./components/Slider/Slider";
 import RideCard from "./components/RideCard/RideCard";
 import { useSearch } from "./useSearch";
 import Loader from "./components/Loader/Loader";
+import i18n from "i18next";
 
 const Search = () => {
   const {
@@ -24,25 +25,31 @@ const Search = () => {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>Find Available Rides</h1>
+      <h1 className={styles.title}>{i18n.t("common:search.title")}</h1>
       <div className={styles.searchContainer}>
         <form className={styles.inputContainer} onSubmit={handleSearch}>
           <AutocompleteInput
-            placeholder="Origin"
+            placeholder={i18n.t("common:search.origin")}
             className={styles.input}
             onPlaceSelected={setOrigin}
             required
           />
           <AutocompleteInput
-            placeholder="Destination"
+            placeholder={i18n.t("common:search.destination")}
             className={styles.input}
             onPlaceSelected={setDestination}
             required
           />
           <DatePicker value={date} onChange={setDate} required />
-          <Slider value={radius} max={10} onChange={setRadius} required />
+          <Slider
+            label={i18n.t("common:search.distance")}
+            value={radius}
+            max={10}
+            onChange={setRadius}
+            required
+          />
           <Button fullWidth type="submit" variant="blue" size="large">
-            {isLoading ? <Loader /> : "Search Rides"}
+            {isLoading ? <Loader /> : i18n.t("common:search.search-button")}
           </Button>
         </form>
       </div>
@@ -56,7 +63,7 @@ const Search = () => {
           ))
         ) : (
           <div className={styles.emptyState}>
-            {"No rides found. Try searching for available rides!"}
+            {i18n.t("common:search.emptyState")}
           </div>
         )}
       </div>

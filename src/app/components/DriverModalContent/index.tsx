@@ -9,6 +9,7 @@ import Button from "../Button/Button";
 import rideActions from "@/app/actions/rideActions";
 import { useFetchRide } from "@/app/hooks/useFetchRide";
 import Loader from "../Loader/Loader";
+import i18next from "i18next";
 
 interface DriverModalContentProps {
   userId: string | undefined;
@@ -60,7 +61,13 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
             disabled={!driver?.phoneNumber}
             size="large"
           >
-            {isLoading ? <Loader /> : isApproved ? "Unapproved" : "Approve"}
+            {isLoading ? (
+              <Loader />
+            ) : isApproved ? (
+              i18next.t("common:driver-modal.remove-passenger")
+            ) : (
+              i18next.t("common:driver-modal.approve")
+            )}
           </Button>
         )}
         <SocialButton
@@ -71,7 +78,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
           }
           disabled={!driver?.phoneNumber}
         >
-          Phone
+          {i18next.t("common:driver-modal.phone")}
         </SocialButton>
 
         <SocialButton
@@ -82,7 +89,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
           }
           disabled={!driver?.phoneNumber}
         >
-          WhatsApp
+          {i18next.t("common:driver-modal.whatsapp")}
         </SocialButton>
 
         <SocialButton
@@ -90,7 +97,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
           onClick={() => window.open(driver?.instagramUrl, "_blank")}
           disabled={!driver?.instagramUrl}
         >
-          Instagram
+          {i18next.t("common:driver-modal.instagram")}
         </SocialButton>
 
         <SocialButton
@@ -98,7 +105,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
           onClick={() => window.open(driver?.facebookUrl, "_blank")}
           disabled={!driver?.facebookUrl}
         >
-          Facebook
+          {i18next.t("common:driver-modal.facebook")}
         </SocialButton>
       </div>
     </div>

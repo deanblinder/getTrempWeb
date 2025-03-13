@@ -6,6 +6,7 @@ import { useState } from "react";
 import EditProfileModal from "../components/EditProfileModal";
 import Avatar from "../components/Avatar";
 import Button from "../components/Button/Button";
+import i18next from "i18next";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -37,7 +38,7 @@ const Profile = () => {
         </h2>
         <div className={styles.buttonContainer}>
           <Button fullWidth size="large" onClick={handleEditProfile}>
-            Edit Profile
+            {i18next.t("common:profile.edit-button")}
           </Button>
 
           <Button
@@ -47,7 +48,7 @@ const Profile = () => {
             outline
             onClick={handleLogout}
           >
-            Logout
+            {i18next.t("common:profile.logout-button")}
           </Button>
         </div>
       </div>

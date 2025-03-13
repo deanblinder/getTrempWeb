@@ -8,6 +8,7 @@ import { User } from "@/models/user";
 import { useSessionUpdate } from "@/app/hooks/useSessionUpdate";
 import { useSession } from "next-auth/react";
 import { useUserRides } from "@/app/hooks/useUserRides";
+import i18next from "i18next";
 
 interface EditProfileModalProps {
   isOpen: boolean;
@@ -59,7 +60,7 @@ const EditProfileModal = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h3>Edit Profile</h3>
+        <h3>{i18next.t("common:profile.edit.modal.title")}</h3>
         {description && <h4>{description}</h4>}
         <form
           onSubmit={(e) => {
@@ -70,7 +71,9 @@ const EditProfileModal = ({
           <input
             type="text"
             name="firstName"
-            placeholder="First Name"
+            placeholder={i18next.t(
+              "common:profile.edit.modal.first-name.placeholder"
+            )}
             defaultValue={userDetails.firstName}
             required
             onChange={(e) =>
@@ -80,7 +83,9 @@ const EditProfileModal = ({
           <input
             type="text"
             name="lastName"
-            placeholder="Last Name"
+            placeholder={i18next.t(
+              "common:profile.edit.modal.last-name.placeholder"
+            )}
             defaultValue={userDetails.lastName}
             required
             onChange={(e) =>
@@ -90,7 +95,9 @@ const EditProfileModal = ({
           <input
             type="tel"
             name="phone"
-            placeholder="Phone Number"
+            placeholder={i18next.t(
+              "common:profile.edit.modal.phone.placeholder"
+            )}
             defaultValue={userDetails.phoneNumber}
             pattern="[0-9]{10}"
             title="Please enter a valid 10-digit phone number"
@@ -102,7 +109,9 @@ const EditProfileModal = ({
           <input
             type="url"
             name="instagram"
-            placeholder="Instagram URL"
+            placeholder={i18next.t(
+              "common:profile.edit.modal.instegram.placeholder"
+            )}
             defaultValue={userDetails.instagramUrl}
             onChange={(e) =>
               setUserDetails({ ...userDetails, instagramUrl: e.target.value })
@@ -111,7 +120,9 @@ const EditProfileModal = ({
           <input
             type="url"
             name="facebook"
-            placeholder="Facebook URL"
+            placeholder={i18next.t(
+              "common:profile.edit.modal.facebook.placeholder"
+            )}
             defaultValue={userDetails.facebookUrl}
             onChange={(e) =>
               setUserDetails({ ...userDetails, facebookUrl: e.target.value })
@@ -120,7 +131,7 @@ const EditProfileModal = ({
 
           <div className={styles.modalButtons}>
             <Button type="submit" fullWidth>
-              Save
+              {i18next.t("common:profile.edit.modal.save-button")}
             </Button>
             <Button
               type="button"
@@ -129,7 +140,7 @@ const EditProfileModal = ({
               fullWidth
               onClick={onClose}
             >
-              Cancel
+              {i18next.t("common:profile.edit.modal.cancel-button")}
             </Button>
           </div>
         </form>

@@ -7,6 +7,7 @@ import Modal from "../components/Modal/Modal";
 import DriverModalContent from "../components/DriverModalContent";
 import { useSession } from "next-auth/react";
 import { Ride } from "@/models/rides";
+import i18next from "i18next";
 
 const Rides = () => {
   const { rides } = useUserRides();
@@ -33,14 +34,10 @@ const Rides = () => {
   if (rides.length === 0) {
     return (
       <main className={styles.container}>
-        <h1 className={styles.title}>My Upcoming Rides</h1>
+        <h1 className={styles.title}>{i18next.t("common:rides.title")}</h1>
         <div className={styles.emptyState}>
-          <h2>{"No Rides Found"}</h2>
-          <p>
-            {
-              "You don't have any upcoming rides. Create a new ride or join an existing one!"
-            }
-          </p>
+          <h2>{i18next.t("common:rides.emptyState.title")}</h2>
+          <p>{i18next.t("common:rides.emptyState.description")}</p>
         </div>
       </main>
     );
@@ -48,7 +45,7 @@ const Rides = () => {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>My Upcoming Rides</h1>
+      <h1 className={styles.title}>{i18next.t("common:rides.title")}</h1>
       <div className={styles.ridesList}>
         {rides.map((ride) => (
           <RideCard
