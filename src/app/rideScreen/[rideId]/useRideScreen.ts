@@ -31,11 +31,11 @@ export const useRideScreen = () => {
 
   const { user: driver } = useUser(rideData?.driver.id || "");
 
-  const rideRequested = rideData?.passengers.requests.includes(
-    session?.user.id || ""
+  const rideRequested = rideData?.passengers.requests.some(
+    request => request.userId === session?.user.id
   );
-  const rideAccepted = rideData?.passengers.accepted.includes(
-    session?.user.id || ""
+  const rideAccepted = rideData?.passengers.accepted.some(
+    accepted => accepted.userId === session?.user.id
   );
 
   const getButtonContent = () => {

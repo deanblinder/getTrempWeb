@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
         {
           $or: [
             { "driver.id": userId },
-            { "passengers.accepted": { $in: userId } },
-            { "passengers.requests": { $in: userId } },
+            { "passengers.accepted.userId": userId },
+            { "passengers.requests.userId": userId },
           ],
         },
         { "rideTime.timeStemp": { $gt: currentDate } },

@@ -31,7 +31,9 @@ export async function PUT(request: NextRequest) {
     }
 
     // Check if user is in accepted passengers
-    const isAcceptedPassenger = ride.passengers.accepted.includes(userId);
+    const isAcceptedPassenger = ride.passengers.accepted.some(
+      passenger => passenger.userId === userId
+    );
 
     if (!isAcceptedPassenger) {
       return NextResponse.json(
@@ -42,7 +44,7 @@ export async function PUT(request: NextRequest) {
 
     // Remove user from accepted array and increment seats
     ride.passengers.accepted = ride.passengers.accepted.filter(
-      (id) => id !== userId
+      passenger => passenger.userId !== userId
     );
     ride.seats += 1;
 

@@ -32,7 +32,7 @@ export async function PUT(request: NextRequest) {
 
     // Check if user is in requests array
     const requestIndex = ride.passengers.requests.findIndex(
-      (request) => request === userId
+      (request) => request.userId === userId
     );
 
     if (requestIndex === -1) {

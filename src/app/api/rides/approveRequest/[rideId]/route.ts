@@ -32,7 +32,7 @@ export async function PUT(request: NextRequest) {
 
     // Check if user is in requests array
     const requestIndex = ride.passengers.requests.findIndex(
-      (request) => request === userId
+      request => request.userId === userId
     );
 
     if (requestIndex === -1) {
@@ -51,7 +51,11 @@ export async function PUT(request: NextRequest) {
     }
 
     // Check if user is already accepted
-    if (ride.passengers.accepted.includes(userId)) {
+    const isAlreadyAccepted = ride.passengers.accepted.some(
+      passenger => passenger.userId === userId
+    );
+
+    if (isAlreadyAccepted) {
       return NextResponse.json(
         { error: "User is already accepted in this ride" },
         { status: 400 }
@@ -61,8 +65,8 @@ export async function PUT(request: NextRequest) {
     // Remove user from requests array
     ride.passengers.requests.splice(requestIndex, 1);
 
-    // Add user to accepted array
-    ride.passengers.accepted.push(userId);
+    // Add user to accepted array with timestamp
+    ride.passengers.accepted.push({ userId, timestamp: Date.now() });
 
     // Decrement available seats
     ride.seats -= 1;

@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Add user to requests array
-    ride.passengers.requests.push(userId);
+    ride.passengers.requests.push({ userId, timestamp: Date.now() });
     await ride.save();
 
     return NextResponse.json({

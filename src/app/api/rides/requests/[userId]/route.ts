@@ -24,21 +24,20 @@ export async function GET(request: NextRequest) {
         { "rideTime.timeStemp": { $gt: currentDate } },
       ],
     });
-    const allRequests = rides
-      .reduce((requests: string[], ride) => {
+    const allRequests = rides.reduce(
+      (requests: { userId: string; timestamp: number }[], ride) => {
         if (ride.passengers && ride.passengers.requests) {
           requests.push(...ride.passengers.requests);
         }
         return requests;
-      }, [])
-      .sort();
+      },
+      []
+    );
 
     // Create a unique identifier for the request set
-    const requestsString = allRequests.join(",");
 
     return NextResponse.json({
       requests: allRequests,
-      requestsString: requestsString,
     });
   } catch (error) {
     console.error("Error fetching ride requests:", error);

@@ -20,8 +20,8 @@ export interface Ride {
   seats: number;
   selectedRouteIndex: number;
   passengers: {
-    requests: string[];
-    accepted: string[];
+    requests: { userId: string; timestamp: number }[];
+    accepted: { userId: string; timestamp: number }[];
   };
 }
 
@@ -61,8 +61,18 @@ const rideSchema = new Schema<Ride>({
   seats: { type: Number, required: true },
   selectedRouteIndex: { type: Number, required: true },
   passengers: {
-    requests: [{ type: String }],
-    accepted: [{ type: String }],
+    requests: [
+      {
+        userId: { type: String, required: true },
+        timestamp: { type: Number, required: true },
+      },
+    ],
+    accepted: [
+      {
+        userId: { type: String, required: true },
+        timestamp: { type: Number, required: true },
+      },
+    ],
   },
 });
 

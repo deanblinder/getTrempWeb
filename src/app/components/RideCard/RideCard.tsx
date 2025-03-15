@@ -97,16 +97,18 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
         {isDriver && shouldShowRequests && (
           <AvatarList
             title={i18next.t("common:ride-card.requests")}
-            userIds={ride.passengers.requests}
+            userIds={ride.passengers.requests.map((request) => request.userId)}
             rideId={ride._id}
             onAvatarClick={onAvatarClick}
           />
         )}
         {isDriver && shouldShowAccepted && (
           <AvatarList
-            title={i18next.t("common:ride-card.accepted")}
-            userIds={ride.passengers.accepted}
             rideId={ride._id}
+            title={i18next.t("common:ride-card.accepted")}
+            userIds={ride.passengers.accepted.map(
+              (accepted) => accepted.userId
+            )}
             onAvatarClick={onAvatarClick}
           />
         )}

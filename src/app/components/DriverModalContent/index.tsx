@@ -28,7 +28,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
   if (!userId) return null;
 
   const isApproved =
-    driver && rideData?.passengers.accepted.includes(driver._id);
+    driver && rideData?.passengers.accepted.some(passenger => passenger.userId === driver._id);
 
   const onApprove = async () => {
     setIsLoading(true);
