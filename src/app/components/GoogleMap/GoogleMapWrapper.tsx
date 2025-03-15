@@ -1,12 +1,9 @@
 "use client";
-import {
-  useLoadScript,
-  GoogleMap,
-  DirectionsRenderer,
-} from "@react-google-maps/api";
+import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import styles from "./GoogleMapWrapper.module.css";
 import { Place } from "@/app/useSearch";
+import { GoogleMapsContext } from "../GoogleMapsProvider/GoogleMapsProvider";
 
 interface GoogleMapWrapperProps {
   origin?: Place;
@@ -30,10 +27,7 @@ const GoogleMapWrapper = ({
   const [currentRouteIndex, setCurrentRouteIndex] =
     useState(selectedRouteIndex);
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
-    libraries: ["places"],
-  });
+  const { isLoaded } = GoogleMapsContext;
 
   useEffect(() => {
     setCurrentRouteIndex(selectedRouteIndex);

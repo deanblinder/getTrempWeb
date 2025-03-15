@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Autocomplete from "react-google-autocomplete";
 import styles from "./styles.module.css";
 import { Place } from "@/app/useSearch";
-import { useLoadScript } from "@react-google-maps/api";
+import { GoogleMapsContext } from "../GoogleMapsProvider/GoogleMapsProvider";
 type PlaceResult = google.maps.places.PlaceResult;
 
 interface AutocompleteInputProps {
@@ -25,11 +25,7 @@ const AutocompleteInput = ({
   const [isMounted, setIsMounted] = useState(false);
   const [defaultValue, setDefaultValue] = useState("");
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
-    libraries: ["places"],
-    language: "he",
-  });
+  const { isLoaded } = GoogleMapsContext;
 
   useEffect(() => {
     setIsMounted(true);
