@@ -10,6 +10,7 @@ import Avatar from "@/app/components/Avatar";
 import SeatsInput from "@/app/components/SeatsInput/SeatsInput";
 import { useEditRide } from "./useEditRide";
 import i18next from "i18next";
+import GoogleMapsProvider from "@/app/components/GoogleMapsProvider/GoogleMapsProvider";
 
 const EditRide = () => {
   const params = useParams();
@@ -30,110 +31,112 @@ const EditRide = () => {
   } = useEditRide(rideId);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.rideDetails}>
-        <div className={styles.header}>
-          <div>
-            <button className={styles.closeButton} onClick={handleCancel}>
-              ✕
-            </button>
-            <div className={styles.driverInfo}>
-              <Avatar
-                src={session?.user.profilePicture}
-                alt="Driver's avatar"
-                size={60}
-                className={styles.avatar}
-              />
-              <span className={styles.driverName}>
-                {session?.user.firstName} {session?.user?.lastName}
-              </span>
+    <GoogleMapsProvider>
+      <div className={styles.container}>
+        <div className={styles.rideDetails}>
+          <div className={styles.header}>
+            <div>
+              <button className={styles.closeButton} onClick={handleCancel}>
+                ✕
+              </button>
+              <div className={styles.driverInfo}>
+                <Avatar
+                  src={session?.user.profilePicture}
+                  alt="Driver's avatar"
+                  size={60}
+                  className={styles.avatar}
+                />
+                <span className={styles.driverName}>
+                  {session?.user.firstName} {session?.user?.lastName}
+                </span>
+              </div>
             </div>
           </div>
+
+          <div className={styles.locations}>
+            <div className={styles.locationItem}>
+              <span className={styles.label}>
+                {i18next.t("common:edit-ride-screen.from")}
+              </span>
+              <AutocompleteInput
+                initialValue={ride?.origin}
+                placeholder={i18next.t(
+                  "common:edit-ride-screen.origin.placeholder"
+                )}
+                className={styles.locationInput}
+                onPlaceSelected={setOrigin}
+              />
+            </div>
+            <div className={styles.locationItem}>
+              <span className={styles.label}>
+                {i18next.t("common:ride-card.to")}
+              </span>
+              <AutocompleteInput
+                placeholder={i18next.t(
+                  "common:edit-ride-screen.destination.placeholder"
+                )}
+                className={styles.locationInput}
+                initialValue={ride?.destination}
+                onPlaceSelected={setDestination}
+              />
+            </div>
+          </div>
+
+          <div className={styles.details}>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>
+                {i18next.t("common:edit-ride-screen.date")}
+              </span>
+              <DatePicker
+                value={ride?.rideTime?.formattedData?.date}
+                onChange={updateDate}
+                required
+              />
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>
+                {i18next.t("common:edit-ride-screen.time")}
+              </span>
+              <TimePicker
+                value={ride?.rideTime?.formattedData?.time}
+                onChange={updateTime}
+              />
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.label}>
+                {i18next.t("common:edit-ride-screen.seats")}
+              </span>
+              <SeatsInput
+                value={ride?.seats}
+                onChange={updateSeats}
+                showTitle={false}
+                required
+              />
+            </div>
+          </div>
+
+          <div className={styles.buttonContainer}>
+            <button className={styles.cancelButton} onClick={handleDelete}>
+              {i18next.t("common:edit-ride-screen.delete-ride.button")}
+            </button>
+            <button className={styles.saveButton} onClick={handleSave}>
+              {i18next.t("common:edit-ride-screen.save-ride.button")}
+            </button>
+          </div>
         </div>
 
-        <div className={styles.locations}>
-          <div className={styles.locationItem}>
-            <span className={styles.label}>
-              {i18next.t("common:edit-ride-screen.from")}
-            </span>
-            <AutocompleteInput
-              initialValue={ride?.origin}
-              placeholder={i18next.t(
-                "common:edit-ride-screen.origin.placeholder"
-              )}
-              className={styles.locationInput}
-              onPlaceSelected={setOrigin}
-            />
-          </div>
-          <div className={styles.locationItem}>
-            <span className={styles.label}>
-              {i18next.t("common:ride-card.to")}
-            </span>
-            <AutocompleteInput
-              placeholder={i18next.t(
-                "common:edit-ride-screen.destination.placeholder"
-              )}
-              className={styles.locationInput}
-              initialValue={ride?.destination}
-              onPlaceSelected={setDestination}
-            />
-          </div>
-        </div>
-
-        <div className={styles.details}>
-          <div className={styles.detailItem}>
-            <span className={styles.label}>
-              {i18next.t("common:edit-ride-screen.date")}
-            </span>
-            <DatePicker
-              value={ride?.rideTime?.formattedData?.date}
-              onChange={updateDate}
-              required
-            />
-          </div>
-          <div className={styles.detailItem}>
-            <span className={styles.label}>
-              {i18next.t("common:edit-ride-screen.time")}
-            </span>
-            <TimePicker
-              value={ride?.rideTime?.formattedData?.time}
-              onChange={updateTime}
-            />
-          </div>
-          <div className={styles.detailItem}>
-            <span className={styles.label}>
-              {i18next.t("common:edit-ride-screen.seats")}
-            </span>
-            <SeatsInput
-              value={ride?.seats}
-              onChange={updateSeats}
-              showTitle={false}
-              required
-            />
-          </div>
-        </div>
-
-        <div className={styles.buttonContainer}>
-          <button className={styles.cancelButton} onClick={handleDelete}>
-            {i18next.t("common:edit-ride-screen.delete-ride.button")}
-          </button>
-          <button className={styles.saveButton} onClick={handleSave}>
-            {i18next.t("common:edit-ride-screen.save-ride.button")}
-          </button>
+        <div className={styles.mapContainer}>
+          <GoogleMapWrapper
+            origin={ride?.origin}
+            destination={ride?.destination}
+            showRoute={true}
+            selectedRouteIndex={ride?.selectedRouteIndex}
+            onRouteChange={updateSelectedRouteIndex}
+            showRouteButton={true}
+          />
         </div>
       </div>
-
-      <div className={styles.mapContainer}>
-        <GoogleMapWrapper
-          origin={ride?.origin}
-          destination={ride?.destination}
-          showRoute={true}
-          selectedRouteIndex={ride?.selectedRouteIndex}
-          onRouteChange={updateSelectedRouteIndex}
-          showRouteButton={true}
-        />
-      </div>
-    </div>
+    </GoogleMapsProvider>
   );
 };
 
