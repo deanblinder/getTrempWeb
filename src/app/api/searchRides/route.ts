@@ -47,7 +47,7 @@ export const POST = async (request: Request) => {
 
     const rides = await Ride.find({
       "rideTime.timeStemp": {
-        $gte: new Date(date),
+        $gte: new Date(new Date(date).setHours(0, 0, 0, 0)),
         $lt: new Date(new Date(date).getTime() + 3 * 24 * 60 * 60 * 1000),
       },
     });
