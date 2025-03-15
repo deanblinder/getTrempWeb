@@ -25,7 +25,7 @@ const AutocompleteInput = ({
   const [isMounted, setIsMounted] = useState(false);
   const [defaultValue, setDefaultValue] = useState("");
 
-  const { isLoaded } = GoogleMapsContext;
+  const { isLoaded } = GoogleMapsContext.useContext();
 
   useEffect(() => {
     setIsMounted(true);

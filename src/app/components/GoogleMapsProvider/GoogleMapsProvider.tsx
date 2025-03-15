@@ -1,14 +1,23 @@
 "use client";
 
 import { useLoadScript } from "@react-google-maps/api";
-import { ReactNode } from "react";
+import { ReactNode, createContext, useContext } from "react";
+
+interface GoogleMapsContextType {
+  isLoaded: boolean;
+}
 
 interface GoogleMapsProviderProps {
   children: ReactNode;
 }
 
+const GoogleMapsContextInstance = createContext<GoogleMapsContextType>({
+  isLoaded: false,
+});
+
 export const GoogleMapsContext = {
   isLoaded: false,
+  useContext: () => useContext(GoogleMapsContextInstance),
 };
 
 const GoogleMapsProvider = ({ children }: GoogleMapsProviderProps) => {
@@ -20,7 +29,11 @@ const GoogleMapsProvider = ({ children }: GoogleMapsProviderProps) => {
 
   GoogleMapsContext.isLoaded = isLoaded;
 
-  return <>{children}</>;
+  return (
+    <GoogleMapsContextInstance.Provider value={{ isLoaded }}>
+      {children}
+    </GoogleMapsContextInstance.Provider>
+  );
 };
 
 export default GoogleMapsProvider;

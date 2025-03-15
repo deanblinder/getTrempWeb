@@ -27,7 +27,7 @@ const GoogleMapWrapper = ({
   const [currentRouteIndex, setCurrentRouteIndex] =
     useState(selectedRouteIndex);
 
-  const { isLoaded } = GoogleMapsContext;
+  const { isLoaded } = GoogleMapsContext.useContext();
 
   useEffect(() => {
     setCurrentRouteIndex(selectedRouteIndex);
@@ -49,6 +49,7 @@ const GoogleMapWrapper = ({
           },
           travelMode: google.maps.TravelMode.DRIVING,
           provideRouteAlternatives: true, // Request alternative routes
+          language: "he",
         },
         (result, status) => {
           if (status === "OK") {
