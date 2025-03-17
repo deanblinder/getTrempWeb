@@ -7,6 +7,7 @@ import RegisterModal from "./components/RegisterModal";
 import { SessionProvider } from "next-auth/react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "i18next";
+import ReduxProvider from "./store/reduxProvider";
 import { initReactI18next } from "react-i18next";
 import enTranslations from "@/locales/en/common.json";
 import heTranslations from "@/locales/he/common.json";
@@ -39,21 +40,23 @@ export default function RootLayout({
     <html lang={currentLang} dir={currentLang === "he" ? "rtl" : "ltr"}>
       <body>
         <I18nextProvider i18n={i18n}>
-          <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
-            <Navigation
-              navItems={navItems}
-              onShowRegisterModal={() => setShowRegisterModal(true)}
-            />
-            <RegisterModal
-              isOpen={showRegisterModal}
-              onClose={() => setShowRegisterModal(false)}
-            />
-            <div className={styles.mainContent}>{children}</div>
-            <MobileNavigation
-              navItems={navItems}
-              onShowRegisterModal={() => setShowRegisterModal(true)}
-            />
-          </SessionProvider>
+          <ReduxProvider>
+            <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
+              <Navigation
+                navItems={navItems}
+                onShowRegisterModal={() => setShowRegisterModal(true)}
+              />
+              <RegisterModal
+                isOpen={showRegisterModal}
+                onClose={() => setShowRegisterModal(false)}
+              />
+              <div className={styles.mainContent}>{children}</div>
+              <MobileNavigation
+                navItems={navItems}
+                onShowRegisterModal={() => setShowRegisterModal(true)}
+              />
+            </SessionProvider>
+          </ReduxProvider>
         </I18nextProvider>
       </body>
     </html>

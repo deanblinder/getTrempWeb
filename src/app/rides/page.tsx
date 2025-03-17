@@ -1,35 +1,22 @@
 "use client";
 import styles from "./rides.module.css";
 import RideCard from "../components/RideCard/RideCard";
-import { useUserRides } from "../hooks/useUserRides";
-import { useState } from "react";
 import Modal from "../components/Modal/Modal";
 import DriverModalContent from "../components/DriverModalContent";
-import { useSession } from "next-auth/react";
-import { Ride } from "@/models/rides";
 import i18next from "i18next";
+import { useRides } from "./useRides";
 
 const Rides = () => {
-  const { rides } = useUserRides();
-  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRideId, setSelectedRideId] = useState<string | null>(null);
-  const [driverId, setDriverId] = useState<string | null>(null);
-  const { data: session } = useSession();
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedUserId(null);
-    setSelectedRideId(null);
-    setDriverId(null);
-  };
-
-  const handleAvatarClick = (userId: string, ride: Ride) => {
-    setSelectedUserId(userId);
-    setSelectedRideId(ride._id);
-    setDriverId(ride.driver.id);
-    setIsModalOpen(true);
-  };
+  const {
+    rides,
+    selectedUserId,
+    isModalOpen,
+    selectedRideId,
+    driverId,
+    session,
+    handleModalClose,
+    handleAvatarClick,
+  } = useRides();
 
   if (rides.length === 0) {
     return (
