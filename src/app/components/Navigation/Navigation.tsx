@@ -5,6 +5,7 @@ import styles from "./Navigation.module.css";
 import { NavigationItem } from "./MobileNavigation";
 import { useSession } from "next-auth/react";
 import i18next from "i18next";
+import Avatar from "../Avatar";
 
 interface NavigationProps {
   navItems: NavigationItem[];
@@ -42,6 +43,18 @@ const Navigation = ({ navItems, onShowRegisterModal }: NavigationProps) => {
                 {item.name}
               </Link>
             ))}
+            <Link
+              href="/profile"
+              className={styles.avatarLink}
+              onClick={(e) => handleNavClick(e, "/profile")}
+            >
+              <Avatar
+                src={session?.user?.image}
+                alt="User Avatar"
+                size={32}
+                className={styles.navAvatar}
+              />
+            </Link>
           </div>
         </div>
       </nav>

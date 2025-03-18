@@ -55,3 +55,19 @@
 :global(.dark) .navLink:hover {
   color: #d1d5db;
 }
+
+.avatarLink {
+  display: flex;
+  align-items: center;
+}
+
+.navAvatar {
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.navAvatar:hover {
+  transform: scale(1.1);
+}

@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useTranslation } from "react-i18next";
+import Avatar from "../Avatar";
 
 export interface NavigationItem {
   name: string;
@@ -48,7 +49,11 @@ const MobileNavigation = ({
   const mobileTabItems = [
     { name: t("navigation.search"), path: "/", icon: <SearchIcon /> },
     { name: t("navigation.add"), path: "/add", icon: <AddIcon /> },
-    { name: t("navigation.rides"), path: "/rides", icon: <DirectionsCarIcon /> },
+    {
+      name: t("navigation.rides"),
+      path: "/rides",
+      icon: <DirectionsCarIcon />,
+    },
   ];
 
   return (
@@ -73,6 +78,23 @@ const MobileNavigation = ({
         <div className={styles.overlay} onClick={handleClickOutside}>
           <div className={`${styles.mobileMenu} ${styles.open}`}>
             <div className={styles.menuLinks}>
+              <div className={styles.profileSection}>
+                <Link
+                  href="/profile"
+                  className={styles.menuLink}
+                  onClick={(e) => handleNavClick(e, "/profile")}
+                >
+                  <div className={styles.profileContainer}>
+                    <Avatar
+                      src={session?.user?.image}
+                      alt="User Avatar"
+                      size={32}
+                    />
+                    <span>{session?.user?.name}</span>
+                  </div>
+                </Link>
+                <hr className={styles.divider} />
+              </div>
               {navItems.map((item) => (
                 <Link
                   key={item.path}
