@@ -28,7 +28,10 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
   if (!userId) return null;
 
   const isApproved =
-    driver && rideData?.passengers.accepted.some(passenger => passenger.userId === driver._id);
+    driver &&
+    rideData?.passengers.accepted.some(
+      (passenger) => passenger.userId === driver._id
+    );
 
   const onApprove = async () => {
     setIsLoading(true);
@@ -55,12 +58,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
       </div>
       <div className={styles.info}>
         {isOwner && (
-          <Button
-            variant="yellow"
-            onClick={onApprove}
-            disabled={!driver?.phoneNumber}
-            size="large"
-          >
+          <Button variant="yellow" onClick={onApprove} size="large">
             {isLoading ? (
               <Loader />
             ) : isApproved ? (

@@ -113,7 +113,7 @@ const RideScreen = () => {
             subtitle="Contact Information"
             content={
               <DriverModalContent
-                userId={session?.user.id}
+                userId={rideData.driver.id}
                 rideId={rideData?._id}
                 isOwner={session?.user.id === rideData.driver.id}
               />
