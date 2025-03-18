@@ -11,6 +11,7 @@ import SeatsInput from "@/app/components/SeatsInput/SeatsInput";
 import { useEditRide } from "./useEditRide";
 import i18next from "i18next";
 import GoogleMapsProvider from "@/app/components/GoogleMapsProvider/GoogleMapsProvider";
+import { capitalize } from "lodash";
 
 const EditRide = () => {
   const params = useParams();
@@ -47,7 +48,8 @@ const EditRide = () => {
                   className={styles.avatar}
                 />
                 <span className={styles.driverName}>
-                  {session?.user.firstName} {session?.user?.lastName}
+                  {capitalize(session?.user.firstName)}{" "}
+                  {capitalize(session?.user?.lastName)}
                 </span>
               </div>
             </div>

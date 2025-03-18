@@ -10,6 +10,7 @@ import rideActions from "@/app/actions/rideActions";
 import { useFetchRide } from "@/app/hooks/useFetchRide";
 import Loader from "../Loader/Loader";
 import i18next from "i18next";
+import { capitalize } from "lodash";
 
 interface DriverModalContentProps {
   userId: string | undefined;
@@ -53,7 +54,7 @@ const DriverModalContent: React.FC<DriverModalContentProps> = (
           className={styles.avatar}
         />
         <h2 className={styles.name}>
-          {driver?.firstName + " " + driver?.lastName}
+          {capitalize(driver?.firstName) + " " + capitalize(driver?.lastName)}
         </h2>
       </div>
       <div className={styles.info}>

@@ -38,13 +38,13 @@ const Add = () => {
             }}
           >
             <AutocompleteInput
-              placeholder={i18next.t("common:add.destination")}
+              placeholder={i18next.t("common:add.origin")}
               className={styles.input}
               onPlaceSelected={setOrigin}
               required
             />
             <AutocompleteInput
-              placeholder={i18next.t("common:add.origin")}
+              placeholder={i18next.t("common:add.destination")}
               className={styles.input}
               onPlaceSelected={setDestination}
               required

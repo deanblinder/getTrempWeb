@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useTranslation } from "react-i18next";
 import Avatar from "../Avatar";
+import { capitalize } from "lodash";
 
 export interface NavigationItem {
   name: string;
@@ -90,7 +91,10 @@ const MobileNavigation = ({
                       alt="User Avatar"
                       size={32}
                     />
-                    <span>{session?.user?.name}</span>
+                    <span>
+                      {capitalize(session?.user?.firstName)}{" "}
+                      {capitalize(session?.user?.lastName)}
+                    </span>
                   </div>
                 </Link>
                 <hr className={styles.divider} />
