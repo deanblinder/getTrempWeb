@@ -11,6 +11,7 @@ import { initReactI18next } from "react-i18next";
 import enTranslations from "@/locales/en/common.json";
 import heTranslations from "@/locales/he/common.json";
 import { useLayout } from "./useLayout";
+import Head from "next/head";
 
 const storedLang =
   typeof window !== "undefined"
@@ -37,6 +38,24 @@ export default function RootLayout({
 
   return (
     <html lang={currentLang} dir={currentLang === "he" ? "rtl" : "ltr"}>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Get Ride" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+        <link
+          rel="apple-touch-icon"
+          sizes="152x152"
+          href="/apple-touch-icon-152x152.svg"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon-180x180.svg"
+        />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <body>
         <I18nextProvider i18n={i18n}>
           <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
