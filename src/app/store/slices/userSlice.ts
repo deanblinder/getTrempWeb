@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface UserState {
   id: string;
@@ -13,28 +13,32 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  phoneNumber: "",
-  profilePicture: "",
-  facebookUrl: "",
-  instagramUrl: "",
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  profilePicture: '',
+  facebookUrl: '',
+  instagramUrl: ''
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
       return { ...state, ...action.payload };
     },
-  },
+    updateUserProfile: (state, action: PayloadAction<Partial<UserState>>) => {
+      return { ...state, ...action.payload };
+    },
+    clearUser: () => initialState
+  }
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, updateUserProfile, clearUser } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
-export const userReducer = userSlice.reducer;
+export default userSlice.reducer;
