@@ -7,6 +7,7 @@ import EditProfileModal from "../components/EditProfileModal";
 import Avatar from "../components/Avatar";
 import Button from "../components/Button/Button";
 import i18next from "i18next";
+import { capitalize } from "lodash";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -34,7 +35,8 @@ const Profile = () => {
           />
         </div>
         <h2 className={styles.userName}>
-          {session?.user.firstName} {session?.user.lastName}
+          {capitalize(session?.user.firstName)}{" "}
+          {capitalize(session?.user.lastName)}
         </h2>
         <div className={styles.buttonContainer}>
           <Button fullWidth size="large" onClick={handleEditProfile}>

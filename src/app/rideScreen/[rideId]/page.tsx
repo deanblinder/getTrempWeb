@@ -10,6 +10,7 @@ import DriverModalContent from "@/app/components/DriverModalContent";
 import Modal from "@/app/components/Modal/Modal";
 import i18next from "i18next";
 import GoogleMapsProvider from "@/app/components/GoogleMapsProvider/GoogleMapsProvider";
+import { capitalize } from "lodash";
 
 const RideScreen = () => {
   const {
@@ -35,7 +36,9 @@ const RideScreen = () => {
                   size={60}
                 />
                 <span className={styles.driverName}>
-                  {driver?.firstName + " " + driver?.lastName}
+                  {capitalize(driver?.firstName) +
+                    " " +
+                    capitalize(driver?.lastName)}
                 </span>
               </div>
             </div>
@@ -113,7 +116,7 @@ const RideScreen = () => {
             subtitle="Contact Information"
             content={
               <DriverModalContent
-                userId={session?.user.id}
+                userId={rideData.driver.id}
                 rideId={rideData?._id}
                 isOwner={session?.user.id === rideData.driver.id}
               />

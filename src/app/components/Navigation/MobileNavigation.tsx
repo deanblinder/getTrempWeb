@@ -11,6 +11,8 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 import notificationStyles from "./NotificationIndicator.module.css";
+import Avatar from "../Avatar";
+import { capitalize } from "lodash";
 
 export interface NavigationItem {
   name: string;
@@ -89,6 +91,26 @@ const MobileNavigation = ({
         <div className={styles.overlay} onClick={handleClickOutside}>
           <div className={`${styles.mobileMenu} ${styles.open}`}>
             <div className={styles.menuLinks}>
+              <div className={styles.profileSection}>
+                <Link
+                  href="/profile"
+                  className={styles.menuLink}
+                  onClick={(e) => handleNavClick(e, "/profile")}
+                >
+                  <div className={styles.profileContainer}>
+                    <Avatar
+                      src={session?.user?.image}
+                      alt="User Avatar"
+                      size={32}
+                    />
+                    <span>
+                      {capitalize(session?.user?.firstName)}{" "}
+                      {capitalize(session?.user?.lastName)}
+                    </span>
+                  </div>
+                </Link>
+                <hr className={styles.divider} />
+              </div>
               {navItems.map((item) => (
                 <Link
                   key={item.path}

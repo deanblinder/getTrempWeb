@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^2.6.0",
     "dayjs": "^1.11.13",
     "i18next": "^24.2.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.10.1",
     "next": "15.1.7",
     "next-auth": "^4.24.11",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

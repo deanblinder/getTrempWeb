@@ -9,6 +9,7 @@ import { useUser } from "@/app/hooks/useUser";
 import { Ride } from "@/models/rides";
 import AvatarList from "../AvatarList/AvatarList";
 import i18next from "i18next";
+import { capitalize } from "lodash";
 
 interface RideCardProps {
   ride: Ride;
@@ -57,7 +58,7 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
         <div className={styles.avatarContainer}>
           <Avatar src={user?.profilePicture} alt="Driver's avatar" size={40} />
           <span className={styles.driverName}>
-            {user?.firstName + " " + user?.lastName}
+            {capitalize(user?.firstName) + " " + capitalize(user?.lastName)}
           </span>
         </div>
         <div className={styles.locations}>

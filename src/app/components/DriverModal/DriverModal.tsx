@@ -5,6 +5,7 @@ import styles from "./DriverModal.module.css";
 import SocialButton from "../SocialButton/SocialButton";
 import { useUser } from "@/app/hooks/useUser";
 import Avatar from "../Avatar";
+import { capitalize } from "lodash";
 
 interface DriverModalProps {
   isOpen: boolean;
@@ -35,7 +36,9 @@ const DriverModal: React.FC<DriverModalProps> = ({
               className={styles.avatar}
             />
             <h2 className={styles.name}>
-              {driver?.firstName + " " + driver?.lastName}
+              {capitalize(driver?.firstName) +
+                " " +
+                capitalize(driver?.lastName)}
             </h2>
           </div>
 

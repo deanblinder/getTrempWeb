@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 interface AvatarProps {
-  src?: string;
+  src?: string | null;
   alt: string;
   size?: number;
   className?: string;
