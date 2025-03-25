@@ -43,17 +43,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Get Ride" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
-        <link
-          rel="apple-touch-icon"
-          sizes="152x152"
-          href="/apple-touch-icon-152x152.svg"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon-180x180.svg"
-        />
+        <link rel="apple-touch-icon" href="/appIcon.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/appIcon.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <body>
