@@ -49,11 +49,11 @@ export default function RootLayout({
           content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="Get Ride" />
-        <link rel="apple-touch-icon" href="/appIcon.svg" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/appIcon.svg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/appIcon.svg" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/appIcon.svg" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/appIcon.svg" />
+        <link rel="apple-touch-icon" href="/appIcon.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/appIcon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/appIcon.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/appIcon.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/appIcon.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <body>
