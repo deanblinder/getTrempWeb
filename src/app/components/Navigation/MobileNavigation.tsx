@@ -8,6 +8,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
+import notificationStyles from "./NotificationIndicator.module.css";
 
 export interface NavigationItem {
   name: string;
@@ -26,6 +29,9 @@ const MobileNavigation = ({
 }: MobileNavigationProps) => {
   const { data: session } = useSession();
   const { t } = useTranslation("common");
+  const shouldShowNotification = useSelector(
+    (state: RootState) => state.notification.shouldShowNotification
+  );
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -46,9 +52,19 @@ const MobileNavigation = ({
   };
 
   const mobileTabItems = [
-    { name: t("navigation.search"), path: "/", icon: <SearchIcon /> },
-    { name: t("navigation.add"), path: "/add", icon: <AddIcon /> },
-    { name: t("navigation.rides"), path: "/rides", icon: <DirectionsCarIcon /> },
+    {
+      id: "search",
+      name: t("navigation.search"),
+      path: "/",
+      icon: <SearchIcon />,
+    },
+    { id: "add", name: t("navigation.add"), path: "/add", icon: <AddIcon /> },
+    {
+      id: "rides",
+      name: t("navigation.rides"),
+      path: "/rides",
+      icon: <DirectionsCarIcon />,
+    },
   ];
 
   return (
@@ -98,6 +114,9 @@ const MobileNavigation = ({
               onClick={(e) => handleNavClick(e, item.path)}
               className={styles.tabLink}
             >
+              {shouldShowNotification && item.id === "rides" && (
+                <div className={notificationStyles.tabNotification} />
+              )}
               <span className={styles.tabIcon}>{item.icon}</span>
               <span className={styles.tabLabel}>{item.name}</span>
             </Link>

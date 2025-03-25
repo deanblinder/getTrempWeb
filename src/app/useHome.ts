@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
-import userActions from "../actions/userActions";
+import userActions from "./actions/userActions";
 import { useSession } from "next-auth/react";
-import { useAppDispatch } from "../store/store";
-import { setShowNotification } from "../store/slices/notificationSlice";
+import { useAppDispatch } from "./store/store";
+import { setShowNotification } from "./store/slices/notificationSlice";
 
-export const useRideRequests = () => {
+export const useHome = () => {
   const { data: session } = useSession();
 
   const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ export const useRideRequests = () => {
       }
       return 0;
     }
-    return -1;
+    return 0;
   };
 
   const getUserRequets = async () => {
@@ -36,7 +36,7 @@ export const useRideRequests = () => {
           latestRequest.timestamp > lastStoredTimestamp
         ) {
           dispatch(setShowNotification(true));
-          localStorage.setItem("lastRequest", JSON.stringify(latestRequest));
+          //   localStorage.setItem("lastRequest", JSON.stringify(latestRequest));
         }
       }
     }

@@ -34,6 +34,9 @@ export async function GET(request: NextRequest) {
       []
     );
 
+    // sort requests by timestamp
+    allRequests.sort((a, b) => a.timestamp - b.timestamp);
+
     // Create a unique identifier for the request set
 
     return NextResponse.json({
