@@ -5,6 +5,7 @@ import rideActions from "../actions/rideActions";
 import { useSession } from "next-auth/react";
 import { User } from "@/models/user";
 import { useRouter } from "next/navigation";
+import { useRideRequests } from "../hooks/useRideRequests";
 type PlaceResult = google.maps.places.PlaceResult;
 
 export interface AddRideFormData {
@@ -49,7 +50,7 @@ export const useAddRide = () => {
     selectedRouteIndex: 0,
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
+  useRideRequests();
   const setOrigin = (place: PlaceResult) => {
     setFormState((prev: AddRideFormData): AddRideFormData => {
       const updatedPlace = updatePlace(place);

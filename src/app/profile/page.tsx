@@ -8,12 +8,13 @@ import Avatar from "../components/Avatar";
 import Button from "../components/Button/Button";
 import i18next from "i18next";
 import { capitalize } from "lodash";
+import { useRideRequests } from "../hooks/useRideRequests";
 
 const Profile = () => {
   const { data: session } = useSession();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  console.log({ session });
+  useRideRequests();
 
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/" });
