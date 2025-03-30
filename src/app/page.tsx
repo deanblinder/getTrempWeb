@@ -9,6 +9,7 @@ import { useSearch } from "./useSearch";
 import Loader from "./components/Loader/Loader";
 import i18n from "i18next";
 import GoogleMapsProvider from "./components/GoogleMapsProvider/GoogleMapsProvider";
+import { useRideRequests } from "./hooks/useRideRequests";
 
 const Search = () => {
   const {
@@ -23,6 +24,8 @@ const Search = () => {
     shouldShowSearchResults,
     isLoading,
   } = useSearch();
+
+  useRideRequests();
 
   return (
     <GoogleMapsProvider>

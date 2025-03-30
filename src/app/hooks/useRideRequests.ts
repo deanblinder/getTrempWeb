@@ -1,45 +1,50 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import userActions from "../actions/userActions";
+import { useSession } from "next-auth/react";
+import { useAppDispatch } from "../store/store";
+import { setShowNotification } from "../store/slices/notificationSlice";
 
-export const useRideRequests = (userId: string | undefined) => {
-  const [hasNewRequests, setHasNewRequests] = useState(false);
-  const [requests, setRequests] = useState<string[]>([]);
+export const useRideRequests = () => {
+  const { data: session } = useSession();
 
-  const checkRequests = async () => {
-    try {
-      const requests = await userActions.getUserRequests(userId!);
+  const dispatch = useAppDispatch();
 
-      // Get the cached requests string
-      const cachedRequestsString = localStorage.getItem("rideRequestsString");
-
-      // Update state based on comparison with cached data
-      if (cachedRequestsString !== requests.requestsString) {
-        setHasNewRequests(true);
+  const getLastRequest = () => {
+    if (session) {
+      const lastRequest = localStorage.getItem("lastRequest");
+      if (lastRequest) {
+        return JSON.parse(lastRequest).timestamp;
       }
+      return 0;
+    }
+    return -1;
+  };
 
-      // Update the cache and state
-      localStorage.setItem("rideRequestsString", requests.requestsString);
-      setRequests(requests.requests);
-    } catch (error) {
-      console.error("Error fetching ride requests:", error);
+  const getUserRequets = async () => {
+    if (session) {
+      const { requests: rideRequests } = await userActions.getUserRequests(
+        session.user.id
+      );
+
+      if (rideRequests.length > 0) {
+        const latestRequest = rideRequests[rideRequests.length - 1];
+        const lastStoredTimestamp = getLastRequest();
+
+        if (
+          lastStoredTimestamp === 0 ||
+          latestRequest.timestamp > lastStoredTimestamp
+        ) {
+          dispatch(setShowNotification(true));
+          localStorage.setItem("lastRequest", JSON.stringify(latestRequest));
+        }
+      }
     }
   };
 
   useEffect(() => {
-    if (userId) {
-      checkRequests();
-    }
-  }, [userId]);
+    getUserRequets();
+  }, [session]);
 
-  const clearNewRequestsFlag = () => {
-    setHasNewRequests(false);
-  };
-
-  return {
-    requests,
-    hasNewRequests,
-    clearNewRequestsFlag,
-  };
+  return {};
 };

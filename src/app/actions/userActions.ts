@@ -6,9 +6,13 @@ interface UpdateUserData {
   facebookUrl?: string;
   instagramUrl?: string;
 }
+
+export interface Request {
+  userId: string;
+  timestamp: number;
+}
 export interface RideRequestsResponse {
-  requests: string[];
-  requestsString: string;
+  requests: Request[];
 }
 
 import { userServices } from "../services/userServices";

@@ -79,6 +79,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  direction: rtl;
 }
 
 .mobileMenu.open {
