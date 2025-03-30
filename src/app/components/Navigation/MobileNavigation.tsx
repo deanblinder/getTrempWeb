@@ -94,7 +94,6 @@ const MobileNavigation = ({
               <div className={styles.profileSection}>
                 <Link
                   href="/profile"
-                  className={styles.menuLink}
                   onClick={(e) => handleNavClick(e, "/profile")}
                 >
                   <div className={styles.profileContainer}>
