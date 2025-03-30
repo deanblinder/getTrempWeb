@@ -1,8 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useUserRides } from "../hooks/useUserRides";
 import { Ride } from "@/models/rides";
+import { RootState, useAppDispatch } from "../store/store";
+import { setShowNotification } from "../store/slices/notificationSlice";
+import { useSelector } from "react-redux";
 
 export const useRides = () => {
   const { rides } = useUserRides();
@@ -11,6 +14,15 @@ export const useRides = () => {
   const [selectedRideId, setSelectedRideId] = useState<string | null>(null);
   const [driverId, setDriverId] = useState<string | null>(null);
   const { data: session } = useSession();
+  const dispatch = useAppDispatch();
+
+  const shouldShowNotification = useSelector(
+    (state: RootState) => state.notification.shouldShowNotification
+  );
+
+  useEffect(() => {
+    if (shouldShowNotification) dispatch(setShowNotification(false));
+  }, []);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
