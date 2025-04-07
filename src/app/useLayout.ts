@@ -17,6 +17,7 @@ export const useLayout = () => {
     { name: i18n.t("common:navigation.rides"), path: "/rides" },
     { name: i18n.t("common:navigation.profile"), path: "/profile" },
     { name: i18n.t("common:navigation.settings"), path: "/settings" },
+    { name: i18n.t("common:navigation.about"), path: "/about" },
   ]);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const useLayout = () => {
       { name: i18n.t("common:navigation.rides"), path: "/rides" },
       { name: i18n.t("common:navigation.profile"), path: "/profile" },
       { name: i18n.t("common:navigation.settings"), path: "/settings" },
+      { name: i18n.t("common:navigation.about"), path: "/about" },
     ]);
   }, [i18n.language]);
 

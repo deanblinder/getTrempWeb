@@ -1,5 +1,6 @@
 {
   "app.name": "GetTremp",
+  "navigation.about": "אודות",
   "navigation.search": "חיפוש",
   "navigation.add": "הוספה",
   "navigation.rides": "נסיעות",
@@ -73,5 +74,12 @@
   "register.subtitle": "הירשמו והתחילו לשתף ולחפש נסיעות!",
   "error.screen.title": "הגישה נדחתה",
   "error.screen.description": "כדי לגשת לתוכן זה, אנא התחבר לחשבונך. אם עדיין אין לך חשבון, תוכל ליצור אחד בכמה צעדים פשוטים.",
-  "error.screen.login-button": "התחבר"
+  "error.screen.login-button": "התחבר",
+  "about.title": "אודות GetTremp",
+  "about.mission.title": "המטרה שלנו",
+  "about.mission.description": "GetTremp נוצרה במטרה להקל על שיתוף נסיעות בין אנשים. האפליקציה מאפשרת לחבר בין נהגים לנוסעים בצורה פשוטה ונוחה, תוך חיסכון בזמן, בדלק ובעלויות.",
+  "about.social.title": "אפליקציה חברתית",
+  "about.social.description": "אנחנו מאמינים בכוח של קהילה ושיתוף פעולה. האפליקציה מעודדת יצירת קשרים חברתיים ועזרה הדדית, תוך תרומה לאיכות הסביבה והפחתת העומס בכבישים.",
+  "about.contact.title": "צור קשר",
+  "about.contact.description": "יש לכם שאלות או הצעות לשיפור? נשמח לשמוע מכם!"
 }

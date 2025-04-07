@@ -1,5 +1,6 @@
 {
   "app.name": "GetTremp",
+  "navigation.about": "about",
   "navigation.search": "Search",
   "navigation.add": "Add",
   "navigation.rides": "Rides",
@@ -73,5 +74,12 @@
   "register.subtitle": "Join GetRide to start sharing and finding rides!",
   "error.screen.title": "Access Restricted",
   "error.screen.description": "To access this content, please log in to your account. If you don't have an account yet, you can create one in just a few steps",
-  "error.screen.login-button": "Sign in or Register"
+  "error.screen.login-button": "Sign in or Register",
+  "about.title": "About GetTremp",
+  "about.mission.title": "Our Mission",
+  "about.mission.description": "GetTremp was created to make ride-sharing between people easier. The app connects drivers and passengers in a simple and convenient way, saving time, fuel, and costs.",
+  "about.social.title": "Social Application",
+  "about.social.description": "We believe in the power of community and collaboration. The app encourages social connections and mutual help, while contributing to environmental quality and reducing road congestion.",
+  "about.contact.title": "Contact Us",
+  "about.contact.description": "Have questions or suggestions for improvement? We'd love to hear from you!"
 }
