@@ -23,6 +23,7 @@ const RideScreen = () => {
     buttonContent,
     session,
   } = useRideScreen();
+
   return (
     <GoogleMapsProvider>
       <div className={styles.container}>

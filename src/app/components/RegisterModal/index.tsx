@@ -1,16 +1,30 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import styles from "./styles.module.css";
 import GoogleLoginButton from "../googleLoginButton/GoogleLoginButton";
 import i18next from "i18next";
+import { signIn } from "next-auth/react";
 
 interface RegisterModalProps {
   isOpen: boolean;
   onClose: () => void;
+  redirectUrl?: string;
 }
 
-const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
+const RegisterModal = ({
+  isOpen,
+  onClose,
+  redirectUrl,
+}: RegisterModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    await signIn("google", { callbackUrl: redirectUrl || "/" });
+    setIsLoading(false);
+  };
+
   const handleOverlayClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
@@ -33,7 +47,10 @@ const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
           <p className={styles.description}>
             {i18next.t("common:register.subtitle")}
           </p>
-          <GoogleLoginButton />
+          <GoogleLoginButton
+            isLoading={isLoading}
+            onClick={handleGoogleLogin}
+          />
         </div>
       </div>
     </div>

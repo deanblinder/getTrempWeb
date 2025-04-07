@@ -126,5 +126,6 @@ export const useAddRide = () => {
     handleAddRide,
     isEditModalOpen,
     setIsEditModalOpen,
+    session
   };
 };

@@ -70,5 +70,8 @@
   "settings.language.english": "אנגלית",
   "settings.language.hebrew": "עברית",
   "register.title": "התחבר",
-  "register.subtitle": "הירשמו והתחילו לשתף ולחפש נסיעות!"
+  "register.subtitle": "הירשמו והתחילו לשתף ולחפש נסיעות!",
+  "error.screen.title": "הגישה נדחתה",
+  "error.screen.description": "כדי לגשת לתוכן זה, אנא התחבר לחשבונך. אם עדיין אין לך חשבון, תוכל ליצור אחד בכמה צעדים פשוטים.",
+  "error.screen.login-button": "התחבר"
 }

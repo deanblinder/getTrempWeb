@@ -12,6 +12,7 @@ import { useEditRide } from "./useEditRide";
 import i18next from "i18next";
 import GoogleMapsProvider from "@/app/components/GoogleMapsProvider/GoogleMapsProvider";
 import { capitalize } from "lodash";
+import ErrorScreen from "@/app/components/ErrorScreen/ErrorScreen";
 
 const EditRide = () => {
   const params = useParams();
@@ -30,6 +31,8 @@ const EditRide = () => {
     handleDelete,
     session,
   } = useEditRide(rideId);
+
+  if (!session?.user) return <ErrorScreen />;
 
   return (
     <GoogleMapsProvider>

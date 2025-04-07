@@ -10,6 +10,7 @@ import { useAddRide } from "./useAddRide";
 import EditProfileModal from "../components/EditProfileModal";
 import i18next from "i18next";
 import GoogleMapsProvider from "../components/GoogleMapsProvider/GoogleMapsProvider";
+import ErrorScreen from "../components/ErrorScreen/ErrorScreen";
 
 const Add = () => {
   const {
@@ -23,7 +24,10 @@ const Add = () => {
     handleAddRide,
     isEditModalOpen,
     setIsEditModalOpen,
+    session,
   } = useAddRide();
+
+  if (!session?.data?.user) return <ErrorScreen />
 
   return (
     <GoogleMapsProvider>

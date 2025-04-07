@@ -1,22 +1,17 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import styles from "./GoogleLoginButton.module.css";
-import { useState } from "react";
 import Loader from "../Loader/Loader";
 
-const GoogleLoginButton = () => {
-  const [isLoading, setIsLoading] = useState(false);
+type GoogleLoginButtonProps = {
+  isLoading: boolean;
+  onClick: () => void;
+};
 
-  const handleGoogleLogin = async () => {
-    setIsLoading(true);
-    await signIn("google", { callbackUrl: "/" });
-    setIsLoading(false);
-  };
-
+const GoogleLoginButton = ({ isLoading, onClick }: GoogleLoginButtonProps) => {
   return (
     <button
-      onClick={handleGoogleLogin}
+      onClick={onClick}
       className={styles.googleButton}
       type="button"
       aria-label="Sign in with Google"

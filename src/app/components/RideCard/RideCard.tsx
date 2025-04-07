@@ -10,6 +10,7 @@ import { Ride } from "@/models/rides";
 import AvatarList from "../AvatarList/AvatarList";
 import i18next from "i18next";
 import { capitalize } from "lodash";
+import RegisterModal from "../RegisterModal";
 
 interface RideCardProps {
   ride: Ride;
@@ -23,8 +24,18 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
   const [shouldShowRequests] = useState(ride.passengers.requests.length > 0);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser(ride.driver.id);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const handleLogin = () => {
+    setShowRegisterModal(true);
+  };
 
   const handleCardClick = () => {
+    if (!session?.data?.user) {
+      handleLogin();
+      return;
+    }
+
     const isUserDriver = session?.data?.user?.id === ride.driver.id;
     setIsLoading(true);
     setTimeout(() => {}, 1000);
@@ -39,6 +50,11 @@ const RideCard = ({ ride, onAvatarClick }: RideCardProps) => {
 
   return (
     <div className={styles.card}>
+      <RegisterModal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        redirectUrl={`/rideScreen/${ride._id}`}
+      />
       {isLoading && (
         <div
           style={{

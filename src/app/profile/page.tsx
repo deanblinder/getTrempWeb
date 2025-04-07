@@ -9,6 +9,7 @@ import Button from "../components/Button/Button";
 import i18next from "i18next";
 import { capitalize } from "lodash";
 import { useRideRequests } from "../hooks/useRideRequests";
+import ErrorScreen from "../components/ErrorScreen/ErrorScreen";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -23,6 +24,8 @@ const Profile = () => {
   const handleEditProfile = () => {
     setIsEditModalOpen(true);
   };
+
+  if (!session?.user) return <ErrorScreen />;
 
   return (
     <div className={styles.container}>

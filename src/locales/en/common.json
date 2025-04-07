@@ -70,5 +70,8 @@
   "settings.language.english": "English",
   "settings.language.hebrew": "Hebrew",
   "register.title": "Register",
-  "register.subtitle": "Join GetRide to start sharing and finding rides!"
+  "register.subtitle": "Join GetRide to start sharing and finding rides!",
+  "error.screen.title": "Access Restricted",
+  "error.screen.description": "To access this content, please log in to your account. If you don't have an account yet, you can create one in just a few steps",
+  "error.screen.login-button": "Sign in or Register"
 }

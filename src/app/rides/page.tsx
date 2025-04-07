@@ -5,6 +5,7 @@ import Modal from "../components/Modal/Modal";
 import DriverModalContent from "../components/DriverModalContent";
 import i18next from "i18next";
 import { useRides } from "./useRides";
+import ErrorScreen from "../components/ErrorScreen/ErrorScreen";
 
 const Rides = () => {
   const {
@@ -17,6 +18,8 @@ const Rides = () => {
     handleModalClose,
     handleAvatarClick,
   } = useRides();
+
+  if (!session?.user) return <ErrorScreen />;
 
   if (rides.length === 0) {
     return (
