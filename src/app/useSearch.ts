@@ -51,8 +51,7 @@ export const useSearch = () => {
     origin: undefined,
     destination: undefined,
     date: new Date().toISOString().split("T")[0],
-
-    radius: 5,
+    radius: 10,
   });
   const [isLoading, setIsLoading] = useState(false);
 

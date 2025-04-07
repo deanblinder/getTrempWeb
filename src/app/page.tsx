@@ -3,7 +3,6 @@ import styles from "./page.module.css";
 import AutocompleteInput from "./components/AutocompleteInput/AutocompleteInput";
 import DatePicker from "./components/DatePicker/DatePicker";
 import Button from "./components/Button/Button";
-import Slider from "./components/Slider/Slider";
 import RideCard from "./components/RideCard/RideCard";
 import { useSearch } from "./useSearch";
 import Loader from "./components/Loader/Loader";
@@ -18,8 +17,6 @@ const Search = () => {
     searchResults,
     date,
     setDate,
-    radius,
-    setRadius,
     handleSearch,
     shouldShowSearchResults,
     isLoading,
@@ -46,13 +43,13 @@ const Search = () => {
               required
             />
             <DatePicker value={date} onChange={setDate} required />
-            <Slider
+            {/* <Slider
               label={i18n.t("common:search.distance")}
               value={radius}
               max={10}
               onChange={setRadius}
               required
-            />
+            /> */}
             <Button fullWidth type="submit" variant="blue" size="large">
               {isLoading ? <Loader /> : i18n.t("common:search.search-button")}
             </Button>

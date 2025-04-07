@@ -34,8 +34,7 @@ const isLocationWithinDistance = (
 };
 
 export const POST = async (request: Request) => {
-  const { origin, destination, date, radius = 5 } = await request.json();
-
+  const { origin, destination, date, radius = 10 } = await request.json();
   if (!origin || !destination || !date || !radius) {
     return new NextResponse("Missing required parameters", { status: 400 });
   }
