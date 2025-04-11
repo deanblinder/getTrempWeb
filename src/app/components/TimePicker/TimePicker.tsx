@@ -9,6 +9,7 @@ import { heIL as coreheIL } from "@mui/material/locale";
 import { heIL } from "@mui/x-date-pickers/locales";
 import "dayjs/locale/he";
 import { useTranslation } from "react-i18next";
+import useDevice from "@/app/hooks/useDevice";
 
 interface TimePickerProps {
   value?: string;
@@ -26,15 +27,17 @@ const TimePicker = ({
   style,
 }: TimePickerProps) => {
   const { i18n } = useTranslation();
+  const {isMobile} = useDevice();
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
-      adapterLocale={i18n.language === "he" ? "rtl" : "ltr"}
+      adapterLocale={i18n.language === "he" && isMobile ? "rtl" : "ltr"}
     >
       <ThemeProvider
         theme={createTheme(
           {
-            direction: i18n.language === "he" ? "rtl" : "ltr",
+            direction: i18n.language === "he" && isMobile ? "rtl" : "ltr",
           },
           i18n.language === "he" ? heIL : {},
           i18n.language === "he" ? coreheIL : {}
