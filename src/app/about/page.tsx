@@ -6,6 +6,8 @@ import styles from "./page.module.css";
 const AboutPage = () => {
   const { t } = useTranslation("common");
 
+
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{t("about.title")}</h1>
