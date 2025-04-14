@@ -11,6 +11,7 @@ import Modal from "@/app/components/Modal/Modal";
 import i18next from "i18next";
 import GoogleMapsProvider from "@/app/components/GoogleMapsProvider/GoogleMapsProvider";
 import { capitalize } from "lodash";
+import EditProfileModal from "@/app/components/EditProfileModal";
 
 const RideScreen = () => {
   const {
@@ -18,10 +19,12 @@ const RideScreen = () => {
     setShowDriverModal,
     rideData,
     driver,
-    handleClick,
+    handleRideRequest,
     isLoading,
     buttonContent,
     session,
+    isEditProfileModalOpen,
+    setIsEditProfileModalOpen,
   } = useRideScreen();
 
   return (
@@ -93,7 +96,7 @@ const RideScreen = () => {
             >
               {i18next.t("common:ride-screen.connect-driver.button")}
             </Button>
-            <Button fullWidth size="large" onClick={handleClick}>
+            <Button fullWidth size="large" onClick={handleRideRequest}>
               {isLoading ? <Loader /> : buttonContent}
             </Button>
           </div>
@@ -125,6 +128,10 @@ const RideScreen = () => {
           />
         )}
       </div>
+      <EditProfileModal 
+        isOpen={isEditProfileModalOpen}
+        onClose={() => setIsEditProfileModalOpen(false)} 
+        description={i18next.t("common:profile.edit.modal.descriptions")} />
     </GoogleMapsProvider>
   );
 };

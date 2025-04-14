@@ -14,8 +14,14 @@ export const useRideScreen = () => {
   const { rideData, refetch } = useFetchRide(rideId);
   const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
-  const handleClick = async () => {
+  const handleRideRequest = async () => {
+    if(!session?.user.phoneNumber) {             
+      setIsEditProfileModalOpen(true);
+      return;
+    }
+
     setIsLoading(true);
 
     if (rideRequested) {
@@ -52,10 +58,12 @@ export const useRideScreen = () => {
     showDriverModal,
     setShowDriverModal,
     rideData,
-    handleClick,
+    handleRideRequest,
     driver,
     isLoading,
     buttonContent: getButtonContent(),
     session,
+    isEditProfileModalOpen,
+    setIsEditProfileModalOpen,
   };
 };
