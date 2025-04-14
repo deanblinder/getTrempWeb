@@ -24,7 +24,8 @@ const AboutPage = () => {
 
         <section className={styles.section}>
           <h2>{t("about.contact.title")}</h2>
-          <p>{t("about.contact.description")}</p>
+          <p>{t("about.contact.description1")}</p>
+          <p>{t("about.contact.description2")}</p>
           <a href="mailto:dean.blinder@gmail.com" className={styles.email}>
             deanblinder91@gmail.com
           </a>
