@@ -49,12 +49,13 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <meta name="apple-mobile-web-app-title" content="Get Ride" />
-        <link rel="apple-touch-icon" href="/appIcon.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/appIcon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/appIcon.png" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/appIcon.png" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/appIcon.png" />
+        <meta name="apple-mobile-web-app-title" content="Get Tremp" />
+        <link rel="apple-touch-icon-precomposed" href="/appIcon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/appIcon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/appIcon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/appIcon.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="192x192" href="/appIcon.png" />
+        <link rel="shortcut icon" type="image/png" href="/appIcon.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <body>
