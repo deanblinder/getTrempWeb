@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import GoogleLoginButton from "../googleLoginButton/GoogleLoginButton";
 import i18next from "i18next";
 import { signIn } from "next-auth/react";
+import { biEvent, ANALYTICS_EVENTS } from "../../../utils/analytics";
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ const RegisterModal = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
+    biEvent.track(ANALYTICS_EVENTS.GOOGLE_SIGNUP_CLICKED);
     setIsLoading(true);
     await signIn("google", { callbackUrl: redirectUrl || "/" });
     setIsLoading(false);
