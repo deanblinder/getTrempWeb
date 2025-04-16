@@ -47,7 +47,7 @@ type EventProperties = {
 export const biEvent = {
   track: (eventName: string, properties?: EventProperties) => {
     if (MIXPANEL_TOKEN) {
-      const session = typeof window !== 'undefined' ? (window as any).__NEXT_DATA__?.props?.pageProps?.session : null;
+      const session = typeof window !== 'undefined' ? (window).__NEXT_DATA__?.props?.pageProps?.session : null;
       const sessionProperties = session?.user ? {
         userId: session.user.id,
         userEmail: session.user.email,
