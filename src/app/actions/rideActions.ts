@@ -22,7 +22,7 @@ const rideActions = {
     date?: string;
     radius?: number;
   }) => {
-    biEvent.track(ANALYTICS_EVENTS.SEARCH_RIDE, {origin: searchParams.origin, destination: searchParams.destination, date: searchParams.date, radius: searchParams.radius});
+    biEvent.track(ANALYTICS_EVENTS.SEARCH_RIDE, {searchParams});
     return await rideServices.searchRidesService(searchParams);
   },
   fetchRide: async (rideId: string) => {
