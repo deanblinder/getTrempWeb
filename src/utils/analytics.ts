@@ -1,7 +1,10 @@
 import mixpanel from 'mixpanel-browser';
 
 // Initialize Mixpanel with the token from environment variables
-const MIXPANEL_TOKEN = process.env.REACT_APP_MIXPANEL_TOKEN;
+const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
+
+// Debug logging for initialization
+console.log('[Analytics] Initializing with token:', MIXPANEL_TOKEN ? 'Present' : 'Missing');
 
 // Initialize the Mixpanel instance
 if (MIXPANEL_TOKEN) {
@@ -40,7 +43,10 @@ type EventProperties = BaseEventProperties | PageViewProperties | UserProperties
 export const biEvent = {
   track: (eventName: string, properties?: EventProperties) => {
     if (MIXPANEL_TOKEN) {
+      console.log('[Analytics] Tracking event:', eventName, properties);
       mixpanel.track(eventName, properties);
+    } else {
+      console.warn('[Analytics] Event not tracked - Missing Mixpanel token:', eventName);
     }
   },
 
