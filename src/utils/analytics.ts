@@ -19,10 +19,14 @@ export const ANALYTICS_EVENTS = {
   SEARCH_RIDE: "SEARCH_RIDE"
 } as const;
 
+// interface AnalyticsEventValue {
+//   [key: string]: any;
+// }
+
 // Define interfaces for different types of event properties
-interface BaseEventProperties {
-  [key: string]: any; //| string | number | boolean | null | undefined;
-}
+// interface BaseEventProperties {
+//   [key: string]: unknown;
+// }
 
 // interface PageViewProperties extends BaseEventProperties {
 //   page: string;
@@ -35,7 +39,9 @@ interface BaseEventProperties {
 // }
 
 // Define the type for event properties
-type EventProperties = BaseEventProperties; //| PageViewProperties | UserProperties;
+type EventProperties = {
+    [key: string]: unknown;
+}; //| PageViewProperties | UserProperties;
 
 // Analytics utility functions
 export const biEvent = {
