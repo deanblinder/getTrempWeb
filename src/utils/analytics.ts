@@ -19,31 +19,11 @@ export const ANALYTICS_EVENTS = {
   SEARCH_RIDE: "SEARCH_RIDE"
 } as const;
 
-// interface AnalyticsEventValue {
-//   [key: string]: any;
-// }
 
-// Define interfaces for different types of event properties
-// interface BaseEventProperties {
-//   [key: string]: unknown;
-// }
-
-// interface PageViewProperties extends BaseEventProperties {
-//   page: string;
-// }
-
-// interface UserProperties extends BaseEventProperties {
-//   email?: string;
-//   name?: string;
-//   profilePicture?: string;
-// }
-
-// Define the type for event properties
 type EventProperties = {
     [key: string]: unknown;
-}; //| PageViewProperties | UserProperties;
+};
 
-// Analytics utility functions
 export const biEvent = {
   track: (eventName: string, properties?: EventProperties) => {
     if (MIXPANEL_TOKEN) {
