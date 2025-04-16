@@ -3,9 +3,6 @@ import mixpanel from 'mixpanel-browser';
 // Initialize Mixpanel with the token from environment variables
 const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
 
-// Debug logging for initialization
-console.log('[Analytics] Initializing with token:', MIXPANEL_TOKEN ? 'Present' : 'Missing');
-
 // Initialize the Mixpanel instance
 if (MIXPANEL_TOKEN) {
   mixpanel.init(MIXPANEL_TOKEN, {
@@ -18,33 +15,43 @@ if (MIXPANEL_TOKEN) {
 // Define common event names as constants to maintain consistency
 export const ANALYTICS_EVENTS = {
   PAGE_VIEW: 'PAGE_VIEW',
-  GOOGLE_SIGNUP_CLICKED: 'GOOGLE_SIGNUP_CLICKED'
+  GOOGLE_SIGNUP_CLICKED: 'GOOGLE_SIGNUP_CLICKED',
+  SEARCH_RIDE: "SEARCH_RIDE"
 } as const;
 
 // Define interfaces for different types of event properties
 interface BaseEventProperties {
-  [key: string]: string | number | boolean | null | undefined;
+  [key: string]: any; //| string | number | boolean | null | undefined;
 }
 
-interface PageViewProperties extends BaseEventProperties {
-  page: string;
-}
+// interface PageViewProperties extends BaseEventProperties {
+//   page: string;
+// }
 
-interface UserProperties extends BaseEventProperties {
-  email?: string;
-  name?: string;
-  profilePicture?: string;
-}
+// interface UserProperties extends BaseEventProperties {
+//   email?: string;
+//   name?: string;
+//   profilePicture?: string;
+// }
 
 // Define the type for event properties
-type EventProperties = BaseEventProperties | PageViewProperties | UserProperties;
+type EventProperties = BaseEventProperties; //| PageViewProperties | UserProperties;
 
 // Analytics utility functions
 export const biEvent = {
   track: (eventName: string, properties?: EventProperties) => {
     if (MIXPANEL_TOKEN) {
-      console.log('[Analytics] Tracking event:', eventName, properties);
-      mixpanel.track(eventName, properties);
+      const session = typeof window !== 'undefined' ? (window as any).__NEXT_DATA__?.props?.pageProps?.session : null;
+      const sessionProperties = session?.user ? {
+        userId: session.user.id,
+        userEmail: session.user.email,
+        userName: `${session.user.firstName} ${session.user.lastName}`.trim()
+      } : {};
+      
+      const mergedProperties = { ...sessionProperties, ...properties };
+
+      console.log('[Analytics] Tracking event:', eventName, mergedProperties);
+      mixpanel.track(eventName, mergedProperties);
     } else {
       console.warn('[Analytics] Event not tracked - Missing Mixpanel token:', eventName);
     }

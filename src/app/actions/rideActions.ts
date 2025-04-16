@@ -4,6 +4,7 @@ import { Place } from "../useSearch";
 import {} from "next-auth/react";
 import { Ride } from "@/models/rides";
 import { rideServices } from "../services/rideServices";
+import { ANALYTICS_EVENTS, biEvent } from "@/utils/analytics";
 
 const rideActions = {
   addRide: async ({
@@ -21,6 +22,7 @@ const rideActions = {
     date?: string;
     radius?: number;
   }) => {
+    biEvent.track(ANALYTICS_EVENTS.SEARCH_RIDE, {origin: searchParams.origin, destination: searchParams.destination, date: searchParams.date, radius: searchParams.radius});
     return await rideServices.searchRidesService(searchParams);
   },
   fetchRide: async (rideId: string) => {
