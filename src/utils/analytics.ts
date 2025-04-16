@@ -5,7 +5,7 @@ const MIXPANEL_TOKEN = process.env.REACT_APP_MIXPANEL_TOKEN;
 
 // Initialize the Mixpanel instance
 if (MIXPANEL_TOKEN) {
-  mixpanel.init("573498514ccfb156f94e2ede6f98a464", {
+  mixpanel.init(MIXPANEL_TOKEN, {
     debug: process.env.NODE_ENV === 'development',
     track_pageview: true,
     persistence: 'localStorage'
