@@ -18,8 +18,23 @@ export const ANALYTICS_EVENTS = {
   GOOGLE_SIGNUP_CLICKED: 'GOOGLE_SIGNUP_CLICKED'
 } as const;
 
+// Define interfaces for different types of event properties
+interface BaseEventProperties {
+  [key: string]: string | number | boolean | null | undefined;
+}
+
+interface PageViewProperties extends BaseEventProperties {
+  page: string;
+}
+
+interface UserProperties extends BaseEventProperties {
+  email?: string;
+  name?: string;
+  profilePicture?: string;
+}
+
 // Define the type for event properties
-type EventProperties = Record<string, any>;
+type EventProperties = BaseEventProperties | PageViewProperties | UserProperties;
 
 // Analytics utility functions
 export const biEvent = {
