@@ -10,6 +10,7 @@ import { RootState } from "@/app/store/store";
 import notificationStyles from "./NotificationIndicator.module.css";
 import Avatar from "../Avatar";
 import { ANALYTICS_EVENTS, biEvent } from "@/utils/analytics";
+import { useAnalytics } from "@/app/hooks/useAnalytics";
 
 interface NavigationProps {
   navItems: NavigationItem[];
@@ -18,6 +19,8 @@ interface NavigationProps {
 
 const Navigation = ({ navItems, onShowRegisterModal }: NavigationProps) => {
   const { data: session } = useSession();
+  useAnalytics();
+
   const shouldShowNotification = useSelector(
     (state: RootState) => state.notification.shouldShowNotification
   );

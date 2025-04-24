@@ -11,8 +11,6 @@ export const useAnalytics = () => {
         biEvent.identify(session.user.id);
         biEvent.setUserProperties({
         email: session.user.email,
-        name: `${session.user.firstName} ${session.user.lastName}`.trim(),
-        profilePicture: session.user.profilePicture
       });
     }
   }, [session]);

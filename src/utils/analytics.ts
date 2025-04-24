@@ -40,20 +40,25 @@ type EventProperties = {
     [key: string]: unknown;
 };
 
+// Type for user session data
+type UserSessionData = {
+  id?: string;
+  email?: string;
+  name?: string;
+} | null;
+
+// Store current user session data
+let currentUserSession: UserSessionData = null;
+
 export const biEvent = {
   track: (eventName: string, properties?: EventProperties) => {
     if (MIXPANEL_TOKEN) {
-      const session = typeof window !== 'undefined' ? (window).__NEXT_DATA__?.props?.pageProps?.session : null;
-      const sessionProperties = session?.user ? {
-        userId: session.user.id,
-        userEmail: session.user.email,
-        userName: `${session.user.firstName} ${session.user.lastName}`.trim()
-      } : {};
-      
-      const mergedProperties = { ...sessionProperties, ...properties };
-
-      console.log('[Analytics] Tracking event:', eventName, mergedProperties);
-      mixpanel.track(eventName, mergedProperties);
+      const eventProperties = {
+        ...properties,
+        userId: currentUserSession?.id,
+        userEmail: currentUserSession?.email,
+      };
+      mixpanel.track(eventName, eventProperties);
     } else {
       console.warn('[Analytics] Event not tracked - Missing Mixpanel token:', eventName);
     }
@@ -62,12 +67,18 @@ export const biEvent = {
   identify: (userId: string) => {
     if (MIXPANEL_TOKEN) {
       mixpanel.identify(userId);
+      // Update current user session when identifying
+      currentUserSession = { id: userId, email: currentUserSession?.email };
     }
   },
 
   setUserProperties: (properties: EventProperties) => {
     if (MIXPANEL_TOKEN) {
       mixpanel.people.set(properties);
+      // Update email in current session if provided
+      if (properties.email) {
+        currentUserSession = { ...currentUserSession, email: properties.email as string };
+      }
     }
   },
 
