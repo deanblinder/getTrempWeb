@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 import notificationStyles from "./NotificationIndicator.module.css";
 import Avatar from "../Avatar";
+import { ANALYTICS_EVENTS, biEvent } from "@/utils/analytics";
 
 interface NavigationProps {
   navItems: NavigationItem[];
@@ -25,6 +26,7 @@ const Navigation = ({ navItems, onShowRegisterModal }: NavigationProps) => {
     e: React.MouseEvent<HTMLAnchorElement>,
     path: string
   ) => {
+    biEvent.track(ANALYTICS_EVENTS.NAVIGATION_PRESS, {path})
     if (!session && path !== "/") {
       e.preventDefault();
       onShowRegisterModal?.();

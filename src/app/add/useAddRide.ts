@@ -108,6 +108,7 @@ export const useAddRide = () => {
       setIsEditModalOpen(true);
       return;
     }
+    
     await rideActions.addRide({
       formState,
       user: session.data?.user as Partial<User>,

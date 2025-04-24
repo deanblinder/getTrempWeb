@@ -41,8 +41,8 @@ export const useEditRide = (rideId: string) => {
     }
   }, [initialRideData]);
 
-  const handleDelete = () => {
-    rideActions.deleteRide(rideId);
+  const handleDelete = async () => {
+    await rideActions.deleteRide(rideId);
     router.back();
   };
 

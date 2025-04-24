@@ -13,6 +13,7 @@ import { RootState } from "@/app/store/store";
 import notificationStyles from "./NotificationIndicator.module.css";
 import Avatar from "../Avatar";
 import { capitalize } from "lodash";
+import { ANALYTICS_EVENTS, biEvent } from "@/utils/analytics";
 
 export interface NavigationItem {
   name: string;
@@ -39,6 +40,7 @@ const MobileNavigation = ({
     e: React.MouseEvent<HTMLAnchorElement>,
     path: string
   ): void => {
+    biEvent.track(ANALYTICS_EVENTS.MOBILE_NAVIGATION_PRESS, {path})
     if (!session && path !== "/") {
       e.preventDefault();
       onShowRegisterModal?.();
