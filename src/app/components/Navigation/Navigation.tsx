@@ -30,7 +30,7 @@ const Navigation = ({ navItems, onShowRegisterModal }: NavigationProps) => {
     path: string
   ) => {
     biEvent.track(ANALYTICS_EVENTS.NAVIGATION_PRESS, {path})
-    if (!session && path !== "/") {
+    if (!session && path !== "/" && path !== "/settings" && path !== "/about") {
       e.preventDefault();
       onShowRegisterModal?.();
     }

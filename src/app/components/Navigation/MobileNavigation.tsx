@@ -41,7 +41,7 @@ const MobileNavigation = ({
     path: string
   ): void => {
     biEvent.track(ANALYTICS_EVENTS.MOBILE_NAVIGATION_PRESS, {path})
-    if (!session && path !== "/") {
+    if (!session && path !== "/" && path !== "/settings" && path !== "/about") {
       e.preventDefault();
       onShowRegisterModal?.();
     }
